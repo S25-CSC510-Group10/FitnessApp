@@ -23,7 +23,7 @@
   </head>
 
   <body>
-    <header class="site-header">
+    <!-- <header class="site-header">
       <nav class="navbar navbar-expand-lg bg-dark fixed-top nav-dark">
         <div class="container">
           {% if not session.get("email") %}
@@ -35,7 +35,6 @@
           {% endif %}
 
           <div class="collapse navbar-collapse" id="navbarToggle">
-            <!-- Navbar Right Side -->
             {% if not session.get("email"): %}
             <div class="navbar-nav ml-auto">
               <a class="nav-item nav-link" href="{{ url_for('login') }}" id="login">Login</a>
@@ -51,14 +50,11 @@
               <a class="nav-item nav-link" href="{{ url_for('water') }}">Water</a>
               <a class="nav-item nav-link" href="{{ url_for('history') }}">About Us</a>
               <a class="nav-item nav-link" href="{{url_for('friends')}}">Friends</a>
-            
-              
               <a class="nav-item nav-link" href="{{url_for('submit_reviews')}}">Reviews</a>
               <a class="nav-item nav-link" href="{{url_for('blog')}}">Blog</a>
               <a class="nav-item nav-link" href="{{url_for('shop')}}">Shopping</a>
               <a class="nav-item nav-link" href="{{url_for('activities')}}">My Activities</a>
               <a class="nav-item nav-link" href="{{url_for('achievements')}}">Achievements</a>
-
               <a class="nav-item nav-link btn btn-link" href="{{ url_for('display_profile') }}">Profile</button>
             </div>
           </div>
@@ -71,7 +67,91 @@
         </div>
         </div>
       </nav>
+    </header> -->
+
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <!-- Burnout Logo -->
+          <a class="navbar-brand d-flex align-items-center" href="{{ url_for('dashboard') }}">
+            <img src="{{ url_for('static', filename='img/fire.gif') }}" alt="Burnout Logo" style="width:98px;height:38px;">
+            <span class="ml-2">BURNOUT</span>
+          </a>
+    
+          <!-- Navbar Toggler -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Center Navbar Items -->
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard') }}">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="trackProgressDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Track Progress
+                </a>
+                <div class="dropdown-menu" aria-labelledby="trackProgressDropdown">
+                  <a class="dropdown-item" href="{{ url_for('calories') }}">Calories</a>
+                  <a class="dropdown-item" href="{{ url_for('bmi_calci') }}">BMI Calculator</a>
+                  <a class="dropdown-item" href="{{ url_for('water') }}">Water</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('achievements') }}">Achievements</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="mindWellnessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mind & Wellness
+                </a>
+                <div class="dropdown-menu" aria-labelledby="mindWellnessDropdown">
+                  <a class="dropdown-item" href="{{ url_for('mind') }}">Mind</a>
+                  <a class="dropdown-item" href="{{ url_for('render_guided_meditation') }}">Guided Meditation</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="socialDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Social
+                </a>
+                <div class="dropdown-menu" aria-labelledby="socialDropdown">
+                  <a class="dropdown-item" href="{{ url_for('friends') }}">Friends</a>
+                  <a class="dropdown-item" href="{{ url_for('submit_reviews') }}">Reviews</a>
+                  <a class="dropdown-item" href="{{ url_for('blog') }}">Blog</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="exploreLearnDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Explore & Learn
+                </a>
+                <div class="dropdown-menu" aria-labelledby="exploreLearnDropdown">
+                  <a class="dropdown-item" href="{{ url_for('favorites') }}">Favorites</a>
+                  <a class="dropdown-item" href="{{ url_for('shop') }}">Shopping</a>
+                  <a class="dropdown-item" href="{{ url_for('history') }}">About Us</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('display_profile') }}">Profile</a>
+              </li>
+            </ul>
+    
+            <!-- Right Side (Welcome and Logout) -->
+            <div class="d-flex align-items-center">
+              {% if session.get("email") %}
+              <span class="text-white mr-3">Welcome, {{ session.get("name") }}</span>
+              <button class="btn btn-warning btn-sm" onclick="logout()">Log Out</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
+
+    
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-12">
