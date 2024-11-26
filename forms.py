@@ -128,6 +128,12 @@ class EnrollForm(FlaskForm):
     mongo = app.mongo
     submit = SubmitField('Enroll')
 
+class UnenrollForm(FlaskForm):
+    """Form to enroll into a particular exercise/event"""
+    app = App()
+    mongo = app.mongo
+    submit = SubmitField('Unenroll')
+
 class ResetPasswordForm(FlaskForm):
     """Form to reset the account password"""
     password = PasswordField('Password', validators=[DataRequired()])

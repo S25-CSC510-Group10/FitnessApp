@@ -22,7 +22,7 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail, Message
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm,ReviewForm
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UnenrollForm, UserProfileForm, EnrollForm,ReviewForm
 from insert_db_data import insertfooddata,insertexercisedata
 import schedule
 from threading import Thread
@@ -651,15 +651,27 @@ def yoga():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "yoga"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "yoga"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -677,15 +689,27 @@ def headspace():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "headspace"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "headspace"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -703,15 +727,27 @@ def mbsr():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "mbsr"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "msbr"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -729,15 +765,27 @@ def swim():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "swimming"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "swimming"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -755,15 +803,27 @@ def abbs():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "abbs"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "abbs"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
     else:
         return redirect(url_for('dashboard'))
     return render_template('abbs.html', title='Abbs Smash!', form=form)
@@ -780,16 +840,30 @@ def belly():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "belly"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "belly"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        
     else:
         return redirect(url_for('dashboard'))
     return render_template('belly.html', title='Belly Burner', form=form)
@@ -806,15 +880,27 @@ def core():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "core"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "core"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
     else:
         return redirect(url_for('dashboard'))
     return render_template('core.html', title='Core Conditioning', form=form)
@@ -831,15 +917,27 @@ def gym():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "gym"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "gym"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -856,15 +954,27 @@ def walk():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "walk"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "walk"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -881,15 +991,27 @@ def dance():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "dance"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "dance"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
@@ -906,15 +1028,27 @@ def hrx():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "hrx"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "hrx"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
+                # return redirect(url_for('dashboard'))
+        else :
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.remove({'Email': email, 'Activity': activity})
+                flash(
+                    f' You have succesfully unenrolled in our {activity} plan!',
+                    'success')
+                return render_template('new_dashboard.html', form=form)
             # return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('dashboard'))
