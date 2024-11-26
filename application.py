@@ -252,6 +252,28 @@ def display_profile():
         return redirect(url_for('login'))
     #return render_template('user_profile.html', status=True, form=form)#
 
+@app.route("/activites", methods=['GET', 'POST'])
+def activities():
+    """
+    Display the list of activites which a user has or had previously enrolled under with their current status
+    """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
+    if session.get('email'):
+        email = session.get('email')
+        activity_cursor = findActivities(email)
+        activities = [
+            {"name": activity.get("Activity", "Unknown"), 
+            "status": activity.get("Status", "Unknown"), 
+            "date": activity.get("Date", "Unknown")}
+            for activity in activity_cursor
+        ]
+        return render_template('new_dashboard.html', activities=activities)
+    else:
+        return redirect(url_for('login'))
+    #return render_template('user_profile.html', status=True, form=form)#
+
 
 @app.route("/user_profile", methods=['GET', 'POST'])
 def user_profile():
@@ -736,7 +758,13 @@ def headspace():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -749,7 +777,13 @@ def headspace():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -758,7 +792,13 @@ def headspace():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('Headspace.html', title='Headspace', form=form, enrolled=enrolled)
@@ -788,7 +828,13 @@ def mbsr():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -801,7 +847,13 @@ def mbsr():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -810,7 +862,13 @@ def mbsr():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('mbsr.html', title='mbsr', form=form, enrolled=enrolled)
@@ -840,7 +898,13 @@ def swim():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -853,7 +917,13 @@ def swim():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -862,7 +932,13 @@ def swim():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('swim.html', title='Swim', form=form, enrolled=enrolled)
@@ -892,7 +968,13 @@ def abbs():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -905,7 +987,13 @@ def abbs():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -914,7 +1002,13 @@ def abbs():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('abbs.html', title='Abbs Smash!', form=form, enrolled=enrolled)
@@ -944,7 +1038,13 @@ def belly():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -957,7 +1057,13 @@ def belly():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -966,7 +1072,13 @@ def belly():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('belly.html', title='Belly Burner', form=form, enrolled=enrolled)
@@ -997,7 +1109,13 @@ def core():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -1010,7 +1128,13 @@ def core():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -1019,7 +1143,13 @@ def core():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('core.html', title='Core Conditioning', form=form, enrolled=enrolled)
@@ -1049,7 +1179,13 @@ def gym():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -1062,7 +1198,13 @@ def gym():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -1071,7 +1213,13 @@ def gym():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('gym.html', title='Gym', form=form, enrolled=enrolled)
@@ -1100,11 +1248,13 @@ def walk():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                res = findActivities(email)
-                print(len(res))
-                activities = []
-                for i in range(res): 
-                    activities.append({'name': res[i]['Activity'], 'status': res[i]['Status']})
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -1117,7 +1267,13 @@ def walk():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -1126,7 +1282,13 @@ def walk():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('walk.html', title='Walk', form=form, enrolled=enrolled)
@@ -1155,7 +1317,13 @@ def dance():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -1168,7 +1336,13 @@ def dance():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -1177,7 +1351,13 @@ def dance():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('dance.html', title='Dance', form=form, enrolled=enrolled)
@@ -1206,7 +1386,13 @@ def hrx():
                 flash(
                     f' You have succesfully enrolled in our {activity} plan!',
                     'success')
-                activities = findActivities(email)
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
                 return render_template('new_dashboard.html', form=form, activities=activities)
                 # return redirect(url_for('dashboard'))
         else :
@@ -1219,7 +1405,13 @@ def hrx():
                     flash(
                         f' You have succesfully unenrolled in our {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
@@ -1228,7 +1420,13 @@ def hrx():
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
-                    activities = findActivities(email)
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
 
         return render_template('hrx.html', title='HRX', form=form, enrolled=enrolled)
