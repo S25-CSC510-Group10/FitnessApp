@@ -22,11 +22,13 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail, Message
 from flask_pymongo import PyMongo
 from tabulate import tabulate
-from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UserProfileForm, EnrollForm,ReviewForm
+from achievements import updateAchievments, getAchievements
+from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UnenrollForm, UserProfileForm, EnrollForm,ReviewForm
 from insert_db_data import insertfooddata,insertexercisedata
 import schedule
 from threading import Thread
 import time
+from datetime import date
 import base64
 
 app = Flask(__name__, template_folder='templates')
@@ -247,6 +249,42 @@ def display_profile():
         last_10_entries = sorted_user_data_hist[-10:]
 
         return render_template('display_profile.html', status=True, user_data=user_data, graph_html=graph_html, last_10_entries=last_10_entries)
+    else:
+        return redirect(url_for('login'))
+    #return render_template('user_profile.html', status=True, form=form)#
+
+@app.route("/activites", methods=['GET', 'POST'])
+def activities():
+    """
+    Display the list of activites which a user has or had previously enrolled under with their current status
+    """
+    now = datetime.now()
+    now = now.strftime('%Y-%m-%d')
+
+    if session.get('email'):
+        email = session.get('email')
+        activity_cursor = findActivities(email)
+        activities = [
+            {"name": activity.get("Activity", "Unknown"), 
+            "status": activity.get("Status", "Unknown"), 
+            "date": activity.get("Date", "Unknown")}
+            for activity in activity_cursor
+        ]
+        return render_template('new_dashboard.html', activities=activities)
+    else:
+        return redirect(url_for('login'))
+    #return render_template('user_profile.html', status=True, form=form)#
+
+@app.route("/achievements", methods=['GET', 'POST'])
+def achievements():
+    """
+    Display the list of achievements which a user has earned
+    """
+
+    if session.get('email'):
+        email = session.get('email')
+        achievements = getAchievements(email, mongo.db)
+        return render_template('achievements.html', achievements=achievements)
     else:
         return redirect(url_for('login'))
     #return render_template('user_profile.html', status=True, form=form)#
@@ -655,19 +693,66 @@ def yoga():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "yoga"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "yoga"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+
+                    
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('yoga.html', title='Yoga', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('yoga.html', title='Yoga', form=form)
 
 
 @app.route("/headspace", methods=['GET', 'POST'])
@@ -681,19 +766,68 @@ def headspace():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "headspace"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "headspace"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('Headspace.html', title='Headspace', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('Headspace.html', title='Headspace', form=form)
 
 
 @app.route("/mbsr", methods=['GET', 'POST'])
@@ -707,19 +841,68 @@ def mbsr():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "mbsr"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "msbr"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('mbsr.html', title='mbsr', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('mbsr.html', title='mbsr', form=form)
 
 
 @app.route("/swim", methods=['GET', 'POST'])
@@ -733,19 +916,68 @@ def swim():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "swimming"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "swimming"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')     
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('swim.html', title='Swim', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('swim.html', title='Swim', form=form)
 
 
 @app.route("/abbs", methods=['GET', 'POST'])
@@ -759,18 +991,68 @@ def abbs():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "abbs"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "abbs"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('abbs.html', title='Abbs Smash!', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('abbs.html', title='Abbs Smash!', form=form)
 
 
 @app.route("/belly", methods=['GET', 'POST'])
@@ -784,19 +1066,69 @@ def belly():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "belly"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "belly"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('belly.html', title='Belly Burner', form=form, enrolled=enrolled)
+        
     else:
         return redirect(url_for('dashboard'))
-    return render_template('belly.html', title='Belly Burner', form=form)
 
 
 @app.route("/core", methods=['GET', 'POST'])
@@ -810,18 +1142,68 @@ def core():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "core"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
+        activity = "core"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('core.html', title='Core Conditioning', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('core.html', title='Core Conditioning', form=form)
 
 
 @app.route("/gym", methods=['GET', 'POST'])
@@ -835,19 +1217,68 @@ def gym():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "gym"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "gym"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('gym.html', title='Gym', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('gym.html', title='Gym', form=form)
 
 @app.route("/walk", methods=['GET', 'POST'])
 def walk():
@@ -860,19 +1291,68 @@ def walk():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "walk"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "walk"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('walk.html', title='Walk', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('walk.html', title='Walk', form=form)
 
 @app.route("/dance", methods=['GET', 'POST'])
 def dance():
@@ -885,19 +1365,68 @@ def dance():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "dance"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "dance"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('dance.html', title='Dance', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('dance.html', title='Dance', form=form)
 
 @app.route("/hrx", methods=['GET', 'POST'])
 def hrx():
@@ -910,19 +1439,68 @@ def hrx():
     # ##########################
     email = get_session = session.get('email')
     if get_session is not None:
-        form = EnrollForm()
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                enroll = "hrx"
-                mongo.db.user.insert({'Email': email, 'Status': enroll})
-            flash(
-                f' You have succesfully enrolled in our {enroll} plan!',
-                'success')
-            return render_template('new_dashboard.html', form=form)
-            # return redirect(url_for('dashboard'))
+        activity = "hrx"
+        userEnrolledStatus = mongo.db.user_activity.find_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+        if userEnrolledStatus is None: 
+            enrolled = False
+            form = EnrollForm()
+            if form.validate_on_submit():
+                if request.method == 'POST':
+                    mongo.db.user_activity.insert({'Email': email, 'Activity': activity, 'Status': "Enrolled", 'Date': date.today().strftime('%Y-%m-%d')})
+                flash(
+                    f' You have succesfully enrolled in our {activity} plan!',
+                    'success')
+                activity_cursor = findActivities(email)
+                activities = [
+                    {"name": activity.get("Activity", "Unknown"), 
+                    "status": activity.get("Status", "Unknown"), 
+                    "date": activity.get("Date", "Unknown")}
+                    for activity in activity_cursor
+                ]
+                return render_template('new_dashboard.html', form=form, activities=activities)
+                # return redirect(url_for('dashboard'))
+        else :
+            enrolled = True
+            form = UnenrollForm()
+            if form.validate_on_submit():
+                if form.submit.data : 
+                    if request.method == 'POST':
+                        mongo.db.user_activity.remove({'Email': email, 'Activity': activity, 'Status': "Enrolled"})
+                    flash(
+                        f' You have succesfully unenrolled in our {activity} plan!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+                elif form.completed.data:
+                    if request.method == 'POST':
+                        mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
+                                                        {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
+                    flash(
+                        f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')
+                    activity_cursor = findActivities(email)
+                    activities = [
+                        {"name": activity.get("Activity", "Unknown"), 
+                        "status": activity.get("Status", "Unknown"), 
+                        "date": activity.get("Date", "Unknown")}
+                        for activity in activity_cursor
+                    ]
+                    return render_template('new_dashboard.html', form=form, activities=activities)
+
+        return render_template('hrx.html', title='HRX', form=form, enrolled=enrolled)
     else:
         return redirect(url_for('dashboard'))
-    return render_template('hrx.html', title='HRX', form=form)
 
 # @app.route("/ajaxdashboard", methods=['POST'])
 # def ajaxdashboard():
@@ -979,6 +1557,9 @@ def blog():
     # 处理 "blog" 页面的逻辑
     return render_template('blog.html')
 
+def findActivities(email):
+    activities = mongo.db.user_activity.find({'Email': email})
+    return activities
 
 if __name__ == '__main__':
     app.run(debug=True)
