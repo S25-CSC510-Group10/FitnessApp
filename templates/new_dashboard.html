@@ -4,9 +4,28 @@
 <div id="dashboard-data card">
     <h5 class="card-header">Your Activities</h5>
     <div class="card-body">
-        <p class="border-bottom mb-4 h6" id="enroll_legend"></p>
-        <p class="card-text" id="enroll"></p> <br>
-        <p class="border-bottom mb-4 h6" id="calories_legend"></p>
+        {% if activities %}
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Activity</th>
+                        <th>Enrollment Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for activity in activities %}
+                        <tr>
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.status }}</td>
+                            <td>{{ activity.date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="text-muted">No activities found. Enroll in an activity to see it here!</p>
+        {% endif %}
     </div>
 </div>
 
