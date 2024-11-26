@@ -83,6 +83,35 @@
           {% endif %}
           {% endwith %}
           {% block content %}{% endblock %}
+          <!-- Timer Modal -->
+          <div id="timerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999;">
+            <div style="background: #fff; margin: 100px auto; padding: 20px; width: 300px; border-radius: 8px; text-align: center; position: relative;">
+                <h2>Workout Timer</h2>
+                
+                <!-- Clock with Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress">
+                        <div class="clock" id="clockDisplay">00:00</div>
+                    </div>
+                </div>
+                
+                <!-- Timer Input -->
+                <div>
+                    <label for="timeInput">Set Timer (minutes):</label>
+                    <input type="number" id="timeInput" min="1" max="60" value="1" onchange="setTime()">
+                </div>
+                
+                <!-- Timer Controls -->
+                <div class="controls" style="margin: 20px 0;">
+                    <button onclick="startTimer()">Start</button>
+                    <button onclick="pauseTimer()">Pause</button>
+                    <button onclick="resetTimer()">Reset</button>
+                </div>
+                
+                <!-- Close Button -->
+                <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+            </div>
+          </div>
         </div>
       </div>
     </main>

@@ -1,4 +1,8 @@
 const { load } = require("mime");
+var timerInterval = null;
+var timeLeft = 0;
+var totalTime = 0;
+console.log(timeLeft)
 
 function addToLocalStorage(key,data){
     localStorage.setItem(key) = data;
@@ -104,4 +108,63 @@ function dashboard(e, email){
             $("#enroll").empty().append(resdata.enroll)
         }
     })
+}
+
+
+function openModal() {
+    document.getElementById("timerModal").style.display = "block";
+    resetTimer(); // Initialize the timer
+}
+
+function closeModal() {
+    document.getElementById("timerModal").style.display = "none";
+    pauseTimer();
+}
+
+function startTimer() {
+    if (!timerInterval) {
+        timerInterval = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateClock();
+                updateProgressBar();
+            } else {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                alert("Time's up!");
+            }
+        }, 1000);
+    }
+}
+
+function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function resetTimer() {
+    pauseTimer();
+    const timeInput = document.getElementById("timeInput").value;
+    totalTime = timeLeft = timeInput * 60 || 0;
+    updateClock();
+    updateProgressBar();
+}
+
+function setTime() {
+    const timeInput = document.getElementById("timeInput").value;
+    totalTime = timeLeft = timeInput * 60 || 0;
+    updateClock();
+    updateProgressBar();
+}
+
+function updateClock() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById("clockDisplay").textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+function updateProgressBar() {
+    const progress = document.querySelector(".progress");
+    const percentage = ((totalTime - timeLeft) / totalTime) * 360; // Convert to degrees
+    progress.style.background = `conic-gradient(#4caf50 ${percentage}deg, #ccc 0deg)`;
 }
