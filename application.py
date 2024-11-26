@@ -22,6 +22,7 @@ from flask import render_template, session, url_for, flash, redirect, request, F
 from flask_mail import Mail, Message
 from flask_pymongo import PyMongo
 from tabulate import tabulate
+from achievements import updateAchievments, getAchievements
 from forms import HistoryForm, RegistrationForm, LoginForm, CalorieForm, UnenrollForm, UserProfileForm, EnrollForm,ReviewForm
 from insert_db_data import insertfooddata,insertexercisedata
 import schedule
@@ -789,8 +790,13 @@ def headspace():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -859,8 +865,13 @@ def mbsr():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -929,9 +940,14 @@ def swim():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
+                        'success')     
                     activity_cursor = findActivities(email)
                     activities = [
                         {"name": activity.get("Activity", "Unknown"), 
@@ -999,8 +1015,13 @@ def abbs():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1069,8 +1090,13 @@ def belly():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1140,8 +1166,13 @@ def core():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1210,8 +1241,13 @@ def gym():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1279,8 +1315,13 @@ def walk():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1348,8 +1389,13 @@ def dance():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -1417,8 +1463,13 @@ def hrx():
                     if request.method == 'POST':
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
+                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
