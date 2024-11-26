@@ -275,6 +275,20 @@ def activities():
         return redirect(url_for('login'))
     #return render_template('user_profile.html', status=True, form=form)#
 
+@app.route("/achievements", methods=['GET', 'POST'])
+def achievements():
+    """
+    Display the list of achievements which a user has earned
+    """
+
+    if session.get('email'):
+        email = session.get('email')
+        achievements = getAchievements(email, mongo.db)
+        return render_template('achievements.html', achievements=achievements)
+    else:
+        return redirect(url_for('login'))
+    #return render_template('user_profile.html', status=True, form=form)#
+
 
 @app.route("/user_profile", methods=['GET', 'POST'])
 def user_profile():
