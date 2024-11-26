@@ -731,11 +731,15 @@ def yoga():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
-                        
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
                     flash(
                         f' You have succesfully completed the {activity} plan!',
+                        'success')
+                    if achievment is not None:
+                        flash(
+                        f' Woohoooo!!!! You have earned {achievment["name"]} achievement! Go to your Achievements Page to view all your Achievements!',
                         'success')
                     activity_cursor = findActivities(email)
                     activities = [
@@ -802,9 +806,9 @@ def headspace():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -877,9 +881,9 @@ def mbsr():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -952,9 +956,9 @@ def swim():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1027,9 +1031,9 @@ def abbs():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1102,9 +1106,9 @@ def belly():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1178,9 +1182,9 @@ def core():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1253,9 +1257,9 @@ def gym():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1327,9 +1331,9 @@ def walk():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1401,9 +1405,9 @@ def dance():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
@@ -1475,9 +1479,9 @@ def hrx():
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
                     if request.method == 'POST':
+                        achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
                                                         {'$set': {'Status': 'Completed', 'Date': date.today().strftime('%Y-%m-%d')}})
-                        achievment = updateAchievments(activity, email, mongo.db)
                     flash(
                         f' You have succesfully completed the {activity} plan!',
                         'success')
