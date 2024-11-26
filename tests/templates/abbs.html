@@ -10,10 +10,19 @@
             <img class="img-fluid" src="../static/img/abbs.jpeg">
         </div>
         <form method="POST" action="">
-            {{ form.hidden_tag() }}
+			{{ form.hidden_tag() }}
+            {% if not enrolled %}
+                <!-- Display the Enroll button -->
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
+                    {{ form.submit(class="btn btn-outline-info", value="Enroll") }}
                 </div>
+            {% else %}
+                <!-- Display the Unenroll and Completed buttons -->
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-danger", value="Unenroll") }}
+                    {{ form.completed(class="btn btn-outline-success", value="Completed") }}
+                </div>
+            {% endif %}
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
