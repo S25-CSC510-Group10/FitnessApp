@@ -446,6 +446,10 @@ def get_bmi_category(bmi):
         return 'Obese'
 
 
+@app.route('/guided_meditation', methods=['GET'])
+def render_guided_meditation():
+    return render_template("guided_medication.html")
+
 @app.route("/send_email", methods=['GET','POST'])
 def send_email():
     # ############################

@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a1a;
+        color: #e6e6e6;
+    }
+
+    header {
+        background: #000;
+        color: #fff;
+        padding: 1em 0;
+        text-align: center;
+        border-bottom: 2px solid #444;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 1em 0;
+    }
+
+    .section {
+        background: #333;
+        margin: 2em 0;
+        padding: 1.5em;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    }
+
+    .section h2 {
+        color: #fff;
+    }
+
+    .section p {
+        color: #cccccc;
+    }
+
+    .video-library {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+
+    .video-library iframe {
+        flex: 1 1 calc(33.333% - 1em);
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 2px solid #444;
+    }
+
+    footer {
+        background: #000;
+        color: #fff;
+        text-align: center;
+        padding: 1em 0;
+        border-top: 2px solid #444;
+    }
+
+    a {
+        color: #1e90ff;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+
+<div class="container">
+    <!-- Guided Meditation Section -->
+    <section class="section">
+        <h2>Guided Meditation</h2>
+        <p>
+            Guided meditation is a powerful tool to enhance mental clarity, reduce stress, and improve overall
+            wellbeing.
+            Take a moment to center yourself with our collection of guided meditation sessions.
+        </p>
+        <div class="video-library">
+            <!-- Add YouTube videos here -->
+            <iframe src="https://www.youtube.com/embed/1vx8iUvfyCY" title="Guided Meditation"></iframe>
+            <iframe src="https://www.youtube.com/embed/inpok4MKVLM" title="Relaxation Meditation"></iframe>
+            <iframe src="https://www.youtube.com/embed/ZToicYcHIOU" title="Mindfulness Meditation"></iframe>
+        </div>
+    </section>
+
+    <!-- Breathing Exercises Section -->
+    <section class="section">
+        <h2>Breathing Exercises</h2>
+        <p>
+            Proper breathing techniques can help reduce anxiety, improve focus, and boost energy levels.
+            Explore these guided breathing exercises to enhance your physical and mental health.
+        </p>
+        <div class="video-library">
+            <iframe src="https://www.youtube.com/embed/wfDTp2GogaQ" title="Mindful Breathing Exercise"></iframe>
+
+            <iframe src="https://www.youtube.com/embed/5DqTuWve9t8"
+                title="Calm Breathe Bubble | Breathing Exercise"></iframe>
+
+            <iframe src="https://www.youtube.com/embed/TXNECaIJPDI"
+                title="5 Minute Breathing Exercise - Guided Mindfulness Meditation"></iframe>
+
+        </div>
+    </section>
+</div>
+
+{% endblock %}
