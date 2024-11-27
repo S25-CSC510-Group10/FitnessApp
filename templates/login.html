@@ -1,48 +1,63 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+<div class="container" style="max-width: 500px; margin-top: 50px; font-family: Arial, sans-serif;">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 style="color: #FFC107; font-weight: bold; text-transform: uppercase;">Log In</h1>
+        <p style="color: #e6e6e6;">Welcome back! Please log in to access your account.</p>
+    </div>
+
+    <!-- Login Form -->
+    <div class="card shadow-lg" style="background-color: #343434; border-radius: 10px; padding: 20px;">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Log In</legend>
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
+                <div class="form-group mb-4">
+                    {{ form.email.label(class="form-control-label", style="color: #FFC107; font-size: 16px;") }}
                     {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
+                        {{ form.email(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none; border-radius: 5px;") }}
+                        <div class="invalid-feedback" style="color: #ff6b6b;">
                             {% for error in form.email.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.email(class="form-control form-control-lg", style="background-color: #444; color: white; border: none; border-radius: 5px;") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
+                <div class="form-group mb-4">
+                    {{ form.password.label(class="form-control-label", style="color: #FFC107; font-size: 16px;") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
+                        {{ form.password(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none; border-radius: 5px;") }}
+                        <div class="invalid-feedback" style="color: #ff6b6b;">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.password(class="form-control form-control-lg", style="background-color: #444; color: white; border: none; border-radius: 5px;") }}
                     {% endif %}
                 </div>
             </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+            <div class="form-group text-center mb-3">
+                {{ form.submit(class="btn btn-warning btn-lg w-100", style="font-weight: bold; color: #343434;") }}
             </div>
-            <small class="text-muted ml-2">
-                <a href="{{url_for('login')}}">Forgot Password?</a>
-            </small>
         </form>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+
+    <!-- Forgot Password -->
+    <div class="text-center mt-3">
+        <small style="color: #e6e6e6;">
+            <a href="{{ url_for('login') }}" style="color: #FFC107; text-decoration: none;">Forgot Password?</a>
         </small>
     </div>
+
+    <!-- Sign-Up Link -->
+    <div class="border-top pt-3 text-center mt-4">
+        <small style="color: #e6e6e6;">
+            Need an account? <a href="{{ url_for('register') }}" style="color: #FFC107; text-decoration: none;">Sign up now</a>.
+        </small>
+    </div>
+</div>
 {% endblock content %}
