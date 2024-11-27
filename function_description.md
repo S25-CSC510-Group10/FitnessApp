@@ -55,3 +55,15 @@ favorites()
 
 yoga()/swim()/abbs()/belly()/core()/gym()/walk()/dance()/hrx()
 - This function allows user to enroll in different plans
+
+activities()
+- This function display the list of activities which a user has or had previously enrolled under with their current status.
+
+find_activities()
+- This function seaches the list of activities of a user based on an email search.
+
+achievements()
+- This function displays the list of achievements that a user has earned in his fitness journey.
+
+render_guided_meditation()
+- This function is used to display the different meditation exercises available throughout the internet.
