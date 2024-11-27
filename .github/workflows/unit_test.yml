@@ -1,0 +1,39 @@
+name: Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mongodb-version: ['7.0']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install pytest-cov
+          pip install -r requirements.txt
+          echo requirements installed
+        # pip uninstall bson
+        # pip uninstall pymongo
+        # pip install pymongo
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+      - name: Run tests
+        run: |
+          python application.py &
+          sleep 5
+          cd tests
+          python -m unittest test_module
