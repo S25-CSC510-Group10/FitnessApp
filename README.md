@@ -6,8 +6,7 @@
 - Yash Mor
 
 # Link to new features video:
-
-https://www.youtube.com/watch?v=e3Jg1mSQiNs
+[Demo Video](https://drive.google.com/file/d/1UQmxP05gOOQCj-7cpbBgVPsfmwztNKNk/view?usp=sharing)
 <br>
 <br>
 
