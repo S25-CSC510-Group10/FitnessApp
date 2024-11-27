@@ -1,68 +1,69 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
-    <form method="POST" action="{{ url_for('submit_reviews') }}" name="ReviewForm()">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Submit a Review</legend>
-            <div class="form-group">
-                {{ form.name.label(class="form-control-label") }} (Your Name)
-                {% if form.name.errors %}
-                    {{ form.name(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.name.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.name(class="form-control form-control-lg") }}
-                {% endif %}
-                {{ form.review.label(class="form-control-label") }} (Your Review)
-                {% if form.review.errors %}
-                    {{ form.review(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.review.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.review(class="form-control form-control-lg") }}
-                {% endif %}
+<div class="container" style="margin-top: 20px; font-family: Arial, sans-serif;">
+
+    <!-- Submit Review Form -->
+    <div style="background-color: #333; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+        <form method="POST" action="{{ url_for('submit_reviews') }}" name="ReviewForm()">
+            {{ form.hidden_tag() }}
+            <fieldset style="border: none; margin-bottom: 20px;">
+                <legend style="color: #FFC107; font-size: 24px; font-weight: bold; text-align: center;">Submit a Review</legend>
+                <div style="margin-bottom: 20px;">
+                    <!-- Name Field -->
+                    <label style="color: #e6e6e6; font-size: 16px;">Your Name</label>
+                    {% if form.name.errors %}
+                        {{ form.name(class="form-control form-control-lg is-invalid", style="padding: 10px; border-radius: 5px; border: 1px solid red; background-color: #444; color: white;") }}
+                        <div style="color: #FF6F61; margin-top: 5px;">
+                            {% for error in form.name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.name(class="form-control form-control-lg", style="padding: 10px; border-radius: 5px; border: 1px solid #666; background-color: #444; color: white;") }}
+                    {% endif %}
+                </div>
+
+                <!-- Review Field -->
+                <div style="margin-bottom: 20px;">
+                    <label style="color: #e6e6e6; font-size: 16px;">Your Review</label>
+                    {% if form.review.errors %}
+                        {{ form.review(class="form-control form-control-lg is-invalid", style="padding: 10px; border-radius: 5px; border: 1px solid red; background-color: #444; color: white;") }}
+                        <div style="color: #FF6F61; margin-top: 5px;">
+                            {% for error in form.review.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.review(class="form-control form-control-lg", style="padding: 10px; border-radius: 5px; border: 1px solid #666; background-color: #444; color: white;") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+
+            <div style="text-align: center;">
+                {{ form.submit(class="btn btn-outline-info", style="padding: 10px 20px; background-color: #007BFF; border: none; color: white; border-radius: 5px; cursor: pointer;") }}
             </div>
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-outline-info") }}
-        </div>
-    </form>
+        </form>
+    </div>
 
     <!-- Display Existing Reviews -->
-    <div id="existing-reviews">
-        <h2>Existing Reviews:</h2>
-        <ul>
-            {% for review in existing_reviews %}
-                <li class="quote">
-                    <blockquote>&ldquo;{{ review.review }}&rdquo;</blockquote>
-                    <cite>{{ review.name }}</cite>
-                </li>
-            {% endfor %}
-        </ul>
+    <div style="margin-top: 40px;">
+        <h2 style="color: #FFC107; text-align: center; font-weight: bold; margin-bottom: 20px;">Existing Reviews</h2>
+        <div style="background-color: #333; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+            {% if existing_reviews %}
+                <ul style="list-style: none; padding: 0;">
+                    {% for review in existing_reviews %}
+                        <li style="margin-bottom: 20px;">
+                            <blockquote style="font-style: italic; color: #e6e6e6; padding: 10px 15px; border-left: 5px solid #FFC107; background-color: #444; border-radius: 5px;">
+                                &ldquo;{{ review.review }}&rdquo;
+                            </blockquote>
+                            <cite style="display: block; text-align: right; color: #FFC107; margin-top: 5px;">- {{ review.name }}</cite>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p style="color: #cccccc; text-align: center;">No reviews submitted yet. Be the first to leave a review!</p>
+            {% endif %}
+        </div>
     </div>
 </div>
-<style>
-    /* CSS Styles for Existing Reviews */
-    .quote {
-        background-color: #f9f9f9;
-        border-left: 10px solid #ccc;
-        margin: 10px 0;
-        padding: 10px 20px;
-    }
-    blockquote {
-        font-style: italic;
-    }
-    cite {
-        text-align: right;
-        display: block;
-        margin-top: 10px;
-    }
-</style>
-{% endblock content %}
+{% endblock %}
