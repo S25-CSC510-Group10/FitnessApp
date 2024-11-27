@@ -142,53 +142,38 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## Enter Calories
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/historyPic.PNG>
+![image](https://github.com/user-attachments/assets/ae45d06c-fe29-4982-8078-1fc2f03cbc0f)
 
 ## Enter water intakes
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/water.PNG>
+![image](https://github.com/user-attachments/assets/850b2db0-3b45-4c40-826a-f8de44fd09c4)
 
 ## Blog
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/blog.PNG>
+![image](https://github.com/user-attachments/assets/15a36eb1-42f3-40ca-99e1-7c8027d44e85)
 
 ## Shop workout gears
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/shop.PNG>
-
-## Check History
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/caloriesPic.PNG>
+![image](https://github.com/user-attachments/assets/77351168-219f-4927-9718-a89d7cc0a7c8)
 
 ## Add Friends
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/friendsPic.PNG>
+![image](https://github.com/user-attachments/assets/208d3ac5-602c-4ec8-9140-22e64a761c49)
 
 ## Calculate BMI
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/bmiPic.PNG>
-
-## Add an Excercise to Favourites
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/favPic.PNG>
+![image](https://github.com/user-attachments/assets/c7c2bbd6-1553-4fb7-95d2-0a670d389397)
 
 ## Submit a Review
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/reviewPic.jpeg>
+![image](https://github.com/user-attachments/assets/c142e439-dcfd-40a8-a589-b971a1aa1266)
 
 ## View User Profile
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/profile1.0.jpeg>
-
-## View User Profile 2.0
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/profile2.0.jpeg>
-
-## Update Your Profile
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/updateProfile.jpeg>
+![image](https://github.com/user-attachments/assets/10d08d3c-89ea-407a-bdf2-e08a8288e2b9)
 
 ## Time your Workouts
+![image](https://github.com/user-attachments/assets/178ab8df-a160-4a04-9cfc-46d6a1f3db35)
 
 
 # Steps for execution
