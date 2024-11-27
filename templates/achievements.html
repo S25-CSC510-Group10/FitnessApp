@@ -11,6 +11,7 @@
                         <th>Achievement Name</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Share</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -19,6 +20,14 @@
                             <td>{{ achievement.name }}</td>
                             <td>{{ achievement.date }}</td>
                             <td>{{ achievement.description }}</td>
+                            <td>
+                                <a 
+                                    href="https://twitter.com/intent/tweet?text=I%20just%20unlocked%20the%20{{ achievement.name }}%20achievement%20on%20BURNOUT!%20{{ achievement.description }}" 
+                                    target="_blank" 
+                                    class="btn btn-info btn-sm">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -28,6 +37,5 @@
         {% endif %}
     </div>
 </div>
-
 
 {% endblock %}
