@@ -52,9 +52,6 @@
 
 BurnOut is an easy-to-use application designed to help users manage their daily calorie intake and expenditure as well as drinking habits, and it has now been enhanced with additional features. This all-in-one wellness app is not only a user-friendly calorie tracker but also offers a comprehensive suite of tools to support individuals in achieving their fitness and weight management goals.
 
-<img src = "https://github.com/anshganatra/FitnessApp/assets/145216300/e4fc29ea-253c-4bfc-803c-80bf55193044" width="700px">
-
-
 ## Key Features:
 
 1. **Calorie Tracking:** BurnOut allows users to effortlessly keep track of their daily calorie intake and calories burnt through physical activities, helping them maintain a healthy lifestyle.
@@ -129,31 +126,19 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## Register
 
-<img src=https://raw.githubusercontent.com/anshganatra/FitnessApp/main/static/img/registerPic.PNG>
+![image](https://github.com/user-attachments/assets/cdc4700a-6da8-41cd-ac35-e3a3137f43bd)
 
 ## Login
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/loginPic.PNG>
+![image](https://github.com/user-attachments/assets/37f3b1cb-a737-44c7-b4b1-2fa0d1ebc4ea)
 
 ## Dashboard
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/dashboardPic.PNG>
+![image](https://github.com/user-attachments/assets/22a574f3-8a33-4852-86d9-ace6d5e06820)
 
 ## Excercise Section
 
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/excercisePic.PNG>
-
-## Must Try Workout Section
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/musttryworkoutPic.PNG>
-
-## Popular Workout Section
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/popularworkoutPic.PNG>
-
-## Spirit Curation Section
-
-<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/spirit.PNG>
+![image](https://github.com/user-attachments/assets/2a7d7cec-7530-464c-ad74-20d73e663951)
 
 ## Enter Calories
 
