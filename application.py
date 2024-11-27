@@ -15,11 +15,10 @@ https://github.com/VibhavDeo/FitnessApp
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
-from bson import ObjectId
 import smtplib
 from flask import json,jsonify,Flask
 from flask import render_template, session, url_for, flash, redirect, request, Flask
-from flask_mail import Mail, Message
+from flask_mail import Mail
 from flask_pymongo import PyMongo
 from tabulate import tabulate
 from achievements import updateAchievments, getAchievements
@@ -29,7 +28,6 @@ import schedule
 from threading import Thread
 import time
 from datetime import date
-import base64
 
 app = Flask(__name__, template_folder='templates')
 app.secret_key = 'secret'
@@ -253,10 +251,10 @@ def display_profile():
         return redirect(url_for('login'))
     #return render_template('user_profile.html', status=True, form=form)#
 
-@app.route("/activites", methods=['GET', 'POST'])
+@app.route("/activities", methods=['GET', 'POST'])
 def activities():
     """
-    Display the list of activites which a user has or had previously enrolled under with their current status
+    Display the list of activities which a user has or had previously enrolled under with their current status
     """
     now = datetime.now()
     now = now.strftime('%Y-%m-%d')
@@ -328,7 +326,7 @@ def user_profile():
                                              'weight': weight,
                                              'goal': goal,
                                              'target_weight': target_weight})
-                
+
                 flash(f'User Profile Updated', 'success')
 
                 return redirect(url_for('display_profile'))
@@ -346,52 +344,69 @@ def history():
     # Input: Email, date
     # Output: Value fetched and displayed
     # ##########################
-    email = get_session = session.get('email')
-    if get_session is not None:
-        form = HistoryForm()
-    return render_template('history.html', form=form)
+    if session.get('email'):
+        get_session = session.get('email')
+        form = None
+        if get_session is not None:
+            form = HistoryForm()
+        return render_template('history.html', form=form)
+    else:
+        return redirect(url_for('login'))
+    
 
 @app.route('/water', methods=['GET','POST'])
 def water():
-    email = session.get('email')
-    intake = request.form.get('intake')
-    if request.method == 'POST':
+    if session.get('email'):
+        email = session.get('email')
+        intake = request.form.get('intake')
+        if request.method == 'POST':
 
-        current_time = datetime.now()
-        # Insert the new record
-        mongo.db.intake_collection.insert_one({'intake': intake, 'time': current_time, 'email': email})
+            current_time = datetime.now()
+            # Insert the new record
+            mongo.db.intake_collection.insert_one({'intake': intake, 'time': current_time, 'email': email})
 
-    # Retrieving records for the logged-in user
-    records = mongo.db.intake_collection.find({"email": email}).sort("time", -1)
+        # Retrieving records for the logged-in user
+        records = mongo.db.intake_collection.find({"email": email}).sort("time", -1)
 
-    # IMPORTANT: We need to convert the cursor to a list to iterate over it multiple times
-    records_list = list(records)
-    if records_list:
-        average_intake = sum(int(record['intake']) for record in records_list) / len(records_list)
+        # IMPORTANT: We need to convert the cursor to a list to iterate over it multiple times
+        records_list = list(records)
+        if records_list:
+            average_intake = sum(int(record['intake']) for record in records_list) / len(records_list)
+        else:
+            average_intake = 0
+        # Calculate total intake
+        total_intake = sum(int(record['intake']) for record in records_list)
+
+        # Render template with records and total intake
+        return render_template('water_intake.html', records=records_list, total_intake=total_intake,average_intake=average_intake)
     else:
-        average_intake = 0
-    # Calculate total intake
-    total_intake = sum(int(record['intake']) for record in records_list)
+        return redirect(url_for('login'))
 
-    # Render template with records and total intake
-    return render_template('water_intake.html', records=records_list, total_intake=total_intake,average_intake=average_intake)
 
 @app.route('/clear-intake', methods=['POST'])
 def clear_intake():
-    email = session.get('email')
-    # 清除当前用户的所有水摄入量记录
-    mongo.db.intake_collection.delete_many({"email": email})
+    if session.get('email'):
+        email = session.get('email')
+        mongo.db.intake_collection.delete_many({"email": email})
 
-    # 重定向回水摄入量追踪页面
-    return redirect(url_for('water'))
+        return redirect(url_for('water'))
+    else:
+        return redirect(url_for('login'))
+    
 
 @app.route('/shop')
 def shop():
-    return render_template('shop.html')
-
+    if session.get('email'):
+        return render_template('shop.html')
+    else:
+        return redirect(url_for('login'))
+    
 @app.route('/mind')
 def mind():
-    return render_template('mind.html')
+    if session.get('email'):
+        return render_template('mind.html')
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/ajaxhistory", methods=['POST'])
 def ajaxhistory():
@@ -624,8 +639,11 @@ def dashboard():
         {"id": 1, "name": "Yoga"},
         {"id": 2, "name": "Swimming"},
         ]
-    return render_template('dashboard.html', title='Dashboard', exercises=exercises)
-
+    email = get_session = session.get('email')
+    if session.get('email'):
+        return render_template('dashboard.html', title='Dashboard', exercises=exercises)
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/add_favorite', methods=['POST'])
 def add_favorite():
@@ -734,6 +752,7 @@ def yoga():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -809,6 +828,7 @@ def headspace():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -884,6 +904,7 @@ def mbsr():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -959,6 +980,7 @@ def swim():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1034,6 +1056,7 @@ def abbs():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1109,6 +1132,7 @@ def belly():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1185,6 +1209,7 @@ def core():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1260,6 +1285,7 @@ def gym():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1334,6 +1360,7 @@ def walk():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1408,6 +1435,7 @@ def dance():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1482,6 +1510,7 @@ def hrx():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 

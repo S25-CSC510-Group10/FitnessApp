@@ -59,6 +59,11 @@ class TestApplication(unittest.TestCase):
             response = client.get('/user_profile')
             self.assertEqual(response.status_code, 200)  
 
+    def test_history_route_unauthenticated(self):
+        
+        response = self.app.get('/history')
+        self.assertEqual(response.status_code, 302) 
+
     def test_history_route(self):
         
         with self.app as client:
@@ -129,7 +134,66 @@ class TestApplication(unittest.TestCase):
 
             for route in exercise_routes:
                 response = client.get(route)
-                self.assertEqual(response.status_code, 200)  
+                self.assertEqual(response.status_code, 200)
+
+    def test_clear_water_intake(self):
+        with self.app as client:
+            with client.session_transaction() as sess:
+                sess['email'] = 'testuser@example.com'
+
+            response = client.post('/clear-intake')
+            self.assertEqual(response.status_code, 302)  
+
+    def test_water_unauthenticated(self):
+        response = self.app.post('/water')
+        self.assertEqual(response.status_code, 302) 
+
+    def test_my_activities_unauthenticated(self):
+        response = self.app.get('/activities')
+        self.assertEqual(response.status_code, 302)
+
+    def test_my_activities(self):
+        with self.app as client:
+            with client.session_transaction() as sess:
+                sess['email'] = 'testuser@example.com'
+            response = client.get('/activities')
+            self.assertEqual(response.status_code, 200)
+
+    def test_achievements_unauthenticated(self):
+        response = self.app.get('/achievements')
+        self.assertEqual(response.status_code, 302)
+
+    def test_achievements(self):
+    
+        with self.app as client:
+            with client.session_transaction() as sess:
+                sess['email'] = 'testuser@example.com'
+            response = client.get('/achievements')
+            self.assertEqual(response.status_code, 200)
+
+    def test_shop_unauthenticated(self):
+        response = self.app.get('/shop')
+        self.assertEqual(response.status_code, 302)
+
+    def test_shop(self):
+    
+        with self.app as client:
+            with client.session_transaction() as sess:
+                sess['email'] = 'testuser@example.com'
+            response = client.get('/shop')
+            self.assertEqual(response.status_code, 200)
+    
+    def test_mind_unauthenticated(self):
+        response = self.app.get('/mind')
+        self.assertEqual(response.status_code, 302)
+
+    def test_mind(self):
+    
+        with self.app as client:
+            with client.session_transaction() as sess:
+                sess['email'] = 'testuser@example.com'
+            response = client.get('/mind')
+            self.assertEqual(response.status_code, 200)
 
     def test_submit_reviews_route(self):
     

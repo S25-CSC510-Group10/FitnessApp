@@ -1,6 +1,6 @@
 
 """
-Copyright (c) 2023 Rajat Chandak, Shubham Saboo, Vibhav Deo, Chinmay Nayak
+Copyright (c) 2024 Devesh Ajay Vaidya, Ashwin Ramesh, Aditi Reddy, Bhuvan Chandra Kurra
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: Burnout
@@ -9,9 +9,9 @@ This code is licensed under MIT license (see LICENSE for details)
 This python file is used in and is part of the Burnout project.
 
 For more information about the Burnout project, visit:
-https://github.com/VibhavDeo/FitnessApp
-
+https://github.com/CS510-001-HW/FitnessApp
 """
+
 # from datetime import date
 # from re import sub
 # from flask import app
@@ -127,6 +127,13 @@ class EnrollForm(FlaskForm):
     app = App()
     mongo = app.mongo
     submit = SubmitField('Enroll')
+
+class UnenrollForm(FlaskForm):
+    """Form to enroll into a particular exercise/event"""
+    app = App()
+    mongo = app.mongo
+    completed = SubmitField(label='Completed')
+    submit = SubmitField(label='Unenroll')
 
 class ResetPasswordForm(FlaskForm):
     """Form to reset the account password"""

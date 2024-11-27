@@ -2,29 +2,29 @@
 {% block content %}
 
 <div id="dashboard-data card">
-    <h5 class="card-header">Your Activities</h5>
+    <h5 class="card-header">Your Achievements</h5>
     <div class="card-body">
-        {% if activities %}
+        {% if achievements %}
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>Activity</th>
-                        <th>Enrollment Status</th>
+                        <th>Achievement Name</th>
                         <th>Date</th>
+                        <th>Description</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for activity in activities %}
+                    {% for achievement in achievements %}
                         <tr>
-                            <td>{{ activity.name }}</td>
-                            <td>{{ activity.status }}</td>
-                            <td>{{ activity.date }}</td>
+                            <td>{{ achievement.name }}</td>
+                            <td>{{ achievement.date }}</td>
+                            <td>{{ achievement.description }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="text-muted">No activities found. Enroll in an activity to see it here!</p>
+            <p class="text-muted">No achievements found. Complete more courses to earn your first achievement!</p>
         {% endif %}
     </div>
 </div>
