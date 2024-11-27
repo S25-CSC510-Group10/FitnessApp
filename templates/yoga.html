@@ -1,31 +1,63 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div>
-        <h1 id="head"><strong><span style="text-decoration: underline;">YOGA FOR BEGINNERS</span></strong></h1><img class="img-fluid" src="../static/img/yoga.jpg">
-        <p id="1" style="color: white;"><br>Join Anvita &amp; Tejashree for this 30 minute Gentle Yoga session, which has an emphasis on asana alignments, breathing techniques and mindfulness. This class will focus on the Core and abdominal region to help build strength in the midsection of the body and the lower back. Through the asanas in this class, you will build endurance, stamina, and overall agility.<br><br><strong style="font-size: 25px;color: #FFC107;">Main Practice:</strong><br><br>1. Vayunishkasana<br>2. Surya Namaskar - 3 Rounds<br>3. Ardha Uttanasana + Ardha Utkatasana<br>4. Anjaneyasana Lateral Stretch<br>5. Eka Pada Adho Mukha - Knee to Elbow<br>6. Parivrtta Janu Shrishasana<br>7. Supta Dandasana + Pada Sanchalanasana<br><br><br></p>
-    </div>
-    <button class="timer-button" onclick="openModal()">Start Exercise</button>
+<div class="container" style="margin-top: 20px; font-family: Arial, sans-serif;">
 
-    <div class="card" style="background-color:#343434;">
-        <div class="card-body">
-            <h4 class="card-title"><strong style="font-size: 20px;color: #FFC107;">Enroll in our Yoga Plan</strong><h4>
-            <img class="img-fluid" src="../static/img/yoga_stages.png">
-        </div>
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            {% if not enrolled %}
-                <!-- Display the Enroll button -->
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info", value="Enroll") }}
-                </div>
-            {% else %}
-                <!-- Display the Unenroll and Completed buttons -->
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-danger", value="Unenroll") }}
-                    {{ form.completed(class="btn btn-outline-success", value="Completed") }}
-                </div>
-            {% endif %}
-        </form>
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Yoga for Beginners</h1>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Image Section -->
+    <div class="text-center mb-4">
+        <img src="../static/img/yoga.jpg" alt="Yoga for Beginners" class="img-fluid" style="border-radius: 10px; max-height: 400px; object-fit: cover;">
+    </div>
+
+    <!-- Description Section -->
+    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+        <div class="card-body p-4">
+            <p style="color: white; font-size: 16px; line-height: 1.8;">
+                Join <strong>Anvita & Tejashree</strong> for this 30-minute gentle yoga session focusing on asana alignments, breathing techniques, and mindfulness. This class will strengthen your core, build endurance, and enhance agility through targeted poses.
+            </p>
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3">Main Practices:</h4>
+            <ul style="color: white; font-size: 16px; padding-left: 20px;">
+                <li>Vayunishkasana</li>
+                <li>Surya Namaskar - 3 Rounds</li>
+                <li>Ardha Uttanasana + Ardha Utkatasana</li>
+                <li>Anjaneyasana Lateral Stretch</li>
+                <li>Eka Pada Adho Mukha - Knee to Elbow</li>
+                <li>Parivrtta Janu Shrishasana</li>
+                <li>Supta Dandasana + Pada Sanchalanasana</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Enroll Section -->
+    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+        <div class="card-body text-center p-4">
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3">Enroll in our Yoga Plan</h4>
+            <img src="../static/img/yoga_stages.png" alt="Yoga Stages" class="img-fluid mb-3" style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {% if not enrolled %}
+                    <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;">Enroll</button>
+                {% else %}
+                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;">Unenroll</button>
+                    <button type="submit" class="btn btn-outline-success btn-lg">Completed</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <!-- Start Exercise Button -->
+    <div class="text-center">
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start Exercise</button>
+    </div>
+    <br><br>
+</div>
+
+<script>
+    function openModal() {
+        alert("Exercise timer modal would appear here.");
+    }
+</script>
 {% endblock content %}

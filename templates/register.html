@@ -1,151 +1,167 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="content-section">
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+    <div class="card" style="background-color: #343434; border-radius: 10px; padding: 20px;">
+        <h2 class="text-center" style="color: #FFC107; font-weight: bold;">Join Today</h2>
         <form method="POST" action="" onsubmit="return validateForm()">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend style="color: white; font-weight: bold; border-bottom: 2px solid #FFC107; padding-bottom: 10px;">Sign Up</legend>
+                
+                <!-- Username -->
                 <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.username.label(class="form-control-label", style="color: white;") }}
                     {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        {{ form.username(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.username.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
+                        {{ form.username(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
+
+                <!-- Email -->
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
+                    {{ form.email.label(class="form-control-label", style="color: white;") }}
                     {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        {{ form.email(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.email(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
+
+                <!-- Password -->
                 <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
+                    {{ form.password.label(class="form-control-label", style="color: white;") }}
                     {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        {{ form.password(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.password(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
+
+                <!-- Confirm Password -->
                 <div class="form-group">
-                    {{ form.confirm_password.label(class="form-control-label") }}
+                    {{ form.confirm_password.label(class="form-control-label", style="color: white;") }}
                     {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                        {{ form.confirm_password(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
 
-                <!-- New Fields -->
+                <!-- Weight -->
                 <div class="form-group">
-                    {{ form.weight.label(class="form-control-label") }}
+                    {{ form.weight.label(class="form-control-label", style="color: white;") }}
                     {% if form.weight.errors %}
-                        {{ form.weight(class="form-control form-control-lg is-invalid") }}
+                        {{ form.weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.weight.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.weight(class="form-control form-control-lg") }}
+                        {{ form.weight(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
 
+                <!-- Height -->
                 <div class="form-group">
-                    {{ form.height.label(class="form-control-label") }}
+                    {{ form.height.label(class="form-control-label", style="color: white;") }}
                     {% if form.height.errors %}
-                        {{ form.height(class="form-control form-control-lg is-invalid") }}
+                        {{ form.height(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.height.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.height(class="form-control form-control-lg") }}
+                        {{ form.height(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
 
+                <!-- Goal -->
                 <div class="form-group">
-                    {{ form.goal.label(class="form-control-label") }}
+                    {{ form.goal.label(class="form-control-label", style="color: white;") }}
                     {% if form.goal.errors %}
-                        {{ form.goal(class="form-control form-control-lg is-invalid") }}
+                        {{ form.goal(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.goal.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.goal(class="form-control form-control-lg") }}
+                        {{ form.goal(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
 
+                <!-- Target Weight -->
                 <div class="form-group">
-                    {{ form.target_weight.label(class="form-control-label") }}
+                    {{ form.target_weight.label(class="form-control-label", style="color: white;") }}
                     {% if form.target_weight.errors %}
-                        {{ form.target_weight(class="form-control form-control-lg is-invalid") }}
+                        {{ form.target_weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: none;") }}
                         <div class="invalid-feedback">
                             {% for error in form.target_weight.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.target_weight(class="form-control form-control-lg") }}
+                        {{ form.target_weight(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
                 </div>
 
             </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-outline-info") }}
+
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                {{ form.submit(class="btn btn-warning btn-lg", style="font-weight: bold; color: #343434;") }}
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+
+    <!-- Sign In Link -->
+    <div class="text-center mt-4">
+        <small style="color: white;">
+            Already Have An Account? <a href="{{ url_for('login') }}" style="color: #FFC107;">Sign In</a>
         </small>
     </div>
+</div>
 
-    <script>
-        function validateForm() {
-            const password = document.querySelector('input[name="password"]').value;
-            const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
-            const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+<script>
+    function validateForm() {
+        const password = document.querySelector('input[name="password"]').value;
+        const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
 
-            // Check if password meets the criteria
-            if (!passwordRegex.test(password)) {
-                alert("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
-                return false; // Prevent form submission
-            }
-
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return false; // Prevent form submission
-            }
-
-            return true; // Allow form submission
+        if (!passwordRegex.test(password)) {
+            alert("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
+            return false;
         }
-    </script>
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 {% endblock content %}
