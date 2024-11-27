@@ -348,6 +348,7 @@ def history():
     # ##########################
     if session.get('email'):
         email = get_session = session.get('email')
+        form = None
         if get_session is not None:
             form = HistoryForm()
         return render_template('history.html', form=form)
@@ -749,6 +750,7 @@ def yoga():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -824,6 +826,7 @@ def headspace():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -899,6 +902,7 @@ def mbsr():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -974,6 +978,7 @@ def swim():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1049,6 +1054,7 @@ def abbs():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1124,6 +1130,7 @@ def belly():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1200,6 +1207,7 @@ def core():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1275,6 +1283,7 @@ def gym():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1349,6 +1358,7 @@ def walk():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1423,6 +1433,7 @@ def dance():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
@@ -1497,6 +1508,7 @@ def hrx():
                     ]
                     return render_template('new_dashboard.html', form=form, activities=activities)
                 elif form.completed.data:
+                    achievment = None
                     if request.method == 'POST':
                         achievment = updateAchievments(activity, email, mongo.db)
                         mongo.db.user_activity.update_one({'Email': email, 'Activity': activity, 'Status': "Enrolled"}, 
