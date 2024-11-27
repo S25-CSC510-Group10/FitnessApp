@@ -14,38 +14,36 @@ https://www.youtube.com/watch?v=e3Jg1mSQiNs
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/692868088.svg)](https://zenodo.org/doi/10.5281/zenodo.10023046)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/VibhavDeo/FitnessApp/main)
-[![Python application](https://github.com/VibhavDeo/FitnessApp/actions/workflows/python-app.yml/badge.svg)](https://github.com/VibhavDeo/FitnessApp/actions/workflows/python-app.yml)
-[![Lint](https://github.com/VibhavDeo/FitnessApp/actions/workflows/syntax_checker.yml/badge.svg)](https://github.com/VibhavDeo/FitnessApp/actions/workflows/syntax_checker.yml)
-[![Pylint](https://github.com/VibhavDeo/FitnessApp/actions/workflows/pylint.yml/badge.svg)](https://github.com/VibhavDeo/FitnessApp/actions/workflows/pylint.yml)
-[![Tests On Push](http://github.com/VibhavDeo/FitnessApp/actions/workflows/unit_test.yml/badge.svg)](https://github.com/VibhavDeo/FitnessApp/actions/workflows/unit_test.yml)
-[![Code Coverage](https://github.com/VibhavDeo/FitnessApp/actions/workflows/code_cov.yml/badge.svg)](https://github.com/VibhavDeo/FitnessApp/actions/workflows/code_cov.yml)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/VibhavDeo/FitnessApp)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/anshganatra/FitnessApp/main)
+[![Python application](https://github.com/anshganatra/FitnessApp/actions/workflows/python-app.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/python-app.yml)
+[![Lint](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml)
+[![Pylint](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/anshganatra/FitnessApp)
 
 <!--Badges-->
-<a href="https://github.com/VibhavDeo/FitnessApp/fork" target="blank">
-<img src="https://img.shields.io/github/forks/VibhavDeo/FitnessApp?style=flat-square" alt="FitnessApp/forks"/>
+<a href="https://github.com/anshganatra/FitnessApp/fork" target="blank">
+<img src="https://img.shields.io/github/forks/anshganatra/FitnessApp?style=flat-square" alt="FitnessApp/forks"/>
 </a>
-<a href="https://github.com/VibhavDeo/FitnessApp/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/VibhavDeo/FitnessApp?style=flat-square" alt="FitnessApp stars"/>
+<a href="https://github.com/anshganatra/FitnessApp/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/anshganatra/FitnessApp?style=flat-square" alt="FitnessApp stars"/>
 </a>
-<a href="https://github.com/VibhavDeo/FitnessApp/issues" target="blank">
-<img src="https://img.shields.io/github/issues/VibhavDeo/FitnessApp?style=flat-square" alt="FitnessApp issues"/>
+<a href="https://github.com/anshganatra/FitnessApp/issues" target="blank">
+<img src="https://img.shields.io/github/issues/anshganatra/FitnessApp?style=flat-square" alt="FitnessApp issues"/>
 </a>
-<a href="https://github.com/VibhavDeo/FitnessApp/issues" target="blank">
-<img src="https://img.shields.io/github/issues-closed/VibhavDeo/FitnessApp" alt="FitnessApp issues closed"/>
+<a href="https://github.com/anshganatra/FitnessApp/issues" target="blank">
+<img src="https://img.shields.io/github/issues-closed/anshganatra/FitnessApp" alt="FitnessApp issues closed"/>
 </a>
-<a href="https://github.com/VibhavDeo/FitnessApp/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/VibhavDeo/FitnessApp?style=flat-square" alt="cheapBuy pull-requests"/>
+<a href="https://github.com/anshganatra/FitnessApp/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/anshganatra/FitnessApp?style=flat-square" alt="cheapBuy pull-requests"/>
 </a>
-<a href="https://github.com/VibhavDeo/FitnessApp/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/VibhavDeo/FitnessApp" /></a>
+<a href="https://github.com/anshganatra/FitnessApp/graphs/contributors" alt="Contributors">
+<img src="https://img.shields.io/github/contributors/anshganatra/FitnessApp" /></a>
 
-<a href="https://github.com/VibhavDeo/FitnessApp/graphs/commit-activity" alt="commit activity">
-<img src="https://img.shields.io/github/commit-activity/w/VibhavDeo/FitnessApp" /></a>
+<a href="https://github.com/anshganatra/FitnessApp/graphs/commit-activity" alt="commit activity">
+<img src="https://img.shields.io/github/commit-activity/w/anshganatra/FitnessApp" /></a>
 
-<a href="https://img.shields.io/github/repo-size/VibhavDeo/FitnessApp" alt="repo size">
-<img src="https://img.shields.io/github/repo-size/VibhavDeo/FitnessApp" /></a>
+<a href="https://img.shields.io/github/repo-size/anshganatra/FitnessApp" alt="repo size">
+<img src="https://img.shields.io/github/repo-size/anshganatra/FitnessApp" /></a>
 
 # BurnOut
 
@@ -55,7 +53,7 @@ https://www.youtube.com/watch?v=e3Jg1mSQiNs
 
 BurnOut is an easy-to-use application designed to help users manage their daily calorie intake and expenditure as well as drinking habits, and it has now been enhanced with additional features. This all-in-one wellness app is not only a user-friendly calorie tracker but also offers a comprehensive suite of tools to support individuals in achieving their fitness and weight management goals.
 
-<img src = "https://github.com/VibhavDeo/FitnessApp/assets/145216300/e4fc29ea-253c-4bfc-803c-80bf55193044" width="700px">
+<img src = "https://github.com/anshganatra/FitnessApp/assets/145216300/e4fc29ea-253c-4bfc-803c-80bf55193044" width="700px">
 
 
 ## Key Features:
@@ -132,79 +130,82 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## Register
 
-<img src=https://raw.githubusercontent.com/VibhavDeo/FitnessApp/main/static/img/registerPic.PNG>
+<img src=https://raw.githubusercontent.com/anshganatra/FitnessApp/main/static/img/registerPic.PNG>
 
 ## Login
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/loginPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/loginPic.PNG>
 
 ## Dashboard
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/dashboardPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/dashboardPic.PNG>
 
 ## Excercise Section
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/excercisePic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/excercisePic.PNG>
 
 ## Must Try Workout Section
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/musttryworkoutPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/musttryworkoutPic.PNG>
 
 ## Popular Workout Section
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/popularworkoutPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/popularworkoutPic.PNG>
 
 ## Spirit Curation Section
 
-<img src=https://github.com/token1029/FitnessApp/blob/main/static/img/spirit.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/spirit.PNG>
 
 ## Enter Calories
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/historyPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/historyPic.PNG>
 
 ## Enter water intakes
 
-<img src=https://github.com/token1029/FitnessApp/blob/main/static/img/water.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/water.PNG>
 
 ## Blog
 
-<img src=https://github.com/token1029/FitnessApp/blob/main/static/img/blog.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/blog.PNG>
 
 ## Shop workout gears
 
-<img src=https://github.com/token1029/FitnessApp/blob/main/static/img/shop.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/shop.PNG>
 
 ## Check History
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/caloriesPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/caloriesPic.PNG>
 
 ## Add Friends
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/friendsPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/friendsPic.PNG>
 
 ## Calculate BMI
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/bmiPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/bmiPic.PNG>
 
 ## Add an Excercise to Favourites
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/favPic.PNG>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/favPic.PNG>
 
 ## Submit a Review
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/reviewPic.jpeg>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/reviewPic.jpeg>
 
 ## View User Profile
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/profile1.0.jpeg>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/profile1.0.jpeg>
 
 ## View User Profile 2.0
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/profile2.0.jpeg>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/profile2.0.jpeg>
 
 ## Update Your Profile
 
-<img src=https://github.com/VibhavDeo/FitnessApp/blob/main/static/img/updateProfile.jpeg>
+<img src=https://github.com/anshganatra/FitnessApp/blob/main/static/img/updateProfile.jpeg>
+
+## Time your Workouts
+
 
 # Steps for execution
 
@@ -216,11 +217,11 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows
 Step 2:
 Git Clone the Repository
 
-    git clone https://github.com/VibhavDeo/FitnessApp.git
+    git clone https://github.com/anshganatra/FitnessApp.git
 
 (OR) Download the .zip file on your local machine
 
-    https://github.com/VibhavDeo/FitnessApp.git
+    https://github.com/anshganatra/FitnessApp.git
 
 Step 3:
 Install the required packages by running the following command in the terminal
@@ -246,34 +247,33 @@ If you get error regarding any of the following packages - pymongo and bson, the
 # Source Code
 
 Link to the repository:
-https://github.com/token1029/FitnessApp
+https://github.com/anshganatra/FitnessApp
 
 # Future Scope
 
 1. Bug fixes
 2. Show the enrollment lists for all the courses
-3. Email verification for loggin
+3. Email verification for login
 4. Use openAI api to enhance bot performance.
 
 # Team Members
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/DeveshAjayVaidya"><img src="https://avatars.githubusercontent.com/u/158637611?v=4" width="75px;" alt=""/><br /><sub><b>Devesh Ajay Vaidya</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/ashwinramesh022"><img src="https://avatars.githubusercontent.com/u/117009209?v=4" width="75px;" alt=""/><br /><sub><b>Ashwin Ramesh Kannan</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Aditi105"><img src="https://avatars.githubusercontent.com/u/120356039?v=4" width="75px;" alt=""/><br /><sub><b>aditi reddy</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Bhuvankurra"><img src="https://avatars.githubusercontent.com/u/93917820?v=4" width="75px;" alt=""/><br /><sub><b>bhuvan chandra kurra</b></sub></a></td>
+    <td align="center"><a href="https://github.com/anshganatra"><img src="https://avatars.githubusercontent.com/u/32770005?v=4" width="75px;" alt=""/><br /><sub><b>Ansh Ganatra</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/SaiTarun314"><img src="https://avatars.githubusercontent.com/u/44906701?v=4" width="75px;" alt=""/><br /><sub><b>Sai Tarun Yellamraju</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/moryash08"><img src="https://avatars.githubusercontent.com/u/62850244?v=4" width="75px;" alt=""/><br /><sub><b>Yash Mor</b></sub></a><br /></td>
   </tr>
 </table>
 
 # Contribution
 
-Please refer the [CONTRIBUTING.md](https://github.com/token1029/FitnessApp/blob/main/CONTRIBUTING.md) file for instructions on how to contribute to our repository.
+Please refer the [CONTRIBUTING.md](https://github.com/anshganatra/FitnessApp/blob/main/CONTRIBUTING.md) file for instructions on how to contribute to our repository.
 
   <p align="center">
-    <a href="https://github.com/token1029/FitnessApp/issues/new/choose">Report Bug</a>
+    <a href="https://github.com/anshganatra/FitnessApp/issues/new/choose">Report Bug</a>
     /
-    <a href="https://github.com/token1029/FitnessApp/issues/new/choose">Request Feature</a>
+    <a href="https://github.com/anshganatra/FitnessApp/issues/new/choose">Request Feature</a>
   </p>
 
 # License
