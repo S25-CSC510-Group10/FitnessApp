@@ -1,178 +1,99 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
+<div class="container" style="margin-top: 20px; color: white; font-family: Arial, sans-serif;">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>Home Workout Guide</title>
-        <style>
-            body {
-                padding-top: 70px;
-                color: white;
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                margin: 0;
-            }
+  <!-- Page Header -->
+  <div class="text-center mb-5">
+    <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">Home Workout Guide</h1>
+    <p style="color: #e6e6e6; font-size: 18px;">Your go-to guide for effective home workouts, tools, and tips!</p>
+  </div>
 
-            .container {
-                width: 80%;
-                margin: auto;
-                overflow: hidden;
-            }
+  <!-- Navigation Links -->
+  <div style="text-align: center; margin-bottom: 30px;">
+    <a href="#cardio" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Cardio</a>
+    <a href="#strength" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Strength</a>
+    <a href="#yoga" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Yoga</a>
+    <a href="#core" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Core</a>
+    <a href="#supplements" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Supplements</a>
+  </div>
 
-            header {
-                background: #333;
-                color: white;
-                padding: 10px 0;
-                top: 0;
-                z-index: 1000;
-            }
+  <!-- Sections -->
+  <div>
+    <!-- Cardio Section -->
+    <div id="cardio" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+      <h2 style="color: #FFC107;">Cardio Workouts</h2>
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 15px;">
+          <a href="https://www.amazon.com/Tangle-Free-Jumping-Bearings-Adjustable-Handles/dp/B09DF9NWC7" style="color: #d4e81d; text-decoration: none;">Speed Jump Rope</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">A lightweight and adjustable jump rope, ideal for fast-paced cardio and HIIT workouts.</p>
+        </li>
+        <li>
+          <a href="https://www.amazon.com/RUNOW-Treadmill-Apartment-Electric-Exercise/dp/B08QGSXV8M" style="color: #d4e81d; text-decoration: none;">Compact Treadmill</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Space-saving treadmill with variable speeds, perfect for home cardio sessions.</p>
+        </li>
+      </ul>
+    </div>
 
-            header ul {
-                list-style: none;
-                display: flex;
-                justify-content: center;
-                padding: 0;
-            }
+    <!-- Strength Training Section -->
+    <div id="strength" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+      <h2 style="color: #FFC107;">Strength Training</h2>
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 15px;">
+          <a href="https://www.amazon.com/AmazonBasics-Pound-Neoprene-Dumbbells-Weights/dp/B01LR5S6HK" style="color: #d4e81d; text-decoration: none;">Adjustable Dumbbells</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Versatile dumbbells with adjustable weights, suitable for a wide range of strength exercises.</p>
+        </li>
+        <li>
+          <a href="https://www.amazon.com/AmazonBasics-IR92007-12LB-Vinyl-Kettlebell-12lb/dp/B07F1NMM7B" style="color: #d4e81d; text-decoration: none;">Kettlebells Set</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">A set of kettlebells in various weights, great for building strength and endurance.</p>
+        </li>
+      </ul>
+    </div>
 
-            header ul li {
-                margin: 0 10px;
-            }
+    <!-- Yoga Section -->
+    <div id="yoga" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+      <h2 style="color: #FFC107;">Yoga</h2>
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 15px;">
+          <a href="https://www.amazon.com/AmazonBasics-Extra-Thick-Exercise-Carrying/dp/B01LP0U5X0" style="color: #d4e81d; text-decoration: none;">Eco-Friendly Yoga Mat</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Durable, non-slip yoga mat made from eco-friendly materials, providing comfort and stability.</p>
+        </li>
+        <li>
+          <a href="https://www.amazon.com/Trideer-Stretching-Physical-Non-Elastic-Exercise/dp/B092MJ621Z" style="color: #d4e81d; text-decoration: none;">Yoga Strap</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Helpful for stretching and improving flexibility, this strap enhances yoga practice for beginners and advanced yogis alike.</p>
+        </li>
+      </ul>
+    </div>
 
-            header ul li a {
-                color: white;
-                text-decoration: none;
-            }
+    <!-- Core Workouts Section -->
+    <div id="core" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+      <h2 style="color: #FFC107;">Core Workouts</h2>
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 15px;">
+          <a href="https://www.amazon.com/Vinsguir-Workout-Exercise-Equipment-Abdominal/dp/B07RKW5H68" style="color: #d4e81d; text-decoration: none;">Ab Roller Wheel</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">An effective tool for core strengthening, this ab roller challenges your balance and stability.</p>
+        </li>
+        <li>
+          <a href="https://www.amazon.com/Exercise-Ball-Yoga-Ball-Fitness/dp/B010MVAMH2" style="color: #d4e81d; text-decoration: none;">Stability Ball</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Enhances core workouts and improves posture and flexibility, suitable for all fitness levels.</p>
+        </li>
+      </ul>
+    </div>
 
-            .section {
-                padding: 30px;
-                margin: 20px 0;
-                border: 2px solid white;
-                border-radius: 10px;
-                background-color: #111;
-            }
+    <!-- Supplements Section -->
+    <div id="supplements" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+      <h2 style="color: #FFC107;">Supplements</h2>
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+        <li style="margin-bottom: 15px;">
+          <a href="https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Chocolate/dp/B000QSNYGI" style="color: #d4e81d; text-decoration: none;">Whey Protein</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">High-quality whey protein powder for muscle recovery and growth, available in various flavors.</p>
+        </li>
+        <li>
+          <a href="https://www.amazon.com/Gatorade-Protein-Recover-Chocolate-ounce/dp/B00T0BUBI6" style="color: #d4e81d; text-decoration: none;">Protein Bars</a>
+          <p style="color: #e6e6e6; margin: 5px 0;">Convenient and nutritious protein bars to support muscle recovery.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-            .section h2 {
-                margin-top: 0;
-                color: rgb(214, 152, 52);
-            }
-
-            .section ul {
-                list-style: square;
-                padding: 0;
-            }
-
-            .section ul li {
-                margin-bottom: 10px;
-            }
-
-            .section ul li a {
-                color: #d4e81d;
-                text-decoration: none;
-            }
-
-            .section ul li p {
-                margin-top: 5px;
-                text-align: left;
-                display: block;
-            }
-        </style>
-    </head>
-
-    <body>
-        <header>
-            <div class="container">
-                <ul>
-                    <li><a href="#cardio">Cardio</a></li>
-                    <li><a href="#strength">Strength</a></li>
-                    <li><a href="#yoga">Yoga</a></li>
-                    <li><a href="#core">Core</a></li>
-                    <li><a href="#supplements">Supplements</a></li>
-                </ul>
-            </div>
-        </header>
-
-        <div class="container">
-            <!-- Cardio Section -->
-            <div id="cardio" class="section">
-                <h2>Cardio Workouts</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.amazon.com/Tangle-Free-Jumping-Bearings-Adjustable-Handles/dp/B09DF9NWC7/ref=sr_1_1_sspa?crid=2GFAWITTULJO2&keywords=jump%2Brope&qid=1701129318&sprefix=jump%2Brope%2Caps%2C151&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">Speed Jump Rope</a>
-                        <p>A lightweight and adjustable jump rope, ideal for fast-paced cardio and HIIT workouts.</p>
-                    </li>
-                    <li>
-                        <a href="https://www.amazon.com/RUNOW-Treadmill-Apartment-Electric-Exercise/dp/B08QGSXV8M/ref=sr_1_2_sspa?crid=1T14J999J9AG2&keywords=treadmill&qid=1701129350&sprefix=treadmill%2Caps%2C116&sr=8-2-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">Compact Treadmill</a>
-                        <p>Space-saving treadmill with variable speeds, perfect for home cardio sessions.</p>
-                    </li>
-                    <!-- More cardio links -->
-                </ul>
-            </div>
-
-            <!-- Strength Training Section -->
-            <div id="strength" class="section">
-                <h2>Strength Training</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.amazon.com/AmazonBasics-Pound-Neoprene-Dumbbells-Weights/dp/B01LR5S6HK/ref=sr_1_1_ffob_sspa?crid=588BL24W66R2&keywords=dumbbells&qid=1701129414&sprefix=dumbbells%2Caps%2C123&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">Adjustable Dumbbells</a>
-                        <p>Versatile dumbbells with adjustable weights, suitable for a wide range of strength exercises.</p>
-                    </li>
-                    <li>
-                        <a href="https://www.amazon.com/AmazonBasics-IR92007-12LB-Vinyl-Kettlebell-12lb/dp/B07F1NMM7B/ref=sr_1_1_ffob_sspa?crid=11ZOZGCTTDVN3&keywords=kettlebell+sets&qid=1701129444&sprefix=kettble%2Caps%2C156&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1">Kettlebells Set</a>
-                        <p>A set of kettlebells in various weights, great for building strength and endurance.</p>
-                    </li>
-                    <!-- More strength training links -->
-                </ul>
-            </div>
-
-            <!-- Yoga Section -->
-            <div id="yoga" class="section">
-                <h2>Yoga</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.amazon.com/AmazonBasics-Extra-Thick-Exercise-Carrying/dp/B01LP0U5X0/ref=sr_1_1_ffob_sspa?crid=OTKGJBSP7QUH&keywords=yoga%2Bmat&qid=1701134035&sprefix=yoga%2Bma%2Caps%2C242&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">Eco-Friendly Yoga Mat</a>
-                        <p>Durable, non-slip yoga mat made from eco-friendly materials, providing comfort and stability.</p>
-                    </li>
-                    <li>
-                        <a href="https://www.amazon.com/Trideer-Stretching-Physical-Non-Elastic-Exercise/dp/B092MJ621Z/ref=sr_1_1_sspa?crid=14TB8CLHTX6XF&keywords=yoga+strap&qid=1701134130&sprefix=yoga+strap%2Caps%2C132&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1">Yoga Strap</a>
-                        <p>Helpful for stretching and improving flexibility, this strap enhances yoga practice for beginners and advanced yogis alike.</p>
-                    </li>
-                    <!-- More yoga links -->
-                </ul>
-            </div>
-
-            <!-- Core Workouts Section -->
-            <div id="core" class="section">
-                <h2>Core Workouts</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.amazon.com/Vinsguir-Workout-Exercise-Equipment-Abdominal/dp/B07RKW5H68/ref=sr_1_1_sspa?crid=1M1O0S9L7YORE&keywords=ab+roller&qid=1701129470&sprefix=ab+roller%2Caps%2C144&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1">Ab Roller Wheel</a>
-                        <p>An effective tool for core strengthening, this ab roller challenges your balance and stability.</p>
-                    </li>
-                    <li>
-                        <a href="https://www.amazon.com/Exercise-Ball-Yoga-Ball-Fitness/dp/B010MVAMH2/ref=sr_1_1_sspa?crid=2DTUGXOJEYJCX&keywords=stability%2Bball&qid=1701129503&sprefix=stability%2Bball%2Caps%2C109&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1&psc=1">Stability Ball</a>
-                        <p>Enhances core workouts and improves posture and flexibility, suitable for all fitness levels.</p>
-                    </li>
-                    <!-- More core workout links -->
-                </ul>
-            </div>
-
-            <!-- Supplements Section -->
-            <div id="supplements" class="section">
-                <h2>Supplements</h2>
-                <ul>
-                    <li>
-                        <a href="https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Chocolate/dp/B000QSNYGI/ref=sr_1_1_sspa?crid=2FG8B2QZXXVEX&keywords=whey+protein&qid=1701134567&sprefix=whey+protein%2Caps%2C167&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1">Whey Protein</a>
-                        <p>High-quality whey protein powder for muscle recovery and growth, available in various flavors.</p>
-                    </li>
-                    <li>
-                        <a href="https://www.amazon.com/Gatorade-Protein-Recover-Chocolate-ounce/dp/B00T0BUBI6/ref=sr_1_1_sspa?crid=2IFASU3H3KKQJ&dib=eyJ2IjoiMSJ9.9Is-JEx4up7zfQBJVRvgYL2oKIeU-u9IyOgFrQ8cEJOTh-wLuHI51Q997VgIiyDPArI-Vi1e4wvz11rfBGSOpLoI5FBrP1gFKQpfBuYiXudv3A37eK0GN9-k6qSY5AKeRZxTZ_1F6Y_xLtSSvhDRie1RR8xYUs3g1jkpKqGvDf8tDlco7gYNNcjikTgkoISAx5MJcNe1GcnA2sQcREFTrxxYtn6DL6pQx9zb_5pSmdOEvwFYuZoFk038B101yb6D-qpcyxNpMF7yewET_qvQfgsV8EnslzGqCqT7DjTKFF4.ZpTwZWmIssshRyybMTIYzlNE_DaqovIf3A1szlrBCVY&dib_tag=se&keywords=protein+bar&qid=1730491974&rdc=1&sprefix=protein+ba%2Caps%2C159&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1">Protein Bars</a>
-                        <p>Pitch-perfect protein bars for muscle recovery and growth, available in various flavors.</p>
-                    </li>
-                    <!-- More supplements links -->
-                </ul>
-            </div>
-        </div>
-    </body>
 </div>
 {% endblock content %}

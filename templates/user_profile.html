@@ -1,68 +1,82 @@
 {% extends "layout.html" %}
 {% block content %}
-<html>
-  
-        <div class="content-section">
-            <form method="POST" action="{{ url_for('user_profile') }}" name="UserProfileForm()">
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Update your data</legend>
-                    <div class="form-group">
-                        
-                        {{ form.height.label(class="form-control-label") }} (cms)
-                        {% if form.height.errors %}
-                            {{ form.height(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.height.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.height(class="form-control form-control-lg") }}
-                        {% endif %}
-                        {{ form.weight.label(class="form-control-label") }} (kgs)
-                        {% if form.weight.errors %}
-                            {{ form.weight(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.weight.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.weight(class="form-control form-control-lg") }}
-                        {% endif %}
-                        {{ form.goal.label(class="form-control-label") }}
-                        {% if form.goal.errors %}
-                            {{ form.goal(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.goal.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.goal(class="form-control form-control-lg") }}
-                        {% endif %}
-                        {{ form.target_weight.label(class="form-control-label") }} (kgs)
-                        {% if form.target_weight.errors %}
-                            {{ form.target_weight(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.target_weight.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.target_weight(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div> 
-                </fieldset>
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
-                </div>  
-                
-            
-        </div>
-        
+<div class="container" style="font-family: Arial, sans-serif; margin-top: 20px; color: white;">
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">Update Your Profile</h1>
+        <p style="color: #e6e6e6;">Keep your fitness data up to date for personalized insights and recommendations!</p>
     </div>
-</div>
+
+    <!-- Form Section -->
+    <div class="card border-0 shadow-sm p-4" style="background-color: #333; border-radius: 10px;">
+        <form method="POST" action="{{ url_for('user_profile') }}" name="UserProfileForm()">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend style="color: #FFC107; font-size: 24px;" class="mb-4">Update Your Data</legend>
+                <div class="form-group mb-4">
+                    <!-- Height Field -->
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.height.label.text }} (cms)</label>
+                    {% if form.height.errors %}
+                        {{ form.height(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                        <div class="invalid-feedback" style="color: #FF6B6B;">
+                            {% for error in form.height.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.height(class="form-control form-control-lg", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- Weight Field -->
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.weight.label.text }} (kgs)</label>
+                    {% if form.weight.errors %}
+                        {{ form.weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                        <div class="invalid-feedback" style="color: #FF6B6B;">
+                            {% for error in form.weight.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.weight(class="form-control form-control-lg", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- Goal Field -->
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.goal.label.text }}</label>
+                    {% if form.goal.errors %}
+                        {{ form.goal(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                        <div class="invalid-feedback" style="color: #FF6B6B;">
+                            {% for error in form.goal.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.goal(class="form-control form-control-lg", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group mb-4">
+                    <!-- Target Weight Field -->
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.target_weight.label.text }} (kgs)</label>
+                    {% if form.target_weight.errors %}
+                        {{ form.target_weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                        <div class="invalid-feedback" style="color: #FF6B6B;">
+                            {% for error in form.target_weight.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.target_weight(class="form-control form-control-lg", style="background-color: #444; color: white; border: 1px solid #555;") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group text-center mt-4">
+                {{ form.submit(class="btn btn-outline-info btn-lg", style="background-color: #FFC107; color: #333; font-weight: bold; border: none;") }}
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock content %}

@@ -1,9 +1,50 @@
-{% extends "layout.html" %} {% block content %}
-<div class="container">
-  <h1 style="color: white">Your Favorite Exercises</h1>
-  <div class="row">
-    {% for exercise in favorite_exercises %} {% include 'favorite_card.html' %}
+{% extends "layout.html" %}
+{% block content %}
+<div class="container" style="margin-top: 20px; font-family: Arial, sans-serif;">
+  
+  <!-- Page Header -->
+  <header style="text-align: center; margin-bottom: 30px;">
+    <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">Your Favorite Exercises</h1>
+    <p style="color: #e6e6e6; font-size: 18px;">Here's a collection of your favorite workouts to keep you motivated and active!</p>
+  </header>
+
+  <!-- Favorite Exercises Section -->
+  <div class="row g-4">
+    {% for exercise in favorite_exercises %}
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm" style="background-color: #333; border-radius: 15px;">
+
+          <!-- Exercise Image -->
+          <a href="{{ url_for('exercise_detail', id=exercise.id) }}">
+            <img src="{{ exercise.image_url }}" class="card-img-top" alt="{{ exercise.name }}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
+          </a>
+
+          <!-- Card Body -->
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold" style="color: #FFC107;">{{ exercise.name }}</h5>
+            <p class="card-text" style="color: #e6e6e6;">{{ exercise.description }}</p>
+            
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-center gap-2">
+              <a href="{{ url_for('exercise_detail', id=exercise.id) }}" class="btn btn-outline-primary btn-sm">More Info</a>
+              <a href="{{ exercise.tutorial_url }}" class="btn btn-outline-success btn-sm" target="_blank">Tutorial</a>
+              <form method="POST" action="{{ url_for('remove_favorite', id=exercise.id) }}" style="display: inline;">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
   </div>
+
+  <!-- No Favorites Message -->
+  {% if not favorite_exercises %}
+    <div style="text-align: center; margin-top: 50px;">
+      <p style="color: #e6e6e6; font-size: 18px;">You haven't added any favorite exercises yet. Explore workouts and add your favorites!</p>
+      <a href="{{ url_for('explore_workouts') }}" class="btn btn-outline-info">Explore Workouts</a>
+    </div>
+  {% endif %}
+
 </div>
 {% endblock content %}

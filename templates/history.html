@@ -1,39 +1,42 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <header>
-        <h1 style="color: white;">About Us</h1>
-    </header>
-
-    <div class="main-content">
-        <div class="section">
-            <h2 style="color: #FFC107;">Our Mission</h2>
-            <p style="color: white;">At Your Fitness App, our mission is to promote mental well-being and a healthy lifestyle through mindfulness and fitness. We believe in the power of community and support to help individuals lead fulfilling lives.</p>
-        </div>
-
-        <div class="section">
-            <h2 style="color: #FFC107;">Meet Our Team</h2>
-            <ul style="list-style: none; padding: 0; color: white;">
-                <li><strong>Ansh Ganatra</strong> - Member</li>
-                <li><strong>Sai Tarun Yellamraju</strong> - Member</li>
-                <li><strong>Yash Mor</strong> - Member</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2 style="color: #FFC107;">Our Values</h2>
-            <p style="color: white;">We value integrity, compassion, and growth. Our team is dedicated to creating a supportive environment where everyone can thrive and achieve their personal wellness goals.</p>
-        </div>
+<div class="container" style="font-family: Arial, sans-serif; margin-top: 20px; color: white;">
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">About Us</h1>
     </div>
 
-    <footer>
-        <p style="color: white;">&copy; 2024 Your Fitness App. All rights reserved.</p>
-    </footer>
-</div>
+    <!-- Mission Section -->
+    <div class="card border-0 shadow-sm mb-4" style="background-color: #333; border-radius: 10px; padding: 20px;">
+        <h2 style="color: #FFC107;">Our Mission</h2>
+        <p style="color: #e6e6e6; margin-top: 10px;">At Your Fitness App, our mission is to promote mental well-being and a healthy lifestyle through mindfulness and fitness. We believe in the power of community and support to help individuals lead fulfilling lives.</p>
+    </div>
 
-<style>
-    .section {
-        margin: 20px 0;
-    }
-</style>
+    <!-- Team Section -->
+    <div class="card border-0 shadow-sm mb-4" style="background-color: #333; border-radius: 10px; padding: 20px;">
+        <h2 style="color: #FFC107;">Meet Our Team</h2>
+        <ul style="list-style: none; padding: 0; margin-top: 10px;">
+            <li style="color: #e6e6e6; margin-bottom: 5px;">
+                <strong>Ansh Ganatra</strong> - Member
+            </li>
+            <li style="color: #e6e6e6; margin-bottom: 5px;">
+                <strong>Sai Tarun Yellamraju</strong> - Member
+            </li>
+            <li style="color: #e6e6e6; margin-bottom: 5px;">
+                <strong>Yash Mor</strong> - Member
+            </li>
+        </ul>
+    </div>
+
+    <!-- Values Section -->
+    <div class="card border-0 shadow-sm mb-4" style="background-color: #333; border-radius: 10px; padding: 20px;">
+        <h2 style="color: #FFC107;">Our Values</h2>
+        <p style="color: #e6e6e6; margin-top: 10px;">We value integrity, compassion, and growth. Our team is dedicated to creating a supportive environment where everyone can thrive and achieve their personal wellness goals.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-4">
+        <p style="color: #e6e6e6; margin: 0;">&copy; 2024 Your Fitness App. All rights reserved.</p>
+    </div>
+</div>
 {% endblock content %}
