@@ -1,24 +1,29 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 {% block content %}
-<div class="container">
-    <header>
-        <h1 style="color: white;">Mindfulness</h1>
+
+<div class="container" style="margin-top: 50px; font-family: Arial, sans-serif; color: white;">
+    <!-- Header -->
+    <header style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #FFA726; font-weight: bold;">Mindfulness</h1>
     </header>
 
-    <div class="main-content">
-        <div style="color: #ffffff;" class="section parallax">
+    <!-- Introduction Section -->
+    <div class="main-content" style="background-color: #1e1e1e; padding: 20px; border-radius: 15px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);">
+        <div class="section parallax" style="margin-bottom: 20px;">
             <p>Mindfulness is essential for mental well-being. It encourages us to focus on the present moment, reducing anxiety and promoting a sense of calm. By practicing mindfulness, we can better manage stress and improve our overall quality of life.</p>
             <p>Incorporating mindfulness into your daily routine can foster resilience and emotional balance. Simple techniques, such as mindful breathing and meditation, help cultivate awareness and appreciation for the here and now, leading to a more fulfilling life.</p>
         </div>
 
-        <div class="section">
+        <!-- What is Mindfulness Section -->
+        <div class="section" style="margin-bottom: 20px;">
             <h2 style="color: #FFC107;">What is Mindfulness?</h2>
-            <p style="color: white;">Mindfulness is the practice of being fully present and engaged in the moment, aware of your thoughts and feelings without judgment. It can help enhance focus, reduce stress, and improve emotional regulation.</p>
+            <p>Mindfulness is the practice of being fully present and engaged in the moment, aware of your thoughts and feelings without judgment. It can help enhance focus, reduce stress, and improve emotional regulation.</p>
         </div>
 
-        <div class="section">
+        <!-- Tips for Practicing Mindfulness Section -->
+        <div class="section" style="margin-bottom: 20px;">
             <h2 style="color: #FFC107;">Tips for Practicing Mindfulness</h2>
-            <ul style="list-style: none; padding: 0; text-align: left; max-width: 700px; margin: 0 auto; color: white;">
+            <ul style="list-style: none; padding: 0; text-align: left; max-width: 700px; margin: 0 auto;">
                 <li>• Take deep, slow breaths and focus on your breathing.</li>
                 <li>• Observe your thoughts and feelings without judgment.</li>
                 <li>• Practice gratitude by reflecting on positive aspects of your life.</li>
@@ -27,45 +32,28 @@
             </ul>
         </div>
 
-        <div class="section breathing-container">
+        <!-- Breathing Exercise Section -->
+        <div class="section breathing-container" style="text-align: center; margin-top: 20px;">
             <h2 style="color: #FFC107;">Breathe with Us</h2>
             <div id="breathingPopup" class="popup" style="display: none;">
-                <p id="breathingInstruction" style="color: white;">Breathe in...</p>
-                <div class="timer" id="timer" style="font-size: 2rem; color: white;">00:00</div>
+                <p id="breathingInstruction">Breathe in...</p>
+                <div class="timer" id="timer" style="font-size: 2rem;">00:00</div>
             </div>
-            <div class="buttons">
-                <button onclick="startBreathing()" class="btn2 start-btn">Start</button>
-                <button onclick="stopBreathing()" class="btn2 stop-btn">Stop</button>
+            <div class="buttons" style="margin-top: 20px;">
+                <button onclick="startBreathing()" class="btn2 start-btn" style="padding: 12px 24px; font-size: 1rem; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s, transform 0.3s;">Start</button>
+                <button onclick="stopBreathing()" class="btn2 stop-btn" style="padding: 12px 24px; font-size: 1rem; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s, transform 0.3s;">Stop</button>
             </div>
         </div>
     </div>
 
-    <footer>
-        <p style="color: white;">&copy; 2024 Your Fitness App. All rights reserved.</p>
+    <!-- Footer -->
+    <footer style="text-align: center; margin-top: 30px;">
+        <p style="color: #cccccc;">&copy; 2024 Your Fitness App. All rights reserved.</p>
     </footer>
 </div>
 
 <style>
-    .buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .btn2 {
-        padding: 12px 24px;
-        font-size: 1rem;
-        color: white;
-        background-color: #4CAF50; /* Green */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
     .btn2:hover {
-        background-color: #45a049; /* Darker green on hover */
         transform: scale(1.05);
     }
 
@@ -74,9 +62,9 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.8); /* Reduced opacity */
+        background-color: rgba(0, 0, 0, 0.8);
         border-radius: 15px;
-        padding: 40px; /* Increased padding for a larger pop-up */
+        padding: 40px;
         text-align: center;
         z-index: 1000;
         display: flex;
@@ -92,12 +80,11 @@
     function startBreathing() {
         const timerDisplay = document.getElementById('timer');
         const breathingPopup = document.getElementById('breathingPopup');
-        timerDisplay.style.display = 'block';
         timerDisplay.innerText = formatTime(seconds);
         seconds = 0;
 
         breathingPopup.style.display = 'flex'; // Show the popup
-        
+
         clearInterval(timer);
         timer = setInterval(() => {
             seconds++;
@@ -105,16 +92,17 @@
 
             // Breathing instructions every 3 seconds
             if (seconds % 3 === 0) {
-                breathingPopup.innerHTML = "<p id='breathingInstruction' style='color: white;'>" + (Math.floor(seconds / 3) % 2 === 0 ? "Breathe in..." : "Breathe out...") + "</p><div class='timer' style='font-size: 2rem; color: white;'>" + formatTime(seconds) + "</div>";
+                document.getElementById('breathingInstruction').innerText =
+                    Math.floor(seconds / 3) % 2 === 0 ? "Breathe in..." : "Breathe out...";
             }
 
             // Stop after 20 seconds
             if (seconds >= 20) {
                 clearInterval(timer);
-                breathingPopup.style.display = 'none';
+                stopBreathing();
                 alert("Breathing exercise completed.");
             }
-        }, 1000); // Increment timer every second
+        }, 1000);
     }
 
     function stopBreathing() {
@@ -129,13 +117,6 @@
         const secs = seconds % 60;
         return (minutes < 10 ? '0' : '') + minutes + ':' + (secs < 10 ? '0' : '') + secs;
     }
-
-    // Close the pop-up when clicking outside of it
-    window.onclick = function(event) {
-        const breathingPopup = document.getElementById('breathingPopup');
-        if (event.target === breathingPopup) {
-            stopBreathing();
-        }
-    }
 </script>
-{% endblock content %}
+
+{% endblock %}
