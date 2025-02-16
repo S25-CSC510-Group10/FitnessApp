@@ -9,11 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" >
+      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='card.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     {% if title %}
     <title>BURNOUT - {{ title }}</title>
@@ -85,33 +86,22 @@
     
           <div class="collapse navbar-collapse" id="navbarNav">
             <!-- Center Navbar Items -->
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto d-flex justify-content-evenly w-100">
               <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('dashboard') }}">Home</a>
+                <a class="nav-link" href="{{ url_for('achievements') }}">Achievements</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="trackProgressDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Track Progress
+                  Intake
                 </a>
                 <div class="dropdown-menu" aria-labelledby="trackProgressDropdown">
                   <a class="dropdown-item" href="{{ url_for('calories') }}">Calories</a>
                   <a class="dropdown-item" href="{{ url_for('bmi_calci') }}">BMI Calculator</a>
                   <a class="dropdown-item" href="{{ url_for('water') }}">Water</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('achievements') }}">Achievements</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="mindWellnessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Mind & Wellness
-                </a>
-                <div class="dropdown-menu" aria-labelledby="mindWellnessDropdown">
-                  <a class="dropdown-item" href="{{ url_for('mind') }}">Mind</a>
-                  <a class="dropdown-item" href="{{ url_for('render_guided_meditation') }}">Guided Meditation</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
@@ -126,7 +116,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="exploreLearnDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Explore & Learn
+                  Supplemental
                 </a>
                 <div class="dropdown-menu" aria-labelledby="exploreLearnDropdown">
                   <a class="dropdown-item" href="{{ url_for('favorites') }}">Favorites</a>
@@ -134,18 +124,46 @@
                   <a class="dropdown-item" href="{{ url_for('history') }}">About Us</a>
                 </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('display_profile') }}">Profile</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="mindWellnessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Wellness
+                </a>
+                <div class="dropdown-menu" aria-labelledby="mindWellnessDropdown">
+                  <a class="dropdown-item" href="{{ url_for('mind') }}">Mind</a>
+                  <a class="dropdown-item" href="{{ url_for('render_guided_meditation') }}">Guided Meditation</a>
+                </div>
               </li>
+              
+          
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('display_profile') }}">Profile</a>
+              </li> -->
             </ul>
     
             <!-- Right Side (Welcome and Logout) -->
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center">
               {% if session.get("email") %}
               <span class="text-white mr-3">Welcome, {{ session.get("name") }}</span>
               <button class="btn btn-warning btn-sm" onclick="logout()">Log Out</button>
               {% endif %}
+            </div> -->
+            <div class="d-flex align-items-center">
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+              {% if session.get("email") %}
+                <!-- Profile Icon with Dropdown -->
+                <div class="dropdown">
+                  <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="static\img\defaultProfile.jpg" alt="Profile Icon" class="rounded-circle border-0" style="background-color: yellow; width: 30px; height: 30px;"> {{ session.get("name") }}
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('display_profile') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="/settings">Settings - Not Implemented</a></li>
+                    <li><a class="dropdown-item" href="/logout" onclick="logout()">Log Out</a></li>
+                  </ul>
+                </div>
+              {% endif %}
             </div>
+
           </div>
         </div>
       </nav>
@@ -217,13 +235,11 @@
                     </div> -->
             <!-- {% else %} -->
 
-            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('favorites') }}">Favorites</a>
-            </p>
-            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('history') }}">History</a></p>
-            <p><a class="text-white" style="text-decoration: none;" href="{{url_for('friends')}}">Friends</a></p>
             <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('user_profile') }}">Profile</a></p>
-
-
+            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('favorites') }}">Favorites</a></p>
+            <p><a class="text-white" style="text-decoration: none;" href="{{url_for('friends')}}">Friends</a></p>
+            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('history') }}">About Us</a></p>
+            
           </div>
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
             <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
