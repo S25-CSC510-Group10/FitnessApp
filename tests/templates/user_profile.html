@@ -9,7 +9,7 @@
                     <legend class="border-bottom mb-4">Update your data</legend>
                     <div class="form-group">
                         
-                        {{ form.height.label(class="form-control-label") }} (cms)
+                        {{ form.height.label(class="form-control-label") }} (in centimeters)
                         {% if form.height.errors %}
                             {{ form.height(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -20,7 +20,7 @@
                         {% else %}
                             {{ form.height(class="form-control form-control-lg") }}
                         {% endif %}
-                        {{ form.weight.label(class="form-control-label") }} (kgs)
+                        {{ form.weight.label(class="form-control-label") }} (in kilograms)
                         {% if form.weight.errors %}
                             {{ form.weight(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -31,7 +31,8 @@
                         {% else %}
                             {{ form.weight(class="form-control form-control-lg") }}
                         {% endif %}
-                        {{ form.goal.label(class="form-control-label") }}
+                        {{ form.
+                            .label(class="form-control-label") }}
                         {% if form.goal.errors %}
                             {{ form.goal(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -42,7 +43,7 @@
                         {% else %}
                             {{ form.goal(class="form-control form-control-lg") }}
                         {% endif %}
-                        {{ form.target_weight.label(class="form-control-label") }} (kgs)
+                        {{ form.target_weight.label(class="form-control-label") }} (in kilograms)
                         {% if form.target_weight.errors %}
                             {{ form.target_weight(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">

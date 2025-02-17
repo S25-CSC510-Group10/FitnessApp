@@ -15,7 +15,7 @@
                 <legend style="color: #FFC107; font-size: 24px;" class="mb-4">Update Your Data</legend>
                 <div class="form-group mb-4">
                     <!-- Height Field -->
-                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.height.label.text }} (cms)</label>
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.height.label.text }}</label>
                     {% if form.height.errors %}
                         {{ form.height(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
                         <div class="invalid-feedback" style="color: #FF6B6B;">
@@ -30,7 +30,7 @@
 
                 <div class="form-group mb-4">
                     <!-- Weight Field -->
-                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.weight.label.text }} (kgs)</label>
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.weight.label.text }}</label>
                     {% if form.weight.errors %}
                         {{ form.weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
                         <div class="invalid-feedback" style="color: #FF6B6B;">
@@ -60,7 +60,7 @@
 
                 <div class="form-group mb-4">
                     <!-- Target Weight Field -->
-                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.target_weight.label.text }} (kgs)</label>
+                    <label style="color: #e6e6e6;" class="form-control-label">{{ form.target_weight.label.text }}</label>
                     {% if form.target_weight.errors %}
                         {{ form.target_weight(class="form-control form-control-lg is-invalid", style="background-color: #444; color: white; border: 1px solid #555;") }}
                         <div class="invalid-feedback" style="color: #FF6B6B;">
