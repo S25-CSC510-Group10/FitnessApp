@@ -42,8 +42,8 @@ app.config['MAIL_USERNAME'] = "burnoutapp2023@gmail.com"
 app.config['MAIL_PASSWORD'] = "jgny mtda gguq shnw"
 mail = Mail(app)
 
-# insertfooddata()
-# insertexercisedata()
+insertfooddata()
+insertexercisedata()
 
 def reminder_email():
     """
