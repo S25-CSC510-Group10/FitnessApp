@@ -35,8 +35,42 @@
         <!-- Breathing Exercise Section -->
         <div class="section breathing-container" style="text-align: center; margin-top: 20px;">
             <h2 style="color: #FFC107;">Breathe with Us</h2>
+
+            <!-- User input dropdown for the length of each breathe in seconds -->
+            <div style="margin-top: 20px";>
+                <label for="breathingLength" style="color: #FFC107;">Breathing Length (seconds)</label>
+                <select id="breathingLength" style="padding: 10px; font-size: 1rem; border-radius: 5px;">
+                    <option value="3">3 seconds</option>
+                    <option value="4">4 seconds</option>
+                    <option value="5">5 seconds</option>
+                    <option value="6">6 seconds</option>
+                    <option value="7">7 seconds</option>
+                    <option value="8">8 seconds</option>
+                    <option value="9">9 seconds</option>
+                    <option value="10">10 seconds</option>
+                </select>
+            </div>
+
+            <!-- User input dropdown for the length of breathing exercise in minues -->
+            <div style="margin-top: 20px";>
+                <label for="intervalSelect" style="color: #FFC107;">Exercise Duration (minutes)</label>
+                <select id="intervalSelect" style="padding: 10px; font-size: 1rem; border-radius: 5px;">
+                    <option value="30">30 seconds</option>
+                    <option value="60">1 minute</option>
+                    <option value="120">2 minute</option>
+                    <option value="180">3 minute</option>
+                    <option value="240">4 minute</option>
+                    <option value="300">5 minute</option>
+                    <option value="600">10 minute</option>
+                    <option value="900">15 minute</option>
+                </select>
+            </div>
+
             <div id="breathingPopup" class="popup" style="display: none;">
                 <p id="breathingInstruction">Breathe in...</p>
+                <div class ="circle-container">
+                    <div class="breathing-circle" id="breathing-circle"></div>
+                </div>
                 <div class="timer" id="timer" style="font-size: 2rem;">00:00</div>
             </div>
             <div class="buttons" style="margin-top: 20px;">
@@ -71,13 +105,51 @@
         flex-direction: column;
         align-items: center;
     }
+
+    .circle-container {
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .breathing-circle {
+        width: 100px;
+        height: 100px;
+        background-color: #309e00;
+        border-radius: 50%;
+        animation: breathe 20s infinite ease-in-out;
+
+    }
+
+    @keyframes breathe {
+        0%, 100% {
+            width: 100px;
+            height: 100px;
+        }
+        50% {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .timer {
+        margin-top: 20px;
+        font-size: 2rem;
+        color: #FFC107;
+    }
 </style>
 
 <script>
     let timer;
     let seconds = 0;
+    let isBreathingIn = true;
+    let breathingLength = "3"; //Default 3 seconds for breathe length
+    let interval = "30"; //Default 30 seconds for duration
+    let breathingCircle = document.getElementById('breathing-circle');
 
     function startBreathing() {
+        breathingLength = parseInt(document.getElementById('breathingLength').value); // Get user input for breathing length
+        interval = parseInt(document.getElementById('intervalSelect').value); // Convert selected interval to seconds
+
         const timerDisplay = document.getElementById('timer');
         const breathingPopup = document.getElementById('breathingPopup');
         timerDisplay.innerText = formatTime(seconds);
@@ -85,19 +157,22 @@
 
         breathingPopup.style.display = 'flex'; // Show the popup
 
+        // Set length of breathing circle animation 
+        breathingCircle.style.animationDuration = `${breathingLength * 2}s`;
+
         clearInterval(timer);
         timer = setInterval(() => {
             seconds++;
             timerDisplay.innerText = formatTime(seconds);
 
-            // Breathing instructions every 3 seconds
-            if (seconds % 3 === 0) {
-                document.getElementById('breathingInstruction').innerText =
-                    Math.floor(seconds / 3) % 2 === 0 ? "Breathe in..." : "Breathe out...";
+            // Breathing instructions every predetermined abmount of seconds seconds
+            if (seconds % breathingLength === 0) {
+                document.getElementById('breathingInstruction').innerText = Math.floor(seconds / breathingLength) % 2 === 0 ? "Breathe in..." : "Breathe out...";
+                breathingCircle.style.animationDirection = Math.floor(seconds / breathingLength) % 2 === 0 ? 'reverse' : 'normal';
             }
 
-            // Stop after 20 seconds
-            if (seconds >= 20) {
+            // Stop after determied time seconds
+            if (seconds >= interval) {
                 clearInterval(timer);
                 stopBreathing();
                 alert("Breathing exercise completed.");
