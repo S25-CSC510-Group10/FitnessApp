@@ -34,11 +34,11 @@ class RegistrationForm(FlaskForm):
         'Confirm Password', validators=[
             DataRequired(), EqualTo('password')])
     weight = StringField(
-        'Weight', validators=[
+        'Weight (in kilograms)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
     height = StringField(
-        'Height', validators=[
+        'Height (in centimeters)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
     goal = StringField(
@@ -46,7 +46,7 @@ class RegistrationForm(FlaskForm):
             DataRequired(), Length(
                 min=2, max=20)])
     target_weight = StringField(
-        'Target Weight', validators=[
+        'Target Weight (in kilograms)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
     submit = SubmitField('Sign Up')
@@ -96,19 +96,16 @@ class CalorieForm(FlaskForm):
 class UserProfileForm(FlaskForm):
     """Form to input user details to store their height, weight, goal and target weight"""
     weight = StringField(
-        'Weight', validators=[
+        'Weight (in kilograms)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
     height = StringField(
-        'Height', validators=[
+        'Height (in centimeters)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
-    goal = StringField(
-        'Goal (Weight Loss/ Muscle Gain)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
+    goal = SelectField('Select Goal', choices=['Weight Loss', 'Muscle Gain'])
     target_weight = StringField(
-        'Target Weight', validators=[
+        'Target Weight (in kilograms)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
     submit = SubmitField('Update')
