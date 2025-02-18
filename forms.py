@@ -41,7 +41,7 @@ class RegistrationForm(FlaskForm):
         'Height (in centimeters)', validators=[
             DataRequired(), Length(
                 min=2, max=20)])
-    goal = SelectField('Select Goal', choices=['Weight Loss', 'Muscle Gain'])
+    goal = SelectField('Select Goal', choices=['---', 'Weight Loss', 'Muscle Gain'])
     target_weight = StringField(
         'Target Weight (in kilograms)', validators=[
             DataRequired(), Length(
