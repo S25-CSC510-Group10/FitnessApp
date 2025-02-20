@@ -51,6 +51,15 @@
                     {% else %}
                         {{ form.password(class="form-control form-control-lg", style="background-color: #444; color: white; border: none;") }}
                     {% endif %}
+                    
+                    <!-- Password Validation Criteria -->
+                    <div id="password-criteria" style="color: red; font-size: 14px; margin-top: 10px;">
+                        <ul>
+                            <li id="min-length" class="invalid">At least 8 characters <span id="min-length-icon" class="text-danger">✘</span></li>
+                            <li id="uppercase" class="invalid">At least one uppercase letter <span id="uppercase-icon" class="text-danger">✘</span></li>
+                            <li id="special-char" class="invalid">At least one special character <span id="special-char-icon" class="text-danger">✘</span></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Confirm Password -->
@@ -146,22 +155,69 @@
 </div>
 
 <script>
-    function validateForm() {
-        const password = document.querySelector('input[name="password"]').value;
-        const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
-        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+    // Function to validate password input and update the status dynamically
+    document.querySelector('input[name="password"]').addEventListener('input', function() {
+        const password = this.value;
 
-        if (!passwordRegex.test(password)) {
-            alert("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
-            return false;
+        const minLength = document.getElementById('min-length');
+        const minLengthIcon = document.getElementById('min-length-icon');
+        const uppercase = document.getElementById('uppercase');
+        const uppercaseIcon = document.getElementById('uppercase-icon');
+        const specialChar = document.getElementById('special-char');
+        const specialCharIcon = document.getElementById('special-char-icon');
+
+        const minLengthRegex = /.{8,}/;
+        const uppercaseRegex = /[A-Z]/;
+        const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+        // Check if password meets each condition and update the UI accordingly
+        if (minLengthRegex.test(password)) {
+            minLength.classList.remove('invalid');
+            minLength.classList.add('valid');
+            minLength.style.color = 'green';
+            minLengthIcon.textContent = '✔';
+            minLengthIcon.classList.remove('text-danger');
+            minLengthIcon.classList.add('text-success');
+        } else {
+            minLength.classList.remove('valid');
+            minLength.classList.add('invalid');
+            minLength.style.color = 'red';
+            minLengthIcon.textContent = '✘';
+            minLengthIcon.classList.remove('text-success');
+            minLengthIcon.classList.add('text-danger');
         }
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return false;
+        if (uppercaseRegex.test(password)) {
+            uppercase.classList.remove('invalid');
+            uppercase.classList.add('valid');
+            uppercase.style.color = 'green';
+            uppercaseIcon.textContent = '✔';
+            uppercaseIcon.classList.remove('text-danger');
+            uppercaseIcon.classList.add('text-success');
+        } else {
+            uppercase.classList.remove('valid');
+            uppercase.classList.add('invalid');
+            uppercase.style.color = 'red';
+            uppercaseIcon.textContent = '✘';
+            uppercaseIcon.classList.remove('text-success');
+            uppercaseIcon.classList.add('text-danger');
         }
 
-        return true;
-    }
+        if (specialCharRegex.test(password)) {
+            specialChar.classList.remove('invalid');
+            specialChar.classList.add('valid');
+            specialChar.style.color = 'green';
+            specialCharIcon.textContent = '✔';
+            specialCharIcon.classList.remove('text-danger');
+            specialCharIcon.classList.add('text-success');
+        } else {
+            specialChar.classList.remove('valid');
+            specialChar.classList.add('invalid');
+            specialChar.style.color = 'red';
+            specialCharIcon.textContent = '✘';
+            specialCharIcon.classList.remove('text-success');
+            specialCharIcon.classList.add('text-danger');
+        }
+    });
 </script>
 {% endblock content %}
