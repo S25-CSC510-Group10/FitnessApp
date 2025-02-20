@@ -1,98 +1,180 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <div class="container" style="margin-top: 20px; color: white; font-family: Arial, sans-serif;">
 
   <!-- Page Header -->
   <div class="text-center mb-5">
-    <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">Home Workout Guide</h1>
-    <p style="color: #e6e6e6; font-size: 18px;">Your go-to guide for effective home workouts, tools, and tips!</p>
+    <h1 style="color: #FFC107; font-size: 36px; font-weight: bold;">Endorsement Store</h1>
+    <p style="color: #e6e6e6; font-size: 18px;">Aid your wellness journey with verified and endoresed equipment and supplements!</p>
   </div>
 
-  <!-- Navigation Links -->
-  <div style="text-align: center; margin-bottom: 30px;">
-    <a href="#cardio" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Cardio</a>
-    <a href="#strength" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Strength</a>
-    <a href="#yoga" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Yoga</a>
-    <a href="#core" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Core</a>
-    <a href="#supplements" style="color: #FFC107; margin: 0 15px; text-decoration: none;">Supplements</a>
-  </div>
+  <!-- Navigation Tabs -->
+  <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist" style="border-bottom: 2px solid #FFC107;">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="cardio-tab" data-bs-toggle="tab" href="#cardio" role="tab" aria-controls="cardio" aria-selected="true" style="color: #FFC107;">Cardio</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="strength-tab" data-bs-toggle="tab" href="#strength" role="tab" aria-controls="strength" aria-selected="false" style="color: #FFC107;">Strength</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="yoga-tab" data-bs-toggle="tab" href="#yoga" role="tab" aria-controls="yoga" aria-selected="false" style="color: #FFC107;">Yoga</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="core-tab" data-bs-toggle="tab" href="#core" role="tab" aria-controls="core" aria-selected="false" style="color: #FFC107;">Core</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="supplements-tab" data-bs-toggle="tab" href="#supplements" role="tab" aria-controls="supplements" aria-selected="false" style="color: #FFC107;">Supplements</a>
+    </li>
+  </ul>
 
-  <!-- Sections -->
-  <div>
+  <!-- Tab Content -->
+  <div class="tab-content" id="myTabContent">
     <!-- Cardio Section -->
-    <div id="cardio" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-      <h2 style="color: #FFC107;">Cardio Workouts</h2>
-      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
-        <li style="margin-bottom: 15px;">
-          <a href="https://www.amazon.com/Tangle-Free-Jumping-Bearings-Adjustable-Handles/dp/B09DF9NWC7" style="color: #d4e81d; text-decoration: none;">Speed Jump Rope</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">A lightweight and adjustable jump rope, ideal for fast-paced cardio and HIIT workouts.</p>
-        </li>
-        <li>
-          <a href="https://www.amazon.com/RUNOW-Treadmill-Apartment-Electric-Exercise/dp/B08QGSXV8M" style="color: #d4e81d; text-decoration: none;">Compact Treadmill</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Space-saving treadmill with variable speeds, perfect for home cardio sessions.</p>
-        </li>
-      </ul>
+    <div class="tab-pane fade show active" id="cardio" role="tabpanel" aria-labelledby="cardio-tab">
+      <h2 style="color: #FFC107; margin-top: 20px;">Cardio Workouts</h2>
+      <table class="table table-dark" style="border-radius: 10px; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Speed Jump Rope</td>
+            <td>A lightweight and adjustable jump rope, ideal for fast-paced cardio and HIIT workouts.</td>
+            <td><a href="https://www.amazon.com/Tangle-Free-Jumping-Bearings-Adjustable-Handles/dp/B09DF9NWC7" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Compact Treadmill</td>
+            <td>Space-saving treadmill with variable speeds, perfect for home cardio sessions.</td>
+            <td><a href="https://www.amazon.com/RUNOW-Treadmill-Apartment-Electric-Exercise/dp/B08QGSXV8M" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Exercise Bike - Stationary</td>
+            <td>Great for low-impact cardio, these bikes are effective for building endurance and strengthening the legs and heart.</td>
+            <td><a href="https://www.amazon.com/MERACH-Exclusive-Stationary-Electronic-Comfortable/dp/B0CJVCM65C/ref=sr_1_3?s=sporting-goods&sr=1-3" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Elliptical</td>
+            <td>These machines offer a low-impact alternative to running, engaging both the upper and lower body while improving cardiovascular fitness.</td>
+            <td><a href="https://www.amazon.com/Sunny-Health-Fitness-Elliptical-Programmable/dp/B07SRDFKQR/ref=sr_1_6?s=sporting-goods&sr=1-6" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Rowing Machine</td>
+            <td>Combines both strength and cardio, rowing machines target the arms, back, and legs while also boosting heart rate.</td>
+            <td><a href="https://www.amazon.com/YOSUDA-Magnetic-Rowing-Machine-Capacity/dp/B0C1VGRX2P/ref=sr_1_3?s=sporting-goods&sr=1-3" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Strength Training Section -->
-    <div id="strength" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-      <h2 style="color: #FFC107;">Strength Training</h2>
-      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
-        <li style="margin-bottom: 15px;">
-          <a href="https://www.amazon.com/AmazonBasics-Pound-Neoprene-Dumbbells-Weights/dp/B01LR5S6HK" style="color: #d4e81d; text-decoration: none;">Adjustable Dumbbells</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Versatile dumbbells with adjustable weights, suitable for a wide range of strength exercises.</p>
-        </li>
-        <li>
-          <a href="https://www.amazon.com/AmazonBasics-IR92007-12LB-Vinyl-Kettlebell-12lb/dp/B07F1NMM7B" style="color: #d4e81d; text-decoration: none;">Kettlebells Set</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">A set of kettlebells in various weights, great for building strength and endurance.</p>
-        </li>
-      </ul>
+    <div class="tab-pane fade" id="strength" role="tabpanel" aria-labelledby="strength-tab">
+      <h2 style="color: #FFC107; margin-top: 20px;">Strength Training</h2>
+      <table class="table table-dark" style="border-radius: 10px; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Adjustable Dumbbells</td>
+            <td>Versatile dumbbells with adjustable weights, suitable for a wide range of strength exercises.</td>
+            <td><a href="https://www.amazon.com/AmazonBasics-Pound-Neoprene-Dumbbells-Weights/dp/B01LR5S6HK" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Kettlebells Set</td>
+            <td>A set of kettlebells in various weights, great for building strength and endurance.</td>
+            <td><a href="https://www.amazon.com/AmazonBasics-IR92007-12LB-Vinyl-Kettlebell-12lb/dp/B07F1NMM7B" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Yoga Section -->
-    <div id="yoga" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-      <h2 style="color: #FFC107;">Yoga</h2>
-      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
-        <li style="margin-bottom: 15px;">
-          <a href="https://www.amazon.com/AmazonBasics-Extra-Thick-Exercise-Carrying/dp/B01LP0U5X0" style="color: #d4e81d; text-decoration: none;">Eco-Friendly Yoga Mat</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Durable, non-slip yoga mat made from eco-friendly materials, providing comfort and stability.</p>
-        </li>
-        <li>
-          <a href="https://www.amazon.com/Trideer-Stretching-Physical-Non-Elastic-Exercise/dp/B092MJ621Z" style="color: #d4e81d; text-decoration: none;">Yoga Strap</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Helpful for stretching and improving flexibility, this strap enhances yoga practice for beginners and advanced yogis alike.</p>
-        </li>
-      </ul>
+    <div class="tab-pane fade" id="yoga" role="tabpanel" aria-labelledby="yoga-tab">
+      <h2 style="color: #FFC107; margin-top: 20px;">Yoga</h2>
+      <table class="table table-dark" style="border-radius: 10px; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Eco-Friendly Yoga Mat</td>
+            <td>Durable, non-slip yoga mat made from eco-friendly materials, providing comfort and stability.</td>
+            <td><a href="https://www.amazon.com/AmazonBasics-Extra-Thick-Exercise-Carrying/dp/B01LP0U5X0" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Yoga Strap</td>
+            <td>Helpful for stretching and improving flexibility, this strap enhances yoga practice for beginners and advanced yogis alike.</td>
+            <td><a href="https://www.amazon.com/Trideer-Stretching-Physical-Non-Elastic-Exercise/dp/B092MJ621Z" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Core Workouts Section -->
-    <div id="core" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-      <h2 style="color: #FFC107;">Core Workouts</h2>
-      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
-        <li style="margin-bottom: 15px;">
-          <a href="https://www.amazon.com/Vinsguir-Workout-Exercise-Equipment-Abdominal/dp/B07RKW5H68" style="color: #d4e81d; text-decoration: none;">Ab Roller Wheel</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">An effective tool for core strengthening, this ab roller challenges your balance and stability.</p>
-        </li>
-        <li>
-          <a href="https://www.amazon.com/Exercise-Ball-Yoga-Ball-Fitness/dp/B010MVAMH2" style="color: #d4e81d; text-decoration: none;">Stability Ball</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Enhances core workouts and improves posture and flexibility, suitable for all fitness levels.</p>
-        </li>
-      </ul>
+    <div class="tab-pane fade" id="core" role="tabpanel" aria-labelledby="core-tab">
+      <h2 style="color: #FFC107; margin-top: 20px;">Core Workouts</h2>
+      <table class="table table-dark" style="border-radius: 10px; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ab Roller Wheel</td>
+            <td>An effective tool for core strengthening, this ab roller challenges your balance and stability.</td>
+            <td><a href="https://www.amazon.com/Vinsguir-Workout-Exercise-Equipment-Abdominal/dp/B07RKW5H68" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Stability Ball</td>
+            <td>Enhances core workouts and improves posture and flexibility, suitable for all fitness levels.</td>
+            <td><a href="https://www.amazon.com/Exercise-Ball-Yoga-Ball-Fitness/dp/B010MVAMH2" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- Supplements Section -->
-    <div id="supplements" style="background-color: #333; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-      <h2 style="color: #FFC107;">Supplements</h2>
-      <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
-        <li style="margin-bottom: 15px;">
-          <a href="https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Chocolate/dp/B000QSNYGI" style="color: #d4e81d; text-decoration: none;">Whey Protein</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">High-quality whey protein powder for muscle recovery and growth, available in various flavors.</p>
-        </li>
-        <li>
-          <a href="https://www.amazon.com/Gatorade-Protein-Recover-Chocolate-ounce/dp/B00T0BUBI6" style="color: #d4e81d; text-decoration: none;">Protein Bars</a>
-          <p style="color: #e6e6e6; margin: 5px 0;">Convenient and nutritious protein bars to support muscle recovery.</p>
-        </li>
-      </ul>
+    <div class="tab-pane fade" id="supplements" role="tabpanel" aria-labelledby="supplements-tab">
+      <h2 style="color: #FFC107; margin-top: 20px;">Supplements</h2>
+      <table class="table table-dark" style="border-radius: 10px; margin-top: 20px;">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Description</th>
+            <th scope="col">Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Whey Protein</td>
+            <td>High-quality whey protein powder for muscle recovery and growth, available in various flavors.</td>
+            <td><a href="https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Chocolate/dp/B000QSNYGI" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+          <tr>
+            <td>Protein Bars</td>
+            <td>Convenient and nutritious protein bars to support muscle recovery.</td>
+            <td><a href="https://www.amazon.com/Gatorade-Protein-Recover-Chocolate-ounce/dp/B00T0BUBI6" style="color: #d4e81d; text-decoration: none;">Buy Here</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
   </div>
 
 </div>
