@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container" style="margin-top: 20px; font-family: Arial, sans-serif;">
+
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Swimming</h1>
+    </div>
+
+    <!-- Image Section -->
+    <div class="text-center mb-4">
+        <img src="../static/img/swim.png" alt="Swimming" class="img-fluid"
+            style="border-radius: 10px; max-height: 400px; object-fit: cover;">
+    </div>
+
+    <!-- Description Section -->
+    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+        <div class="card-body p-4">
+            <p style="color: white; font-size: 16px; line-height: 1.8;">
+                There are plenty of reasons to swim! Here's a list that should get you motivated:
+            </p>
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-2"><b>Low Impact</b></h4>
+            <p style="color: white; font-size: 16px;">There's no ground impact when you swim, protecting your joints
+                from stress and strain. Water aerobics classes are also desirable for this reason because even if you
+                jump and hit the bottom of the pool, you do so with less force due to buoyancy.</p>
+
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-2"><b>Can Be Continued for a Lifetime</b></h4>
+            <p style="color: white; font-size: 16px;">Because there's no impact on swimming, it can be continued for a
+                lifetime. Swimming is an exercise that benefits people of all ages and fitness levels.</p>
+
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-2"><b>Builds Muscle Mass</b></h4>
+            <p style="color: white; font-size: 16px;">In a study of men who completed an eight-week swimming program,
+                there was a 23.8% increase in the triceps muscle (the back of the arm).</p>
+
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-2"><b>Builds Cardiorespiratory Fitness</b></h4>
+            <p style="color: white; font-size: 16px;">Swimming improves endurance. In one study of sedentary middle-aged
+                men and women who did swim training for 12 weeks, maximal oxygen consumption improved by 10%, and stroke
+                volume (the amount of blood pumped with each heartbeat, indicating heart strength) improved by 18%.</p>
+        </div>
+    </div>
+
+    <!-- Enroll Section -->
+    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+        <div class="card-body text-center p-4">
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our Swimming Plan!</strong></h4>
+            <img src="../static/img/swim.jpeg" alt="Swimming Plan" class="img-fluid mb-3"
+                style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                {% if not enrolled %}
+                <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;" name="action"
+                    value="enroll">Enroll</button>
+                {% else %}
+                <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;" name="action"
+                    value="unenroll">Unenroll</button>
+                <button type="submit" class="btn btn-outline-success btn-lg" name="action"
+                    value="complete">Complete</button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+    <!-- Start Exercise Button -->
+    <div class="text-center">
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start
+            Exercise</button>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        alert("Exercise timer modal would appear here.");
+    }
+</script>
+{% endblock content %}

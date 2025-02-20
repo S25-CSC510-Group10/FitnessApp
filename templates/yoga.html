@@ -39,10 +39,13 @@
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 {% if not enrolled %}
-                    <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;">Enroll</button>
+                <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;" name="action"
+                    value="enroll">Enroll</button>
                 {% else %}
-                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;">Unenroll</button>
-                    <button type="submit" class="btn btn-outline-success btn-lg">Completed</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;" name="action"
+                    value="unenroll">Unenroll</button>
+                <button type="submit" class="btn btn-outline-success btn-lg" name="action"
+                    value="complete">Complete</button>
                 {% endif %}
             </form>
         </div>

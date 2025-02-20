@@ -4,20 +4,27 @@
 
     <!-- Page Header -->
     <div class="text-center mb-4">
-        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Mindfulness-Based Stress Reduction (MBSR)</h1>
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Mindfulness-Based
+            Stress Reduction (MBSR)</h1>
     </div>
 
     <!-- Main Image Section -->
     <div class="text-center mb-4">
-        <img src="../static/img/mbsr.jpg" alt="MBSR Therapy" class="img-fluid" style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
+        <img src="../static/img/mbsr.jpg" alt="MBSR Therapy" class="img-fluid"
+            style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
     </div>
 
     <!-- Description Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body p-4">
             <p style="color: white; font-size: 16px; line-height: 1.8;">
-                <strong style="font-size: 25px; color: #FFC107;">Mindfulness-Based Stress Reduction: A Non-Pharmacological Approach for Chronic Illnesses</strong><br>
-                Mindfulness-Based Stress Reduction (MBSR) therapy is a meditation approach initially designed for stress management. Over time, it has proven effective in treating a wide range of illnesses, including depression, anxiety, chronic pain, cancer, diabetes mellitus, hypertension, and various skin and immune disorders. By focusing on mindfulness techniques, MBSR offers a holistic, non-pharmacological path to improved mental and physical health.
+                <strong style="font-size: 25px; color: #FFC107;">Mindfulness-Based Stress Reduction: A
+                    Non-Pharmacological Approach for Chronic Illnesses</strong><br>
+                Mindfulness-Based Stress Reduction (MBSR) therapy is a meditation approach initially designed for stress
+                management. Over time, it has proven effective in treating a wide range of illnesses, including
+                depression, anxiety, chronic pain, cancer, diabetes mellitus, hypertension, and various skin and immune
+                disorders. By focusing on mindfulness techniques, MBSR offers a holistic, non-pharmacological path to
+                improved mental and physical health.
             </p>
         </div>
     </div>
@@ -25,15 +32,20 @@
     <!-- Enroll Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body text-center p-4">
-            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our 4 Week Meditation Plan</strong></h4>
-            <img src="../static/img/meditation2.JPG" alt="MBSR Plan" class="img-fluid mb-3" style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our 4 Week Meditation
+                    Plan</strong></h4>
+            <img src="../static/img/meditation2.JPG" alt="MBSR Plan" class="img-fluid mb-3"
+                style="border-radius: 10px; max-height: 200px; object-fit: cover;">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 {% if not enrolled %}
-                    <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;">Enroll</button>
+                <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;" name="action"
+                    value="enroll">Enroll</button>
                 {% else %}
-                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;">Unenroll</button>
-                    <button type="submit" class="btn btn-outline-success btn-lg">Completed</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;" name="action"
+                    value="unenroll">Unenroll</button>
+                <button type="submit" class="btn btn-outline-success btn-lg" name="action"
+                    value="complete">Complete</button>
                 {% endif %}
             </form>
         </div>
@@ -41,7 +53,8 @@
 
     <!-- Start Exercise Button -->
     <div class="text-center">
-        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start Exercise</button>
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start
+            Exercise</button>
     </div>
 </div>
 

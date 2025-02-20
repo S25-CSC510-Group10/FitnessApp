@@ -9,16 +9,19 @@
 
     <!-- Main Image Section -->
     <div class="text-center mb-4">
-        <img src="../static/img/dance.jpg" alt="Dance Fitness" class="img-fluid" style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
+        <img src="../static/img/dance.jpg" alt="Dance Fitness" class="img-fluid"
+            style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
     </div>
 
     <!-- Description Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body p-4">
             <p style="color: white; font-size: 16px; line-height: 1.8;">
-                <strong style="font-size: 20px; color: #FFC107;">Simply put, dance cardio is utilizing different types of dance to exercise your body.</strong><br>
-                Build new muscle mass and strip away belly fat fast to reveal a lean, hard physique in 28 days. 
-                There are many types of dance cardio programs to choose from, so you can change your routine as often as you want to.
+                <strong style="font-size: 20px; color: #FFC107;">Simply put, dance cardio is utilizing different types
+                    of dance to exercise your body.</strong><br>
+                Build new muscle mass and strip away belly fat fast to reveal a lean, hard physique in 28 days.
+                There are many types of dance cardio programs to choose from, so you can change your routine as often as
+                you want to.
             </p>
             <h4 style="color: #FFC107; font-size: 20px; margin-top: 20px;">Popular Dance Workouts:</h4>
             <ul style="color: white; font-size: 16px; line-height: 1.8; padding-left: 20px;">
@@ -34,14 +37,18 @@
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body text-center p-4">
             <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our Dance Plan</strong></h4>
-            <img src="../static/img/R22.jpg" alt="Dance Plan" class="img-fluid mb-3" style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <img src="../static/img/R22.jpg" alt="Dance Plan" class="img-fluid mb-3"
+                style="border-radius: 10px; max-height: 200px; object-fit: cover;">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 {% if not enrolled %}
-                    <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;">Enroll</button>
+                <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;" name="action"
+                    value="enroll">Enroll</button>
                 {% else %}
-                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;">Unenroll</button>
-                    <button type="submit" class="btn btn-outline-success btn-lg">Completed</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;" name="action"
+                    value="unenroll">Unenroll</button>
+                <button type="submit" class="btn btn-outline-success btn-lg" name="action"
+                    value="complete">Complete</button>
                 {% endif %}
             </form>
         </div>
@@ -49,7 +56,8 @@
 
     <!-- Start Exercise Button -->
     <div class="text-center">
-        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start Exercise</button>
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start
+            Exercise</button>
     </div>
 </div>
 
