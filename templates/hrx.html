@@ -9,16 +9,21 @@
 
     <!-- Main Image Section -->
     <div class="text-center mb-4">
-        <img src="../static/img/OIP.png" alt="HRX Fitness" class="img-fluid" style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
+        <img src="../static/img/OIP.png" alt="HRX Fitness" class="img-fluid"
+            style="border-radius: 10px; max-height: 400px; object-fit: cover; width: 100%;">
     </div>
 
     <!-- Description Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body p-4">
             <p style="color: white; font-size: 16px; line-height: 1.8;">
-                <strong style="font-size: 20px; color: #FFC107;">Inspired by Hrithik Roshan’s fitness journey, the HRX Workout is based on a strength training module.</strong><br>
-                The HRX Workout primarily focuses on your shoulders, quads, core, traps, and deltoid muscles. It is designed for all age groups and involves specific muscle training using weights and various movements.<br><br>
-                It's a lifestyle choice that emphasizes self-improvement, resilience, and the pursuit of one's best self. The HRX program incorporates:
+                <strong style="font-size: 20px; color: #FFC107;">Inspired by Hrithik Roshan’s fitness journey, the HRX
+                    Workout is based on a strength training module.</strong><br>
+                The HRX Workout primarily focuses on your shoulders, quads, core, traps, and deltoid muscles. It is
+                designed for all age groups and involves specific muscle training using weights and various
+                movements.<br><br>
+                It's a lifestyle choice that emphasizes self-improvement, resilience, and the pursuit of one's best
+                self. The HRX program incorporates:
             </p>
             <ul style="color: white; font-size: 16px; line-height: 1.8; padding-left: 20px;">
                 <li><strong>Primal Movements</strong></li>
@@ -26,7 +31,9 @@
                 <li><strong>Compound Movements</strong></li>
             </ul>
             <p style="color: white; font-size: 16px; line-height: 1.8;">
-                At HRX, it’s our mission to motivate and enable you to work on your mind and body, ensuring you can become the best version of yourself. HRX is more than a brand; it’s a mission to support people in becoming the fittest, happiest, and most confident versions of themselves.
+                At HRX, it’s our mission to motivate and enable you to work on your mind and body, ensuring you can
+                become the best version of yourself. HRX is more than a brand; it’s a mission to support people in
+                becoming the fittest, happiest, and most confident versions of themselves.
             </p>
         </div>
     </div>
@@ -34,15 +41,20 @@
     <!-- Enroll Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body text-center p-4">
-            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our 4 Week HRX Plan</strong></h4>
-            <img src="../static/img/hrx.jpeg" alt="HRX Plan" class="img-fluid mb-3" style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our 4 Week HRX Plan</strong>
+            </h4>
+            <img src="../static/img/hrx.jpeg" alt="HRX Plan" class="img-fluid mb-3"
+                style="border-radius: 10px; max-height: 200px; object-fit: cover;">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 {% if not enrolled %}
-                    <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;">Enroll</button>
+                <button type="submit" class="btn btn-outline-info btn-lg" style="margin-right: 10px;" name="action"
+                    value="enroll">Enroll</button>
                 {% else %}
-                    <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;">Unenroll</button>
-                    <button type="submit" class="btn btn-outline-success btn-lg">Completed</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg" style="margin-right: 10px;" name="action"
+                    value="unenroll">Unenroll</button>
+                <button type="submit" class="btn btn-outline-success btn-lg" name="action"
+                    value="complete">Complete</button>
                 {% endif %}
             </form>
         </div>
@@ -50,7 +62,8 @@
 
     <!-- Start Exercise Button -->
     <div class="text-center">
-        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start Exercise</button>
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start
+            Exercise</button>
     </div>
 </div>
 

@@ -14,7 +14,7 @@ achievements = {
         {"name": "Water Warrior", "required_count": 20, "description": "Attend 20 swimming sessions."},
         {"name": "Deep Diver", "required_count": 25, "description": "Attend 25 swimming sessions."}
     ],
-    "abs": [
+    "abbs": [
         {"name": "Core Explorer", "required_count": 1, "description": "Attend 1 abs-focused sessions."},
         {"name": "Six-Pack Seeker", "required_count": 20, "description": "Attend 20 abs-focused sessions."},
         {"name": "Iron Core", "required_count": 30, "description": "Attend 30 abs-focused sessions."},
@@ -61,7 +61,7 @@ achievements = {
         {"name": "Clarity Seeker", "required_count": 20, "description": "Complete 20 meditation sessions."},
         {"name": "Zen Master", "required_count": 30, "description": "Complete 30 meditation sessions."}
     ],
-    "msbr": [
+    "mbsr": [
         {"name": "Stress Reliever", "required_count": 1, "description": "Complete your first session."},
         {"name": "Calm Practitioner", "required_count": 10, "description": "Complete 10 MSBR sessions."},
         {"name": "Resilient Thinker", "required_count": 20, "description": "Complete 20 MSBR sessions."},

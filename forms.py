@@ -22,6 +22,8 @@ from wtforms.fields.core import DateField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from apps import App
 
+app = App()
+mongo = app.mongo
 
 class RegistrationForm(FlaskForm):
     """Form to collect the registration data of the user"""
@@ -68,10 +70,7 @@ class LoginForm(FlaskForm):
 
 
 class CalorieForm(FlaskForm):
-    """Form to rcord the calorie intake details of the user"""
-    app = App()
-    mongo = app.mongo
-
+    """Form to record the calorie intake details of the user"""
     cursor = mongo.db.food.find()
     get_docs = []
     for record in cursor:
@@ -110,22 +109,16 @@ class UserProfileForm(FlaskForm):
 
 class HistoryForm(FlaskForm):
     """Form to input the date for which the history needs to be displayed"""
-    app = App()
-    mongo = app.mongo
     date = DateField()
     submit = SubmitField('Fetch')
 
 
 class EnrollForm(FlaskForm):
     """Form to enroll into a particular exercise/event"""
-    app = App()
-    mongo = app.mongo
     submit = SubmitField('Enroll')
 
 class UnenrollForm(FlaskForm):
-    """Form to enroll into a particular exercise/event"""
-    app = App()
-    mongo = app.mongo
+    """Form to unenroll from a particular exercise/event"""
     completed = SubmitField(label='Completed')
     submit = SubmitField(label='Unenroll')
 
