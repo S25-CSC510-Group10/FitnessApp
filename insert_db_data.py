@@ -14,6 +14,10 @@ https://github.com/CS510-001-HW/FitnessApp
 
 """"Importing app from apps.py"""
 from apps import App
+import os
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+food_data = os.path.join(project_root, "food_data", "calories.csv")
 
 app = App()
 mongo = app.mongo
@@ -26,7 +30,7 @@ def insertfooddata():
     """
 
     # Open the CSV file containing food calorie data
-    f = open("food_data/calories.csv", "r", encoding="ISO-8859-1")
+    f = open(food_data, "r", encoding="ISO-8859-1")
     l = f.readlines()  # Read all lines in the file into a list
 
     # Adjust each line to remove unwanted characters (trimming edges)

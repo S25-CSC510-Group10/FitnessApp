@@ -1,5 +1,5 @@
 """
-Copyright (c) 2023 Rajat Chandak, Shubham Saboo, Vibhav Deo, Chinmay Nayak
+Copyright (c) 2025 Hank Lenham, Ryan McPhee, Lawrence Stephenson
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: Burnout
@@ -16,7 +16,7 @@ from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
 import smtplib
-from flask import json, jsonify, Flask
+from flask import json, jsonify, Flask, abort
 from flask import render_template, session, url_for, flash, redirect, request, Flask
 from flask_mail import Mail
 from flask_pymongo import PyMongo
@@ -37,6 +37,14 @@ import schedule
 from threading import Thread
 import time
 from datetime import date
+import os
+from jinja2 import TemplateNotFound
+
+# Set project root directory for standardization.
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Define the path to the CSV file
+food_data = os.path.join(project_root, "food_data", "calories.csv")
 
 app = Flask(__name__, template_folder="templates")
 app.secret_key = "secret"
@@ -53,7 +61,6 @@ mail = Mail(app)
 
 insertfooddata()
 insertexercisedata()
-
 
 def reminder_email():
     """
@@ -106,7 +113,6 @@ def home():
         return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -827,11 +833,11 @@ def add_favorite():
                 "href": exercise.get("href"),
             }
             mongo.db.favorites.insert_one(favorite)
-            flash(f"{exercise.get('name')} added to favorites!")  # Flash the message
+            flash(f"{exercise.get('name')} added to favorites!", "success")  # Flash the message
 
     elif action == "remove":
         mongo.db.favorites.delete_one({"email": email, "href": activity})
-        flash(f"{exercise.get('name')} removed from favorites.")  # Flash the message
+        flash(f"{exercise.get('name')} removed from favorites.", "success")  # Flash the message
 
     # Redirect back to the activity page after favoriting/unfavoriting
     return redirect(request.referrer or url_for("home"))
@@ -1002,6 +1008,17 @@ def findActivities(email):
     activities = mongo.db.user_activity.find({"Email": email})
     return activities
 
+# Fallback for undefined routes
+@app.route('/<path:path>')
+def catch_all(path):
+    abort(404)  # This will raise a 404 error
+    
+@app.errorhandler(404)
+def page_not_found(error):
+   try:
+    return render_template('404.html', title = '404'), 404
+   except TemplateNotFound:
+       return "Custom 404 error: Page not found", 404
 
 if __name__ == "__main__":
     app.run(debug=True)
