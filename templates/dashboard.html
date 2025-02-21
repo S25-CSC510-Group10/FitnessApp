@@ -22,8 +22,7 @@
                 </a>
                 <div class="card-body text-center">
                     <h5 class="card-title" style="font-weight: bold; color: #FFA726;">{{ exercise.name }}</h5>
-                    <p style="color: #b3b3b3;">Learn easy yoga poses to build strength, flexibility, and mental clarity.
-                    </p>
+                    <p style="color: #b3b3b3;">{{ exercise.description }}</p>
                     <a href="{{ url_for('activity_page', activity=exercise.href) }}"
                         class="btn btn-outline-warning btn-sm mx-1">More Info</a>
                     <a href="{{ exercise.video_link }}" class="btn btn-outline-success btn-sm mx-1"
