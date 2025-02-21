@@ -10,171 +10,30 @@
 
     <!-- Workout Cards Section -->
     <div class="row g-4">
-        <!-- Yoga for Beginners -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='yoga') }}">
-                    <img src="../static/img/yoga.jpg" class="card-img-top" alt="Yoga for Beginners" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Yoga for Beginners</h5>
-                    <p style="color: #b3b3b3;">Learn easy yoga poses to build strength, flexibility, and mental clarity.</p>
-                    <a href="{{ url_for('activity_page', activity='yoga') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=c8hjhRqIwHE" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Swimming -->
+        {% for exercise in exercises %}
+        <!-- Dynamically load exercises in database-->
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='swimming') }}">
-                    <img src="../static/img/swim.jpeg" class="card-img-top" alt="Swimming" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
+            <div class="card h-100 border-0 shadow-lg"
+                style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
+                <a href="{{ url_for('activity_page', activity=exercise.href) }}">
+                    <img src="{{ exercise.image }}" class="card-img-top" alt="{{ exercise.name }}"
+                        style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
                 </a>
                 <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Swimming</h5>
-                    <p style="color: #b3b3b3;">Burn calories, build endurance, and strengthen muscles with swimming workouts.</p>
-                    <a href="{{ url_for('activity_page', activity='swimming') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=oM4sHl1hTEE" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
+                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">{{ exercise.name }}</h5>
+                    <p style="color: #b3b3b3;">Learn easy yoga poses to build strength, flexibility, and mental clarity.
+                    </p>
+                    <a href="{{ url_for('activity_page', activity=exercise.href) }}"
+                        class="btn btn-outline-warning btn-sm mx-1">More Info</a>
+                    <a href="{{ exercise.video_link }}" class="btn btn-outline-success btn-sm mx-1"
+                        target="_blank">Tutorial</a>
                 </div>
             </div>
         </div>
+        {% endfor %}
 
-        <!-- Abs Smash -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='abs') }}">
-                    <img src="../static/img/R31.jpg" class="card-img-top" alt="Abs Smash" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Abs Smash</h5>
-                    <p style="color: #b3b3b3;">Achieve a six-pack or improve your midsection definition with this workout.</p>
-                    <a href="{{ url_for('activity_page', activity='abs') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=z6GxFSsx84E" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Walk Fitness -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='walk') }}">
-                    <img src="../static/img/walk.jpg" class="card-img-top" alt="Walk Fitness" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Walk Fitness</h5>
-                    <p style="color: #b3b3b3;">Burn more calories and improve endurance with our walk workout routines.</p>
-                    <a href="{{ url_for('activity_page', activity='walk') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=3hlUMzWh8jY" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Belly Burner -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='belly') }}">
-                    <img src="../static/img/R21.jpg" class="card-img-top" alt="Belly Burner" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Belly Burner</h5>
-                    <p style="color: #b3b3b3;">A 30-minute no-equipment workout that targets stubborn belly fat.</p>
-                    <a href="{{ url_for('activity_page', activity='belly') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=8MAtXXXUvqo" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Dance Fitness -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='dance') }}">
-                    <img src="../static/img/R22.jpg" class="card-img-top" alt="Dance Fitness" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Dance Fitness</h5>
-                    <p style="color: #b3b3b3;">Shake it off and groove to fun tracks with our energetic dance sessions.</p>
-                    <a href="{{ url_for('activity_page', activity='dance') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=Qf0L-xtMUjg" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- HRX Fitness -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='hrx') }}">
-                    <img src="../static/img/R23.jpg" class="card-img-top" alt="HRX Fitness" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">HRX Fitness</h5>
-                    <p style="color: #b3b3b3;">Push your limits with intense and transformative workout sessions.</p>
-                    <a href="{{ url_for('activity_page', activity='hrx') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=Ze7zzMgCdko" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Core Conditioning -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='core') }}">
-                    <img src="../static/img/R32.jpg" class="card-img-top" alt="Core Conditioning" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Core Conditioning</h5>
-                    <p style="color: #b3b3b3;">Strengthen your core muscles, improve posture, and achieve a toned look.</p>
-                    <a href="{{ url_for('activity_page', activity='core') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=XH7mBWRG9q0" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gym -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='gym') }}">
-                    <img src="../static/img/R11.jpg" class="card-img-top" alt="Gym" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Gym</h5>
-                    <p style="color: #b3b3b3;">Discover dumbbell workouts by skilled trainers for every muscle group.</p>
-                    <a href="{{ url_for('activity_page', activity='gym') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=8IjCdiweJQo" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Headspace -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='headspace') }}">
-                    <img src="../static/img/headspace.PNG" class="card-img-top" alt="Headspace" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">Headspace</h5>
-                    <p style="color: #b3b3b3;">Explore guided meditations and programs to reduce stress and boost mindfulness.</p>
-                    <a href="{{ url_for('activity_page', activity='headspace') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=5LMRrYqAAZI" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- MBSR -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-lg" style="border-radius: 15px; background-color: #1e1e1e; color: #ffffff;">
-                <a href="{{ url_for('activity_page', activity='mbsr') }}">
-                    <img src="../static/img/mbsr.jpg" class="card-img-top" alt="MBSR" style="border-top-left-radius: 15px; border-top-right-radius: 15px; height: 200px; object-fit: cover;">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="font-weight: bold; color: #FFA726;">MBSR</h5>
-                    <p style="color: #b3b3b3;">Mindfulness-Based Stress Reduction practices to improve mental clarity.</p>
-                    <a href="{{ url_for('activity_page', activity='mbsr') }}" class="btn btn-outline-warning btn-sm mx-1">More Info</a>
-                    <a href="https://www.youtube.com/watch?v=507zwibbfRs" class="btn btn-outline-success btn-sm mx-1" target="_blank">Tutorial</a>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 
+</div>
 {% endblock %}
