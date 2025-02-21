@@ -1,22 +1,26 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <div class="container" style="margin-top: 20px; font-family: Arial, sans-serif;">
-
     <!-- Page Header -->
     <div class="text-center mb-4">
-        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Yoga for Beginners</h1>
+        <h1 style="color: #FFC107; font-size: 36px; font-weight: bold; text-decoration: underline;">Yoga for Beginners
+        </h1>
     </div>
 
     <!-- Image Section -->
     <div class="text-center mb-4">
-        <img src="../static/img/yoga.jpg" alt="Yoga for Beginners" class="img-fluid" style="border-radius: 10px; max-height: 400px; object-fit: cover;">
+        <img src="../static/img/yoga.jpg" alt="Yoga for Beginners" class="img-fluid"
+            style="border-radius: 10px; max-height: 400px; object-fit: cover;">
     </div>
 
     <!-- Description Section -->
     <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body p-4">
             <p style="color: white; font-size: 16px; line-height: 1.8;">
-                Join <strong>Anvita & Tejashree</strong> for this 30-minute gentle yoga session focusing on asana alignments, breathing techniques, and mindfulness. This class will strengthen your core, build endurance, and enhance agility through targeted poses.
+                Join <strong>Anvita & Tejashree</strong> for this 30-minute gentle yoga session focusing on asana
+                alignments, breathing techniques, and mindfulness. This class will strengthen your core, build
+                endurance, and enhance agility through targeted poses.
             </p>
             <h4 style="color: #FFC107; font-size: 20px;" class="mb-3">Main Practices:</h4>
             <ul style="color: white; font-size: 16px; padding-left: 20px;">
@@ -32,10 +36,11 @@
     </div>
 
     <!-- Enroll Section -->
-    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+    <div class="card border-0 shadow-sm" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body text-center p-4">
             <h4 style="color: #FFC107; font-size: 20px;" class="mb-3">Enroll in our Yoga Plan</h4>
-            <img src="../static/img/yoga_stages.png" alt="Yoga Stages" class="img-fluid mb-3" style="border-radius: 10px; max-height: 200px; object-fit: cover;">
+            <img src="../static/img/yoga_stages.png" alt="Yoga Stages" class="img-fluid mb-3"
+                style="border-radius: 10px; max-height: 200px; object-fit: cover;">
             <form method="POST" action="">
                 {{ form.hidden_tag() }}
                 {% if not enrolled %}
@@ -51,9 +56,25 @@
         </div>
     </div>
 
+    <!-- Favorite Section -->
+    <div class="text-center mb-4 mr-2">
+        <form method="POST" action="{{ url_for('add_favorite') }}">
+            <input type="hidden" name="activity" value="yoga">
+            <button type="submit" class="btn btn-outline-warning btn-lg" name="action"
+                value="{% if favorited %}remove{% else %}add{% endif %}">
+                {% if favorited %}
+                Unfavorite
+                {% else %}
+                Favorite
+                {% endif %}
+            </button>
+        </form>
+    </div>
+
     <!-- Start Exercise Button -->
     <div class="text-center">
-        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start Exercise</button>
+        <button class="btn btn-warning btn-lg" onclick="openModal()" style="font-weight: bold; color: #343434;">Start
+            Exercise</button>
     </div>
     <br><br>
 </div>

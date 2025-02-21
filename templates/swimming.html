@@ -40,7 +40,7 @@
     </div>
 
     <!-- Enroll Section -->
-    <div class="card border-0 shadow-sm mb-5" style="background-color: #343434; border-radius: 10px;">
+    <div class="card border-0 shadow-sm" style="background-color: #343434; border-radius: 10px;">
         <div class="card-body text-center p-4">
             <h4 style="color: #FFC107; font-size: 20px;" class="mb-3"><strong>Enroll in our Swimming Plan!</strong></h4>
             <img src="../static/img/swim.jpeg" alt="Swimming Plan" class="img-fluid mb-3"
@@ -58,6 +58,21 @@
                 {% endif %}
             </form>
         </div>
+    </div>
+
+    <!-- Favorite Section -->
+    <div class="text-center mb-4 mr-2">
+        <form method="POST" action="{{ url_for('add_favorite') }}">
+            <input type="hidden" name="activity" value="swimming">
+            <button type="submit" class="btn btn-outline-warning btn-lg" name="action"
+                value="{% if favorited %}remove{% else %}add{% endif %}">
+                {% if favorited %}
+                Unfavorite
+                {% else %}
+                Favorite
+                {% endif %}
+            </button>
+        </form>
     </div>
 
     <!-- Start Exercise Button -->
