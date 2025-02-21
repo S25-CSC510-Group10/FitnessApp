@@ -136,7 +136,7 @@ def logout():
     Output: session clear
     """
     session.clear()
-    return "success"
+    return redirect(url_for('login'))
 
 
 @app.route("/register", methods=['GET', 'POST'])

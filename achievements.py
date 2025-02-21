@@ -3,36 +3,36 @@ from datetime import date
 
 achievements = {
     "yoga": [
-        {"name": "Zen Beginner", "required_count": 1, "description": "Attend 1 yoga sessions."},
+        {"name": "Zen Beginner", "required_count": 1, "description": "Attend 1 yoga session."},
         {"name": "Flexible Enthusiast", "required_count": 10, "description": "Complete 10 yoga sessions."},
         {"name": "Pose Perfectionist", "required_count": 20, "description": "Complete 20 yoga sessions."},
         {"name": "Flow Champion", "required_count": 30, "description": "Complete 30 yoga sessions."}
     ],
     "swimming": [
-        {"name": "Splash Starter", "required_count": 1, "description": "Attend 1 swimming sessions."},
+        {"name": "Splash Starter", "required_count": 1, "description": "Attend 1 swimming session."},
         {"name": "Aqua Adventurer", "required_count": 10, "description": "Attend 10 swimming sessions."},
         {"name": "Water Warrior", "required_count": 20, "description": "Attend 20 swimming sessions."},
         {"name": "Deep Diver", "required_count": 25, "description": "Attend 25 swimming sessions."}
     ],
-    "abbs": [
-        {"name": "Core Explorer", "required_count": 1, "description": "Attend 1 abs-focused sessions."},
+    "abs": [
+        {"name": "Core Explorer", "required_count": 1, "description": "Attend 1 abs-focused session."},
         {"name": "Six-Pack Seeker", "required_count": 20, "description": "Attend 20 abs-focused sessions."},
         {"name": "Iron Core", "required_count": 30, "description": "Attend 30 abs-focused sessions."},
         {"name": "Ab Machine", "required_count": 40, "description": "Attend 40 abs-focused sessions."}
     ],
     "walk": [
-        {"name": "Trail Trotter", "required_count": 1, "description": "Attend 1 walk sessions."},
+        {"name": "Trail Trotter", "required_count": 1, "description": "Attend 1 walk session."},
         {"name": "Daily Strider", "required_count": 10, "description": "Attend 10 walk sessions."},
         {"name": "Marathon Mindset", "required_count": 30, "description": "Attend 30 walk sessions."},
     ],
     "belly": [
-        {"name": "Burn It Up", "required_count": 1, "description": "Complete 1 belly workout sessions."},
+        {"name": "Burn It Up", "required_count": 1, "description": "Complete 1 belly workout session."},
         {"name": "Toned and Strong ", "required_count": 10, "description": "Complete 10 belly workout sessions."},
         {"name": "Routine Regular", "required_count": 20, "description": "Complete 20 belly workout sessions."},
         {"name": "Shred Legend", "required_count": 30, "description": "Complete 30 belly workout sessions."}
     ],
     "dance": [
-        {"name": "Groove Beginner", "required_count": 1, "description": "Complete 1 dance sessions."},
+        {"name": "Groove Beginner", "required_count": 1, "description": "Complete 1 dance session."},
         {"name": "Rhythm Master", "required_count": 10, "description": "Complete 10 dance sessions."},
         {"name": "Choreography Ace", "required_count": 20, "description": "Complete 20 dance sessions."},
         {"name": "Stage Ready", "required_count": 30, "description": "Complete 30 dance sessions."}
@@ -44,13 +44,13 @@ achievements = {
         {"name": "Beast Mode", "required_count": 50, "description": "Complete 50 HRX sessions."}
     ],
     "core": [
-        {"name": "Foundation Builder", "required_count": 1, "description": "Complete 1 Core sessions."},
+        {"name": "Foundation Builder", "required_count": 1, "description": "Complete 1 Core session."},
         {"name": "Core Contender", "required_count": 10, "description": "Complete 10 Core sessions."},
         {"name": "Strength Specialist", "required_count": 20, "description": "Complete 20 Core sessions."},
         {"name": "Champion Core", "required_count": 30, "description": "Complete 30 Core sessions."}
     ],
     "gym": [
-        {"name": "Lift Beginner", "required_count": 1, "description": "Complete 1 gym workouts."},
+        {"name": "Lift Beginner", "required_count": 1, "description": "Complete 1 gym workout."},
         {"name": "Weight Warrior", "required_count": 20, "description": "Complete 20 gym workouts."},
         {"name": "Routine Regular", "required_count": 30, "description": "Complete 30 gym workouts."},
         {"name": "Max Out", "required_count": 50, "description": "Complete 50 gym workouts."}
