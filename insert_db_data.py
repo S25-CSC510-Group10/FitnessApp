@@ -71,7 +71,7 @@ def insertexercisedata():
             "video_link": "https://www.youtube.com/watch?v=z6GxFSsx84E",
             "name": "Abs Smash",
             "description": "Whether your goal is a six-pack or just a little more definition around your midsection, we will help get you there!",
-            "href": "abbs"
+            "href": "abs"
         },
         {
             "email": "email",
