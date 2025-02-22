@@ -1,9 +1,0 @@
-{% extends "layout.html" %} {% block content %}
-<div class="container">
-  <h1 style="color: white">Your Favorite Exercises</h1>
-  <div class="row">
-    {% for exercise in favorite_exercises %} {% include 'favorite_card.html' %}
-    {% endfor %}
-  </div>
-</div>
-{% endblock content %}
