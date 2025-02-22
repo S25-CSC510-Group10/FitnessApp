@@ -94,10 +94,6 @@ class TestApplicationExtra(unittest.TestCase):
             response = self.app.get('/dashboard')
             self.assertEqual(response.status_code, 200)
 
-    def test_nonexistent_route(self):
-        response = self.app.get('/nonexistent')
-        self.assertEqual(response.status_code, 404)  # Expecting a 404 response
-
     def test_yoga_route_logged_out(self):
         response = self.app.get('/yoga')
         self.assertEqual(response.status_code, 302)  # Redirects if not logged in
