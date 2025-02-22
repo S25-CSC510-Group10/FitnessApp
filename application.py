@@ -62,6 +62,7 @@ mail = Mail(app)
 insertfooddata()
 insertexercisedata()
 
+
 def reminder_email():
     """
     reminder_email() will send a reminder to users for doing their workout.
@@ -113,6 +114,7 @@ def home():
         return redirect(url_for("dashboard"))
     else:
         return redirect(url_for("login"))
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -1008,17 +1010,76 @@ def findActivities(email):
     activities = mongo.db.user_activity.find({"Email": email})
     return activities
 
+
 # Fallback for undefined routes
-@app.route('/<path:path>')
+@app.route("/<path:path>")
 def catch_all(path):
     abort(404)  # This will raise a 404 error
-    
+
+
 @app.errorhandler(404)
 def page_not_found(error):
-   try:
-    return render_template('404.html', title = '404'), 404
-   except TemplateNotFound:
-       return "Custom 404 error: Page not found", 404
+    try:
+        return render_template("404.html", title="404"), 404
+    except TemplateNotFound:
+        return "Custom 404 error: Page not found", 404
+
+
+def get_calories(food_item):
+    print(f"calories item {food_item}")
+    food_data = mongo.db.food.find_one({"food": food_item.lower().strip()})
+
+    if food_data:
+        return food_data.get("calories")
+    return None
+
+
+bot_state = 0
+
+
+def bot_response(user_message):
+    user_message = user_message.lower().strip()
+    print(f"bot's received message {user_message}")
+    global bot_state
+
+    # if the user ever enters a 0 return the starting message
+    if user_message in ["0", "menu", "start", "reset", "restart"]:
+        bot_state = 0
+        return (
+            f"Hello there! I am BurnBot, and I am here to help you achieve your fitness goals.\n\n"
+            + "Select an option below.\n\n"
+            + "0. View the menu again.\n\n"
+            + "1. Tell me the food item, and I’ll fetch its calorie count for you!\n\n"
+        )
+
+    if bot_state == 0:
+
+        if user_message == "1":  # Option 1 selected
+            bot_state = 1
+            return "Please tell me the food item, and I will fetch its calorie count for you."
+
+    if bot_state == 1:
+        if user_message:
+            calories = get_calories(user_message)
+            if calories:
+                return f"The calorie count for {user_message} is {calories} kcal."
+            else:
+                return f"Sorry, I couldn't find the calorie count for {user_message}. Please check the spelling or try a different food item. Otherwise, enter 0 to go back to the menu."
+
+    bot_state = 0
+    return (
+        f"Sorry, I didn’t understand that. Please select an option below:\n\n"
+        + "0. View the menu again.\n\n"
+        + "1. Tell me the food item, and I’ll fetch its calorie count for you!\n\n"
+    )
+
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.json.get("message", "")
+    response = bot_response(user_message)
+    return jsonify({"response": response})
+
 
 if __name__ == "__main__":
     app.run(debug=True)

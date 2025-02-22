@@ -17,7 +17,7 @@ from apps import App
 import os
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__)))
-food_data = os.path.join(project_root, "food_data", "calories.csv")
+food_data = os.path.join(project_root, "food_data", "calories_lower.csv")
 
 app = App()
 mongo = app.mongo

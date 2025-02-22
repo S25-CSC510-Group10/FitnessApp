@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" >
-      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='card.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% if title %}
-    <title>BURNOUT - {{ title }}</title>
-    {% else %}
-    <title>BURNOUT</title>
-    {% endif %}
-  </head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='card.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='burnbot.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <body>
-    <!-- <header class="site-header">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% if title %}
+  <title>BURNOUT - {{ title }}</title>
+  {% else %}
+  <title>BURNOUT</title>
+  {% endif %}
+</head>
+
+<body>
+  <!-- <header class="site-header">
       <nav class="navbar navbar-expand-lg bg-dark fixed-top nav-dark">
         <div class="container">
           {% if not session.get("email") %}
@@ -70,191 +71,202 @@
       </nav>
     </header> -->
 
-    <header class="site-header">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <!-- Burnout Logo -->
-          <a class="navbar-brand d-flex align-items-center" href="{{ url_for('dashboard') }}">
-            <img src="{{ url_for('static', filename='img/fire.gif') }}" alt="Burnout Logo" style="width:98px;height:38px;">
-            <span class="ml-2">BURNOUT</span>
-          </a>
-    
-          <!-- Navbar Toggler -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-    
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Center Navbar Items -->
-            <ul class="navbar-nav mx-auto d-flex justify-content-evenly w-100">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('achievements') }}">Achievements</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
-              </li>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <!-- Burnout Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="{{ url_for('dashboard') }}">
+          <img src="{{ url_for('static', filename='img/fire.gif') }}" alt="Burnout Logo"
+            style="width:98px;height:38px;">
+          <span class="ml-2">BURNOUT</span>
+        </a>
 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="trackProgressDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Intake
-                </a>
-                <div class="dropdown-menu" aria-labelledby="trackProgressDropdown">
-                  <a class="dropdown-item" href="{{ url_for('calories') }}">Calories</a>
-                  <a class="dropdown-item" href="{{ url_for('bmi_calci') }}">BMI Calculator</a>
-                  <a class="dropdown-item" href="{{ url_for('water') }}">Water</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="socialDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Social
-                </a>
-                <div class="dropdown-menu" aria-labelledby="socialDropdown">
-                  <a class="dropdown-item" href="{{ url_for('friends') }}">Friends</a>
-                  <a class="dropdown-item" href="{{ url_for('submit_reviews') }}">Reviews</a>
-                  <a class="dropdown-item" href="{{ url_for('blog') }}">Blog</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="exploreLearnDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Supplemental
-                </a>
-                <div class="dropdown-menu" aria-labelledby="exploreLearnDropdown">
-                  <a class="dropdown-item" href="{{ url_for('favorites') }}">Favorites</a>
-                  <a class="dropdown-item" href="{{ url_for('shop') }}">Shopping</a>
-                  <a class="dropdown-item" href="{{ url_for('history') }}">About Us</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="mindWellnessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Wellness
-                </a>
-                <div class="dropdown-menu" aria-labelledby="mindWellnessDropdown">
-                  <a class="dropdown-item" href="{{ url_for('mind') }}">Mind</a>
-                  <a class="dropdown-item" href="{{ url_for('render_guided_meditation') }}">Guided Meditation</a>
-                </div>
-              </li>
-              
-          
-              <!-- <li class="nav-item">
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Center Navbar Items -->
+          <ul class="navbar-nav mx-auto d-flex justify-content-evenly w-100">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('achievements') }}">Achievements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('activities') }}">Activities</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="trackProgressDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Intake
+              </a>
+              <div class="dropdown-menu" aria-labelledby="trackProgressDropdown">
+                <a class="dropdown-item" href="{{ url_for('calories') }}">Calories</a>
+                <a class="dropdown-item" href="{{ url_for('bmi_calci') }}">BMI Calculator</a>
+                <a class="dropdown-item" href="{{ url_for('water') }}">Water</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="socialDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Social
+              </a>
+              <div class="dropdown-menu" aria-labelledby="socialDropdown">
+                <a class="dropdown-item" href="{{ url_for('friends') }}">Friends</a>
+                <a class="dropdown-item" href="{{ url_for('submit_reviews') }}">Reviews</a>
+                <a class="dropdown-item" href="{{ url_for('blog') }}">Blog</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="exploreLearnDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Supplemental
+              </a>
+              <div class="dropdown-menu" aria-labelledby="exploreLearnDropdown">
+                <a class="dropdown-item" href="{{ url_for('favorites') }}">Favorites</a>
+                <a class="dropdown-item" href="{{ url_for('shop') }}">Shopping</a>
+                <a class="dropdown-item" href="{{ url_for('history') }}">About Us</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="mindWellnessDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Wellness
+              </a>
+              <div class="dropdown-menu" aria-labelledby="mindWellnessDropdown">
+                <a class="dropdown-item" href="{{ url_for('mind') }}">Mind</a>
+                <a class="dropdown-item" href="{{ url_for('render_guided_meditation') }}">Guided Meditation</a>
+              </div>
+            </li>
+
+
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('display_profile') }}">Profile</a>
               </li> -->
-            </ul>
-    
-            <!-- Right Side (Welcome and Logout) -->
-            <!-- <div class="d-flex align-items-center">
+          </ul>
+
+          <!-- Right Side (Welcome and Logout) -->
+          <!-- <div class="d-flex align-items-center">
               {% if session.get("email") %}
               <span class="text-white mr-3">Welcome, {{ session.get("name") }}</span>
               <button class="btn btn-warning btn-sm" onclick="logout()">Log Out</button>
               {% endif %}
             </div> -->
-            <div class="d-flex align-items-center">
-              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-              {% if session.get("email") %}
-                <!-- Profile Icon with Dropdown -->
-                <div class="dropdown">
-                  <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="static\img\defaultProfile.jpg" alt="Profile Icon" class="rounded-circle border-0" style="background-color: yellow; width: 30px; height: 30px;"> {{ session.get("name") }}
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                    <li><a class="dropdown-item" href="{{ url_for('display_profile') }}">Profile</a></li>
-                    <li><a class="dropdown-item" href="/settings">Settings - Not Implemented</a></li>
-                    <li><a class="dropdown-item" href="/logout" onclick="logout()">Log Out</a></li>
-                  </ul>
-                </div>
-              {% endif %}
+          <div class="d-flex align-items-center">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            {% if session.get("email") %}
+            <!-- Profile Icon with Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="profileDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="static\img\defaultProfile.jpg" alt="Profile Icon" class="rounded-circle border-0"
+                  style="background-color: yellow; width: 30px; height: 30px;"> {{ session.get("name") }}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item" href="{{ url_for('display_profile') }}">Profile</a></li>
+                <li><a class="dropdown-item" href="/settings">Settings - Not Implemented</a></li>
+                <li><a class="dropdown-item" href="/logout" onclick="logout()">Log Out</a></li>
+              </ul>
             </div>
-
+            {% endif %}
           </div>
+
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
-    
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-12">
-          {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-          {% for category, message in messages %}
-          <div class="alert alert-{{ category }}">
-            {{ message }}
-          </div>
-          {% endfor %}
-          {% endif %}
-          {% endwith %}
-          {% block content %}{% endblock %}
-          <!-- Timer Modal -->
-          <div id="timerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999;">
-            <div style="background: #fff; margin: 100px auto; padding: 20px; width: 300px; border-radius: 8px; text-align: center; position: relative;">
-                <h2>Workout Timer</h2>
-                
-                <!-- Clock with Progress Bar -->
-                <div class="progress-container">
-                    <div class="progress">
-                        <div class="clock" id="clockDisplay">00:00</div>
-                    </div>
-                </div>
-                
-                <!-- Timer Input -->
-                <div>
-                    <label for="timeInput">Set Timer (minutes):</label>
-                    <input type="number" id="timeInput" min="1" max="60" value="1" onchange="setTime()">
-                </div>
-                
-                <!-- Timer Controls -->
-                <div class="controls" style="margin: 20px 0;">
-                    <button onclick="startTimer()">Start</button>
-                    <button onclick="pauseTimer()">Pause</button>
-                    <button onclick="resetTimer()">Reset</button>
-                </div>
-                
-                <!-- Close Button -->
-                <button onclick="closeModal()" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+        <!-- Timer Modal -->
+        <div id="timerModal"
+          style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999;">
+          <div
+            style="background: #fff; margin: 100px auto; padding: 20px; width: 300px; border-radius: 8px; text-align: center; position: relative;">
+            <h2>Workout Timer</h2>
+
+            <!-- Clock with Progress Bar -->
+            <div class="progress-container">
+              <div class="progress">
+                <div class="clock" id="clockDisplay">00:00</div>
+              </div>
             </div>
+
+            <!-- Timer Input -->
+            <div>
+              <label for="timeInput">Set Timer (minutes):</label>
+              <input type="number" id="timeInput" min="1" max="60" value="1" onchange="setTime()">
+            </div>
+
+            <!-- Timer Controls -->
+            <div class="controls" style="margin: 20px 0;">
+              <button onclick="startTimer()">Start</button>
+              <button onclick="pauseTimer()">Pause</button>
+              <button onclick="resetTimer()">Reset</button>
+            </div>
+
+            <!-- Close Button -->
+            <button onclick="closeModal()"
+              style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; font-size: 20px; cursor: pointer;">&times;</button>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <footer class="bg-dark text-white pt-5 pb-4">
-      <div class="container text-center text-md-left">
-        <div class="row text-center text-md-left">
-          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold text-warning">BURNOUT</h5>
-            <p class="small text-white">Turning excuses into results.....</p>
-          </div>
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick links</h5>
-            <!-- Navbar Right Side -->
-            <!-- {% if not session.get("email"): %} -->
-            <!-- <div class="navbar-nav ml-auto">
+  <footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container text-center text-md-left">
+      <div class="row text-center text-md-left">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">BURNOUT</h5>
+          <p class="small text-white">Turning excuses into results.....</p>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick links</h5>
+          <!-- Navbar Right Side -->
+          <!-- {% if not session.get("email"): %} -->
+          <!-- <div class="navbar-nav ml-auto">
                         <ul class="list-unstyled text-muted">
                         <li><a class="nav-item nav-link" href="{{ url_for('login') }}" id="login">Login</a></li>
                         <li><a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a></li>
                         </ul>
                     </div> -->
-            <!-- {% else %} -->
+          <!-- {% else %} -->
 
-            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('user_profile') }}">Profile</a></p>
-            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('favorites') }}">Favorites</a></p>
-            <p><a class="text-white" style="text-decoration: none;" href="{{url_for('friends')}}">Friends</a></p>
-            <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('history') }}">About Us</a></p>
-            
-          </div>
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-            <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
-            <p>
-              <i class="fas fa-home mr-3"></i>Raleigh, NC 27606, US
-            </p>
-            <p>
-              <i class="fas fa-envelope mr-3"></i>theRahleeBoyzz@Sherman.com
-            </p>
-            <p>
-              <i class="fas fa-phone mr-3"></i>+1 (919) 555-5555
-            </p>
-          </div>
-          <!-- {% endif %} -->
-          <!--<div >
+          <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('user_profile') }}">Profile</a></p>
+          <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('favorites') }}">Favorites</a></p>
+          <p><a class="text-white" style="text-decoration: none;" href="{{url_for('friends')}}">Friends</a></p>
+          <p><a class="text-white" style="text-decoration: none;" href="{{ url_for('history') }}">About Us</a></p>
+
+        </div>
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+          <p>
+            <i class="fas fa-home mr-3"></i>Raleigh, NC 27606, US
+          </p>
+          <p>
+            <i class="fas fa-envelope mr-3"></i>theRahleeBoyzz@Sherman.com
+          </p>
+          <p>
+            <i class="fas fa-phone mr-3"></i>+1 (919) 555-5555
+          </p>
+        </div>
+        <!-- {% endif %} -->
+        <!--<div >
 
                         <ul class="list-unstyled text-muted">
                         <li><a href="#">Home</a></li>
@@ -263,7 +275,7 @@
                         <li><a href="#">FAQ</a></li>
                         </ul>
                     </div> -->
-          <!-- <div class="col-lg-2 col-md-6">
+        <!-- <div class="col-lg-2 col-md-6">
                     <h5 class="text-white mb-3">Quick links</h5>
                     <ul class="list-unstyled text-muted">
                         <li><a href="#">Home</a></li>
@@ -272,7 +284,7 @@
                         <li><a href="#">FAQ</a></li>
                     </ul>
                 </div> -->
-          <!-- <div class="col-lg-4 col-md-6">
+        <!-- <div class="col-lg-4 col-md-6">
                     <h5 class="text-white mb-3">Newsletter</h5>
                     <p class="small text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                     <form action="#">
@@ -282,24 +294,40 @@
                         </div>
                     </form>
                 </div> -->
-        </div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
+  <!-- BurnBot Chat Button -->
+  <button id="burnbot-btn" class="btn btn-warning">
+    <img src="{{ url_for('static', filename='img/fire.gif') }}" alt="Burnout Logo">
+  </button>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger intent="WELCOME" chat-title="BurnBot" agent-id="49437a24-4e37-4774-a720-95be1ffa0142"
-      language-code="en"></df-messenger>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"></script>
-    <script src="../static/js/script.js"></script>
-  </body>
+  <!-- BurnBot Chat Container -->
+  <div id="burnbot-container" class="card shadow-lg">
+    <div class="fw-bolder fs-2 card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+      <span>BurnBot</span>
+      <button id="close-btn" class="btn btn-sm btn-light">&times;</button>
+    </div>
+    <div class="card-body" id="chat-box"></div>
+    <div class="card-footer d-flex">
+      <input type="text" id="chat-input" class="form-control" placeholder="Type a message...">
+      <button id="send-btn" class="btn btn-warning ms-2">Send</button>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="../static/js/script.js"></script>
+  <script src="../static/js/burnbot.js"></script>
+
+</body>
 
 </html>
