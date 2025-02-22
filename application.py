@@ -1002,22 +1002,6 @@ def findActivities(email):
     activities = mongo.db.user_activity.find({"Email": email})
     return activities
 
-
-def bot_response(user_message):
-    responses = {
-        "": "Hello there! I am BurnBot and I am here to help you achieve your fitness goals.",
-        "1": "Tell me the food item, and I’ll fetch its calorie count for you!",
-        # "2": "Would you like a diet plan based on weight loss, muscle gain, or maintenance?",
-        # "3": "Do you prefer home workouts or gym workouts?",
-        # "4": "Ask me anything! I have a list of FAQs.",
-    }
-
-    return responses.get(
-        user_message.lower(),
-        "Sorry, I didn’t understand that. Please select an option (1-5).",
-    )
-
-
 def get_calories(food_item):
     print(f"calories item {food_item}")
     food_data = mongo.db.food.find_one({"food": food_item.lower().strip()})
