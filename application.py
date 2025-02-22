@@ -780,11 +780,8 @@ def dashboard():
     # dashboard() called and displays the list of activities
     # Output: redirected to dashboard.html
     # ##########################
-    exercises = [
-        {"id": 1, "name": "Yoga"},
-        {"id": 2, "name": "Swimming"},
-    ]
-    email = get_session = session.get("email")
+    exercises_cursor = mongo.db.your_exercise_collection.find()
+    exercises = list(exercises_cursor)
     if session.get("email"):
         return render_template("dashboard.html", title="Dashboard", exercises=exercises)
     else:
@@ -796,7 +793,6 @@ from flask import redirect, url_for, flash
 
 @app.route("/add_favorite", methods=["POST"])
 def add_favorite():
-    flash("TESTING TSLFGLSGSKLDGLGJ!")  # For testing
     email = session.get("email")
     if not email:
         return jsonify({"status": "error", "message": "User not logged in"}), 401
@@ -833,11 +829,15 @@ def add_favorite():
                 "href": exercise.get("href"),
             }
             mongo.db.favorites.insert_one(favorite)
-            flash(f"{exercise.get('name')} added to favorites!", "success")  # Flash the message
+            flash(
+                f"{exercise.get('name')} added to favorites!", "success"
+            )  # Flash the message
 
     elif action == "remove":
         mongo.db.favorites.delete_one({"email": email, "href": activity})
-        flash(f"{exercise.get('name')} removed from favorites.", "success")  # Flash the message
+        flash(
+            f"{exercise.get('name')} removed from favorites.", "success"
+        )  # Flash the message
 
     # Redirect back to the activity page after favoriting/unfavoriting
     return redirect(request.referrer or url_for("home"))
