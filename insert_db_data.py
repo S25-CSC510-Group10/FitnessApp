@@ -26,7 +26,7 @@ def insertfooddata():
     """
 
     # Open the CSV file containing food calorie data
-    f = open("food_data/calories.csv", "r", encoding="ISO-8859-1")
+    f = open("food_data/calories2.csv", "r", encoding="ISO-8859-1")
     l = f.readlines()  # Read all lines in the file into a list
 
     # Adjust each line to remove unwanted characters (trimming edges)
