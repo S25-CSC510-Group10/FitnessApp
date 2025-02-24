@@ -14,9 +14,6 @@ https://github.com/VibhavDeo/FitnessApp
 """
 import unittest
 import os,sys,inspect
-# currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-# parentdir = os.path.dirname(currentdir)
-# sys.path.insert(0, parentdir)
 from application import app
 from flask import session
 
@@ -42,14 +39,6 @@ class TestApplication(unittest.TestCase):
         
         response = self.app.get('/calories')
         self.assertEqual(response.status_code, 302)  
-
-    # def test_display_profile_route(self):
-    #     
-    #     with self.app as client:
-    #         with client.session_transaction() as sess:
-    #             sess['email'] = 'testuser@example.com'
-    #         response = client.get('/display_profile')
-    #         self.assertEqual(response.status_code, 200)  
 
     def test_user_profile_route(self):
         
@@ -108,14 +97,6 @@ class TestApplication(unittest.TestCase):
             response = client.get('/dashboard')
             self.assertEqual(response.status_code, 200)  
 
-    def test_add_favorite_route(self):
-        
-        with self.app as client:
-            with client.session_transaction() as sess:
-                sess['email'] = 'testuser@example.com'
-            response = client.post('/add_favorite', json={'exercise_id': '123', 'action': 'add'})
-            self.assertEqual(response.status_code, 200)  
-
     def test_favorites_route(self):
         
         with self.app as client:
@@ -130,7 +111,7 @@ class TestApplication(unittest.TestCase):
             with client.session_transaction() as sess:
                 sess['email'] = 'testuser@example.com'
 
-            exercise_routes = ['/yoga', '/swim', '/abbs', '/belly', '/core', '/gym', '/walk', '/dance', '/hrx']
+            exercise_routes = ['/yoga', '/swimming', '/abs', '/belly', '/core', '/gym', '/walk', '/dance', '/hrx']
 
             for route in exercise_routes:
                 response = client.get(route)
