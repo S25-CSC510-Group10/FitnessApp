@@ -21,6 +21,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.fields.core import DateField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from apps import App
+import pdb
 
 app = App()
 mongo = app.mongo
@@ -75,6 +76,7 @@ class CalorieForm(FlaskForm):
     get_docs = []
     for record in cursor:
         get_docs.append(record)
+
 
     result = []
     temp = ""

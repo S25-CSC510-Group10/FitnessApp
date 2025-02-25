@@ -125,7 +125,6 @@ def login():
     Input: Email, Password, Login Type
     Output: Account Authentication and redirecting to Dashboard
     """
-    print("Login function here")
     if not session.get("email"):
         form = LoginForm()
         if form.validate_on_submit():
