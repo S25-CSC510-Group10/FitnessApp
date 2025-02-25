@@ -153,50 +153,94 @@ def test_registration_no_password(client, monkeypatch):
 
     assert b"Account created for newuser!" not in response.data
 
-# def test_calories(client, monkeypatch):
+# Test adding a valid calorie intake.
+def test_calories_valid(client, monkeypatch):
 
-#     monkeypatch.setattr(mongo.db.calories, "find_one", mock_find_one)
-#     monkeypatch.setattr(mongo.db.calories, "insert", mock_insert)
-#     monkeypatch.setattr(mongo.db.calories, "update_many", mock_update_many)
+    monkeypatch.setattr(mongo.db.calories, "find_one", mock_find_one)
+    monkeypatch.setattr(mongo.db.calories, "insert", mock_insert)
+    monkeypatch.setattr(mongo.db.calories, "update_many", mock_update_many)
+    monkeypatch.setattr(mongo.db.user, "find_one", mock_find_one)
 
-#     # Register a user.
-#     client.post(
-#         "/register",
-#         data = {
-#             "username": "newuser",
-#             "email": "newuser@example.com",
-#             "password": "securepassword",
-#             "confirm_password": "securepassword",
-#             "weight": "70",
-#             "height": "175",
-#             "goal": "Weight Loss",
-#             "target_weight": "65",
-#         },
-#         follow_redirects=True
-#     )
+    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
 
-#     # Log the user in
-#     client.post(
-#         "/login",
-#         data={"email": "newuser@example.com", "pwd": "securepassword"},
-#         follow_redirects=True,
-#     )
+    assert b"You have been logged in!" in response.data
+    assert session.get("email") == "hplenham@gmail.com"
 
-#     form = CalorieForm()
+    # Put calories into their tracker
+    response = client.post(
+        "/calories",
+        data = {
+            "food": "Acai (20)",
+            "burnout": "30"
+        },
+        follow_redirects=True
+    )
 
-#     print(form.food.choices[0][1])
-#     form.validate()
+    assert b"Successfully updated the data" in response.data
 
-#     # Put calories into their tracker
-#     response = client.post(
-#         "/calories",
-#         data = {
-#             "food": form.food.choices[0][1],
-#             "burnout": "30"
-#         },
-#         follow_redirects=True
-#     )
+# Test adding an INVALID calorie intake where the item is wrong
+def test_calories_invalid_item(client, monkeypatch):
 
-#     print("Form errors:", form.errors)
+    monkeypatch.setattr(mongo.db.calories, "find_one", mock_find_one)
+    monkeypatch.setattr(mongo.db.calories, "insert", mock_insert)
+    monkeypatch.setattr(mongo.db.calories, "update_many", mock_update_many)
+    monkeypatch.setattr(mongo.db.user, "find_one", mock_find_one)
 
-#     assert b"Successfully updated the data" in response.data
+    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+
+    assert b"You have been logged in!" in response.data
+    assert session.get("email") == "hplenham@gmail.com"
+
+    # Attempt to put in an invalid item (one that doesn't exist)
+    response = client.post(
+        "/calories",
+        data = {
+            "food": "Acai (19)",
+            "burnout": "30"
+        },
+        follow_redirects=True
+    )
+
+    assert b"Successfully updated the data" not in response.data
+
+# Test adding an INVALID calorie intake where burnout wasn't entered
+def test_calories_invalid_item(client, monkeypatch):
+
+    monkeypatch.setattr(mongo.db.calories, "find_one", mock_find_one)
+    monkeypatch.setattr(mongo.db.calories, "insert", mock_insert)
+    monkeypatch.setattr(mongo.db.calories, "update_many", mock_update_many)
+    monkeypatch.setattr(mongo.db.user, "find_one", mock_find_one)
+
+    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+
+    assert b"You have been logged in!" in response.data
+    assert session.get("email") == "hplenham@gmail.com"
+
+    # Put in a valid item but with no burnout.
+    response = client.post(
+        "/calories",
+        data = {
+            "food": "Acai (20)",
+            "burnout": ""
+        },
+        follow_redirects=True
+    )
+
+    assert b"Successfully updated the data" not in response.data
+
+# Tests displaying a profile with a user logged in
+def test_display_profile(client):
+
+    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+
+    assert b"You have been logged in!" in response.data
+    assert session.get("email") == "hplenham@gmail.com"
+
+    # Request the profile page
+    response = client.get("/display_profile")
+
+    # Assertions
+    assert response.status_code == 200
+    assert b"Weight Loss" in response.data  # Check goal
+    assert b"450" in response.data  # Check weight
+    assert b"400" in response.data  # Check target weight
