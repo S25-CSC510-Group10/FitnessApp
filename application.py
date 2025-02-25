@@ -805,12 +805,18 @@ def add_favorite():
     if not activity:
         return jsonify({"status": "error", "message": "Exercise ID is required"}), 400
 
-    print(f"EXERCISE ID: {activity}")
+    if not action:
+        return (
+            jsonify(
+                {
+                    "status": "error",
+                    "message": "Favorite action is required (add, remove)",
+                }
+            ),
+            400,
+        )
 
     exercise = mongo.db.your_exercise_collection.find_one({"href": activity})
-
-    print(f"activity: {activity}")
-    print(f"exercise: {exercise}")
 
     if not exercise:
         return jsonify({"status": "error", "message": "Exercise not found"}), 404
