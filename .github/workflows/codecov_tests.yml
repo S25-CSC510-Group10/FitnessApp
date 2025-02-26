@@ -1,32 +1,52 @@
 name: Run tests and upload coverage
 
-on: 
-  push
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
 
 jobs:
-
   test:
-  
-    name: Run tests and collect coverage
     runs-on: ubuntu-latest
     
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+        options: --health-cmd="mongod --version" --health-interval=10s --health-timeout=5s --health-retries=3
+    
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up Python 3.13
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v2
         with:
           python-version: "3.13"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt pytest pytest-cov
-          pip install coverage
+          pip install -r requirements.txt
+          pip install pytest pytest-cov
+
+      - name: Wait for MongoDB to be ready
+        run: |
+          echo "Waiting for MongoDB to start..."
+          while ! nc -z localhost 27017; do
+            sleep 1
+          done
+          echo "MongoDB is ready!"
 
       - name: Run tests
-        run: coverage run -m pytest
+        run: |
+          pytest --cov=. tests/
 
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v2
