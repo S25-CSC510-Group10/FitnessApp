@@ -11,6 +11,7 @@ The following are a set of guidelines for contributing to BurnOut. We are open t
  * [Reporting Bugs](#reporting-bugs)
  * [Suggesting enhancements](#suggesting-enhancements)
  * [Pull Requests Methods](#pull-requests-methods)
+ * [Adding endpoints](#adding-endpoints)
 
 [Style Guides](#style-guides)
 
@@ -65,6 +66,54 @@ Everyone participating in this project needs to abide by the aPAS - A Personal A
   Ensure that you follow the steps mentioned below in order to have your contribution reviewed by the maintainers:
   - Add a description of the modification.
   - Insert a clear and descriptive title.
+
+  ## Adding endpoints
+  ### Steps to Add a New Endpoint
+  1. Create a New Route in application.py
+  Open application.py (or whichever file contains the primary routes for your application).
+  
+  Add a new route to handle requests for the new functionality you want to expose. For example:
+  ```python
+  @app.route('/new-endpoint', methods=['GET'])
+  def new_endpoint():
+      return "This is the new endpoint"
+  ```
+  Ensure the methods parameter includes any HTTP methods (GET, POST, PUT, DELETE) that your endpoint will handle.
+  2. Define Logic for the Endpoint
+  In the function, implement the necessary logic for the endpoint.
+  
+  If you need to process data, query the database, or return dynamic content, structure the function accordingly. For example:
+  ```python
+  @app.route('/new-endpoint', methods=['GET'])
+  def new_endpoint():
+      data = some_function_to_get_data()
+      return render_template('new_endpoint.html', data=data)
+  ```
+
+  3. Create Template (If Needed)
+  If your endpoint will render HTML, create a corresponding .html file in the templates/ folder. For example, new_endpoint.html:
+
+  5. Static Files (CSS, JS, Images)
+  If your endpoint requires specific styling, scripts, or images, place them in the static/ folder.
+
+  6. Testing
+  Create tests for your new endpoint. For example, create a test file in the tests/ folder (e.g., test_new_endpoint.py).
+  
+  In this test file, write unit tests for the new route to ensure it's functioning correctly. Here's an example of a simple test using pytest:
+  ```python
+  def test_new_endpoint(client):
+      response = client.get('/new-endpoint')
+      assert response.status_code == 200
+      assert b"This is the new endpoint" in response.data
+  ```
+  Make sure you use Flask’s test_client() to simulate requests for the test.
+  
+  7. Document the Endpoint
+  Update the README.md or any relevant documentation file (e.g., Enhancements.md) to describe the new endpoint, how to use it, and its expected behavior.
+
+  9. Commit Changes
+  After testing locally, make sure to commit the changes to your repository. Follow your team's commit conventions, if applicable.
+  
 
 ### <h2>Style Guides</h2>
 
@@ -140,3 +189,4 @@ Everyone participating in this project needs to abide by the aPAS - A Personal A
 
 ## References
 [Contributing.md](https://github.com/atom/atom/blob/master/CONTRIBUTING.md#specs-styleguide)
+
