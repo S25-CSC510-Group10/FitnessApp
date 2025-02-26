@@ -13,12 +13,8 @@ https://github.com/S25-CSC510-Group10/FitnessApp
 """
 
 import unittest
-<<<<<<< HEAD
-=======
-import os, sys, inspect
->>>>>>> 86deb4da4f4988b35479c795d28d53298d94140b
 from application import app
-
+from flask import session
 
 class TestApplication(unittest.TestCase):
 

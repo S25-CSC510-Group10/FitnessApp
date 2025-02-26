@@ -39,11 +39,6 @@ def mock_exercise():
         "description": "New to Yoga? You are at the right place! Learn easy yoga poses to buil…",
     }
 
-<<<<<<< HEAD
-from application import app
-=======
->>>>>>> 86deb4da4f4988b35479c795d28d53298d94140b
-
 class TestApplicationExtra(unittest.TestCase):
 
     def setUp(self):
