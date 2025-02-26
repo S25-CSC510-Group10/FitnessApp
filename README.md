@@ -13,7 +13,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 [![DOI](https://zenodo.org/badge/692868088.svg)](https://zenodo.org/doi/10.5281/zenodo.10023046)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/anshganatra/FitnessApp/main)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/S25-CSC510-Group10/FitnessApp/main)](https://img.shields.io/github/last-commit/S25-CSC510-Group10/FitnessApp/main)
 [![Python application](https://github.com/anshganatra/FitnessApp/actions/workflows/python-app.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/python-app.yml)
 [![Lint](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml)
 [![Pylint](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml)
