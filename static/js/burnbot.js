@@ -7,7 +7,7 @@ document.getElementById("burnbot-btn").addEventListener("click", function () {
             "BurnBot: Hello there! I am BurnBot, and I am here to help you achieve your fitness goals.\n\n"
             + "Select an option below.\n\n"
             + "0. View the menu again.\n\n"
-            + "1. Tell me the food item, and I’ll fetch its calorie count for you!\n\n"
+            + "1. Tell me the food item, and I'll fetch its calorie count for you!\n\n"
             // "2. Would you like a diet plan based on weight loss, muscle gain, or maintenance?\n\n" +
             // "3. Do you prefer home workouts or gym workouts?\n\n" +
             // "4. Ask me anything! I have a list of FAQs.\n\n"

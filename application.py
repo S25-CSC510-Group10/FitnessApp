@@ -847,6 +847,9 @@ def add_favorite():
             f"{exercise.get('name')} removed from favorites.", "success"
         )  # Flash the message
 
+    elif action not in ["add", "remove"]:
+        return jsonify({"status": "error", "message": "Invalid action specified"}), 400
+
     # Redirect back to the activity page after favoriting/unfavoriting
     return redirect(request.referrer or url_for("home"))
 
@@ -1055,7 +1058,7 @@ def bot_response(user_message):
             f"Hello there! I am BurnBot, and I am here to help you achieve your fitness goals.\n\n"
             + "Select an option below.\n\n"
             + "0. View the menu again.\n\n"
-            + "1. Tell me the food item, and I’ll fetch its calorie count for you!\n\n"
+            + "1. Tell me the food item, and I'll fetch its calorie count for you!\n\n"
         )
 
     if bot_state == 0:
@@ -1074,15 +1077,22 @@ def bot_response(user_message):
 
     bot_state = 0
     return (
-        f"Sorry, I didn’t understand that. Please select an option below:\n\n"
+        f"Sorry, I didn't understand that. Please select an option below:\n\n"
         + "0. View the menu again.\n\n"
-        + "1. Tell me the food item, and I’ll fetch its calorie count for you!\n\n"
+        + "1. Tell me the food item, and I'll fetch its calorie count for you!\n\n"
     )
 
 
 @app.route("/chat", methods=["POST"])
 def chat():
+    email = session.get("email")
+    if not email:
+        return jsonify({"status": "error", "message": "User not logged in"}), 401
+
     user_message = request.json.get("message", "")
+    if not user_message:
+        return jsonify({"status": "error", "message": "Message is required"}), 400
+
     response = bot_response(user_message)
     return jsonify({"response": response})
 
