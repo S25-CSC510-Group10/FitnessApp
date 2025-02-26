@@ -76,6 +76,7 @@ class CalorieForm(FlaskForm):
     for record in cursor:
         get_docs.append(record)
 
+
     result = []
     temp = ""
     for i in get_docs:
