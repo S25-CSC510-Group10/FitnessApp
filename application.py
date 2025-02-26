@@ -978,11 +978,7 @@ def activity_page(activity):
             )
             flash(f"You have successfully completed {activity}!", "success")
             if achievement:
-                flash(
-                    f'Congratulations! You earned the "{
-                        achievement["name"]}" achievement!',
-                    "success"
-                )
+                flash(f'Congratulations! You earned the "{achievement["name"]}" achievement!',"success")
 
         # Refresh the dashboard with updated activity status
         activity_cursor = findActivities(email)
