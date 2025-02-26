@@ -18,30 +18,14 @@
 [![Lint](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/syntax_checker.yml)
 [![Pylint](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml/badge.svg)](https://github.com/anshganatra/FitnessApp/actions/workflows/pylint.yml)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/anshganatra/FitnessApp)
+![Forks](https://img.shields.io/github/forks/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![Stars](https://img.shields.io/github/stars/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![Issues](https://img.shields.io/github/issues/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![PR](https://img.shields.io/github/issues-pr/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![Contributors](https://img.shields.io/github/contributors/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![Commit](https://img.shields.io/github/commit-activity/w/S25-CSC510-Group10/FitnessApp?style=flat-square)
+![Repo Size](https://img.shields.io/github/repo-size/S25-CSC510-Group10/FitnessApp?style=flat-square)
 
-<!--Badges-->
-<a href="https://github.com/lastephenson42/FitnessApp/fork" target="_blank">
-  <img src="https://img.shields.io/github/forks/S25-CSC510-Group10/FitnessApp?style=flat-square" alt="FitnessApp/forks"/>
-</a>
-
-<a href="https://github.com/anshganatra/FitnessApp/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/S25-CSC510-Group10/FitnessApp?style=flat-square" alt="FitnessApp stars"/>
-</a>
-<a href="https://github.com/S25-CSC510-Group10/FitnessApp/issues" target="blank">
-<img src="https://img.shields.io/github/issues/S25-CSC510-Group10/FitnessApp?style=flat-square" alt="FitnessApp issues"/>
-</a>
-
-<a href="https://github.com/anshganatra/FitnessApp/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/S25-CSC510-Group10/FitnessApp?style=flat-square" alt="cheapBuy pull-requests"/>
-</a>
-<a href="https://github.com/anshganatra/FitnessApp/graphs/contributors" alt="Contributors">
-<img src="https://img.shields.io/github/contributors/S25-CSC510-Group10/FitnessApp?style=flat-square" /></a>
-
-<a href="https://github.com/anshganatra/FitnessApp/graphs/commit-activity" alt="commit activity">
-<img src="https://img.shields.io/github/commit-activity/w/S25-CSC510-Group10/FitnessApp?style=flat-square" /></a>
-
-<a href="https://img.shields.io/github/repo-size/anshganatra/FitnessApp" alt="repo size">
-<img src="https://img.shields.io/github/repo-size/S25-CSC510-Group10/FitnessApp?style=flat-square" /></a>
 
 # BurnOut
 
