@@ -19,7 +19,6 @@ The following are a set of guidelines for contributing to BurnOut. We are open t
 
 [References](#references)
 
-
 ### Code of Conduct
 Everyone participating in this project needs to abide by the aPAS - A Personal Agile Scheduler Code of Conduct that can be found under the main repository link as a CODE_OF_CONDUCT.md file. By participating, you are expected to uphold this code. Please report unacceptable behavior to any of the original team members listed at the bottom of [README.md](README.md).
 
