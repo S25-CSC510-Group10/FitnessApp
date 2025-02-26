@@ -85,7 +85,7 @@ This document serves as a comprehensive reference point for users, giving them i
 - [Core Functionalities of the Application:](#core-functionalities)
   - [Register](#register)
   - [Login](#login)
-  - [Set User Profile](#set-user-profile)
+  - [Set User Profile](#dashboard)
   - [Enter Calories in and burnt](#enter-calories-in-and-burnt)
   - [Enter Water Intakes](#enter-water-intakes)
   - [Blog](#blog)
