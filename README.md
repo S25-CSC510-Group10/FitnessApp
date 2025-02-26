@@ -85,18 +85,7 @@ This document serves as a comprehensive reference point for users, giving them i
 - [Core Functionalities of the Application:](#core-functionalities)
   - [Register](#register)
   - [Login](#login)
-  - [Set User Profile](#dashboard)
-  - [Enter Calories in and burnt](#enter-calories-in-and-burnt)
-  - [Enter Water Intakes](#enter-water-intakes)
-  - [Blog](#blog)
-  - [Shop](#shop)
-  - [Check History](#check-history)
-  - [Adding Friends](#adding-friends)
-  - [Add an Excercise to Favourites](#add-an-excercise-to-favourites)
-  - [Submit a Review](#submit-a-review)
-  - [View User Profile](#view-user-profile)
-  - [View User Profile 2.0](#view-user-profile-2.0)
-  - [Update Your Profile](#update-your-profile)
+  - [Homepage](#homepage)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
@@ -132,7 +121,7 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/0dab79e5-d434-45a0-ae67-fba852596139)
 
-## Dashboard
+## Homepage
 
 ![image](https://github.com/user-attachments/assets/fcd993dd-0d33-4e74-8f3d-130b70ee5a26)
 
