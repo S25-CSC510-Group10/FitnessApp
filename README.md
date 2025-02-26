@@ -86,6 +86,7 @@ This document serves as a comprehensive reference point for users, giving them i
   - [Register](#register)
   - [Login](#login)
   - [Homepage](#homepage)
+  - [Exercise Section](#exercise-section)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
@@ -127,6 +128,14 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/3e7d46d4-fe09-4493-a56b-434ac61679bf)
 
+## Achievements
+
+![image](https://github.com/user-attachments/assets/e9bbff9c-67fc-43e5-b1bb-f87c7af5f590)
+
+## Favorites
+
+![image](https://github.com/user-attachments/assets/d08d7cc8-5be3-4dcc-bf10-3ff6a29dd922)
+
 ## Enter Calories Consumed and Burned
 
 ![image](https://github.com/user-attachments/assets/abf8be09-c94c-49d3-a9a0-ab886e325d51)
@@ -162,6 +171,9 @@ This document serves as a comprehensive reference point for users, giving them i
 ## Time your Workouts
 ![image](https://github.com/user-attachments/assets/178ab8df-a160-4a04-9cfc-46d6a1f3db35)
 
+## Mindfulness
+
+![image](https://github.com/user-attachments/assets/7143e7e6-56c1-4d98-9b6b-1f36a28ff769)
 
 # Steps for execution
 
