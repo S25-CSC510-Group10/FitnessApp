@@ -206,8 +206,9 @@ Step 5:
 Open the URL in your browser:  
  http://127.0.0.1:5000/
 
-NOTE!!:
-If you get error regarding any of the following packages - pymongo and bson, then dont worry we have also been there. Run the following commands to resolve the error :
+### Potential Issues
+
+You may run into dependency issues given there are a significant amount of packages given for this project. If you do, try these steps:
 
     pip uninstall bson
     pip uninstall pymongo
@@ -216,34 +217,26 @@ If you get error regarding any of the following packages - pymongo and bson, the
 # Source Code
 
 Link to the repository:
-https://github.com/anshganatra/FitnessApp
+https://github.com/S25-CSC510-Group10/FitnessApp/
 
 # Future Scope
 
-1. Bug fixes
-2. Show the enrollment lists for all the courses
-3. Email verification for login
-4. Use openAI api to enhance bot performance.
+1. Refactor to use ReactJS instead of Django
+2. Complete more extensive testing on application.py
+3. Add more functionality and usefulness to BurnBot, including adding a displayed list of food choices.
+4. Improve progress visualization
+5. Add a prescribed meal plan based on weight loss goals using the food database.
+6. Website customization options.
 
 # Team Members
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/anshganatra"><img src="https://avatars.githubusercontent.com/u/32770005?v=4" width="75px;" alt=""/><br /><sub><b>Ansh Ganatra</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/SaiTarun314"><img src="https://avatars.githubusercontent.com/u/44906701?v=4" width="75px;" alt=""/><br /><sub><b>Sai Tarun Yellamraju</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/moryash08"><img src="https://avatars.githubusercontent.com/u/62850244?v=4" width="75px;" alt=""/><br /><sub><b>Yash Mor</b></sub></a><br /></td>
+    <td align="center"><sub><b>Hank Lenham</b></sub></td>
+    <td align="center"><sub><b>Ryan McPhee</b></sub></td>
+    <td align="center"><sub><b>Lawrence Stephenson</b></sub></td>
   </tr>
 </table>
-
-# Contribution
-
-Please refer the [CONTRIBUTING.md](https://github.com/anshganatra/FitnessApp/blob/main/CONTRIBUTING.md) file for instructions on how to contribute to our repository.
-
-  <p align="center">
-    <a href="https://github.com/anshganatra/FitnessApp/issues/new/choose">Report Bug</a>
-    /
-    <a href="https://github.com/anshganatra/FitnessApp/issues/new/choose">Request Feature</a>
-  </p>
 
 # License
 
