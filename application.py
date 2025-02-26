@@ -69,7 +69,6 @@ def reminder_email():
     """
     with app.app_context():
         try:
-            time.sleep(10)
             print("in send mail")
             recipientlst = list(mongo.db.user.distinct("email"))
             print(recipientlst)
@@ -277,6 +276,10 @@ def display_profile():
         target_weight = float(user_data["target_weight"])
         user_data_hist = list(mongo.db.profile.find({"email": email}))
 
+        print(user_data)
+        print(target_weight)
+        print(user_data_hist)
+
         for entry in user_data_hist:
             entry["date"] = datetime.strptime(entry["date"], "%Y-%m-%d").date()
 
@@ -314,6 +317,8 @@ def display_profile():
         graph_html = fig.to_html(full_html=False)
 
         last_10_entries = sorted_user_data_hist[-10:]
+
+        print("Returning the display profile")
 
         return render_template(
             "display_profile.html",
@@ -357,9 +362,7 @@ def user_profile():
     if session.get("email"):
         form = UserProfileForm()
         if form.validate_on_submit():
-            print("validated")
             if request.method == "POST":
-                print("post")
                 email = session.get("email")
                 weight = request.form.get("weight")
                 height = request.form.get("height")
@@ -399,7 +402,6 @@ def user_profile():
     else:
         return redirect(url_for("login"))
     return render_template("user_profile.html", status=True, form=form)
-
 
 @app.route("/history", methods=["GET"])
 def history():
@@ -547,7 +549,6 @@ def friends():
     for f in myFriends:
         myFriendsList.append(f["receiver"])
 
-    print(myFriends)
     allUsers = list(mongo.db.user.find({}, {"name", "email"}))
 
     pendingRequests = list(
@@ -568,9 +569,6 @@ def friends():
     for p in pendingApprovals:
         pendingApproves.append(p["sender"])
 
-    print(pendingApproves)
-
-    # print(pendingRequests)
     return render_template(
         "friends.html",
         allUsers=allUsers,
