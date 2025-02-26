@@ -961,11 +961,7 @@ def activity_page(activity):
             mongo.db.user_activity.delete_one(
                 {"Email": email, "Activity": activity, "Status": "Enrolled"}
             )
-            flash(
-                f"You have successfully unenrolled from {
-                  activity}!",
-                "success",
-            )
+            flash(f"You have successfully unenrolled from {activity}!", "success",)
             # return redirect(url_for("activities"))
 
         elif action == "complete" and enrolled:
