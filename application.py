@@ -915,11 +915,15 @@ def activity_page(activity):
 
     favorited = mongo.db.favorites.find_one({"email": email, "href": activity})
 
+    print("enrolled? ", enrolled)
+
     # Handle form submission
     form = EnrollForm() if not enrolled else UnenrollForm()
     if request.method == "POST":
         action = request.form.get("action")
+        print("action is: ", action)
         if action == "enroll" and not enrolled:
+            print("trying to enroll")
             # User enrolls
             mongo.db.user_activity.insert_one(
                 {
