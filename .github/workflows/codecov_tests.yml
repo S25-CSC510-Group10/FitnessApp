@@ -46,14 +46,12 @@ jobs:
 
       - name: Run tests
         run: |
-          ls
-          pytest --cov=. --maxfail=3 --disable-warnings tests/
-          coverage xml
+          coverage run --source=. -m pytest tests/
 
       - name: Upload coverage to Coveralls  
         run: |
-          coveralls --format=cobertura
+          coveralls
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
 
           
