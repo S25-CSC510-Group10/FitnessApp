@@ -25,6 +25,7 @@
 ![Contributors](https://img.shields.io/github/contributors/S25-CSC510-Group10/FitnessApp?style=flat-square)
 ![Commit](https://img.shields.io/github/commit-activity/w/S25-CSC510-Group10/FitnessApp?style=flat-square)
 ![Repo Size](https://img.shields.io/github/repo-size/S25-CSC510-Group10/FitnessApp?style=flat-square)
+[![Run tests and upload coverage](https://github.com/S25-CSC510-Group10/FitnessApp/actions/workflows/codecov_tests.yml/badge.svg)](https://github.com/S25-CSC510-Group10/FitnessApp/actions/workflows/codecov_tests.yml)
 
 
 # BurnOut
