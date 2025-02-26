@@ -46,4 +46,7 @@ jobs:
 
       - name: Run tests
         run: |
-           pytest -v --cov=. --maxfail=3 --disable-warnings tests/
+           pytest --cov=. --maxfail=3 --disable-warnings tests/
+
+      - name: Upload coverage to codecov
+        uses: codecov/codecov-action@v2
