@@ -11,6 +11,7 @@ For more information about the Burnout project, visit:
 https://github.com/S25-CSC510-Group10/FitnessApp
 """
 
+from flask import redirect, url_for, flash
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
@@ -226,6 +227,7 @@ def calories():
 
     if get_session is not None:
         form = CalorieForm()
+        print("TEST5")
         if form.validate_on_submit():
 
             print("test2")
@@ -261,7 +263,9 @@ def calories():
                 flash(f"Successfully updated the data", "success")
                 return redirect(url_for("calories"))
     else:
+        print("TEST2")
         return redirect(url_for("home"))
+    print("TEST1")
     return render_template("calories.html", form=form, time=now)
 
 
@@ -442,7 +446,8 @@ def water():
         # Retrieving records for the logged-in user
         records = mongo.db.intake_collection.find({"email": email}).sort("time", -1)
 
-        # IMPORTANT: We need to convert the cursor to a list to iterate over it multiple times
+        # IMPORTANT: We need to convert the cursor to a list to iterate over it
+        # multiple times
         records_list = list(records)
         if records_list:
             average_intake = sum(
@@ -792,9 +797,6 @@ def dashboard():
         return redirect(url_for("login"))
 
 
-from flask import redirect, url_for, flash
-
-
 @app.route("/add_favorite", methods=["POST"])
 def add_favorite():
     email = session.get("email")
@@ -904,7 +906,8 @@ def activity_page(activity):
     email = session.get("email")
 
     if email is None:
-        return redirect(url_for("dashboard"))  # Redirect if user is not logged in
+        # Redirect if user is not logged in
+        return redirect(url_for("dashboard"))
 
     # Check if the user is enrolled in the activity
     userEnrolledStatus = mongo.db.user_activity.find_one(
@@ -939,7 +942,11 @@ def activity_page(activity):
             mongo.db.user_activity.delete_one(
                 {"Email": email, "Activity": activity, "Status": "Enrolled"}
             )
-            flash(f"You have successfully unenrolled from {activity}!", "success")
+            flash(
+                f"You have successfully unenrolled from {
+                  activity}!",
+                "success",
+            )
             # return redirect(url_for("activities"))
 
         elif action == "complete" and enrolled:
@@ -957,7 +964,8 @@ def activity_page(activity):
             flash(f"You have successfully completed {activity}!", "success")
             if achievement:
                 flash(
-                    f'Congratulations! You earned the "{achievement["name"]}" achievement!',
+                    f'Congratulations! You earned the "{
+                        achievement["name"]}" achievement!',
                     "success",
                 )
 
@@ -995,7 +1003,8 @@ def submit_reviews():
     if session.get("email"):
         print("Imhere2")
         if request.method == "POST":  # Check if it's a POST request
-            form = ReviewForm(request.form)  # Initialize the form with form data
+            # Initialize the form with form data
+            form = ReviewForm(request.form)
             if form.validate_on_submit():
                 print("imehere1")
                 email = session.get("email")
@@ -1077,9 +1086,11 @@ def bot_response(user_message):
         if user_message:
             calories = get_calories(user_message)
             if calories:
-                return f"The calorie count for {user_message} is {calories} kcal."
+                return f"The calorie count for {
+                    user_message} is {calories} kcal."
             else:
-                return f"Sorry, I couldn't find the calorie count for {user_message}. Please check the spelling or try a different food item. Otherwise, enter 0 to go back to the menu."
+                return f"Sorry, I couldn't find the calorie count for {
+                    user_message}. Please check the spelling or try a different food item. Otherwise, enter 0 to go back to the menu."
 
     bot_state = 0
     return (
