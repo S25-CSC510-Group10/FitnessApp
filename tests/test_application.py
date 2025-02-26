@@ -5,6 +5,7 @@ from application import app, mongo
 from flask import session
 from application import reminder_email
 from unittest.mock import MagicMock
+from forms import CalorieForm
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -50,8 +51,27 @@ def mock_update_many():
     return None  # Simulate successful update
 
 
+def login_setup(client):
+    client.post(
+        "/register",
+        data={
+            "username": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+            "confirm_password": "3g:$*fe9R=@9zx",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True,
+    )
+
+
 # Test a successful login.
 def test_login_success(client, monkeypatch):
+
+    login_setup(client)
 
     monkeypatch.setattr(mongo.db.user, "find_one", mock_find_one)
 
@@ -205,8 +225,12 @@ def test_calories_valid(client, monkeypatch):
 
     # Put calories into their tracker
     response = client.post(
-        "/calories", data={"food": "Acai (20)", "burnout": "30"}, follow_redirects=True
+        "/calories", data={"food": "acai (20)", "burnout": "30"}, follow_redirects=True
     )
+
+    form = CalorieForm()
+    form.validate()
+    print(form.errors)
 
     assert b"Successfully updated the data" in response.data
 

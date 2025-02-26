@@ -223,9 +223,13 @@ def calories():
     now = now.strftime("%Y-%m-%d")
 
     get_session = session.get("email")
+    print("test1", get_session)
+
     if get_session is not None:
         form = CalorieForm()
         if form.validate_on_submit():
+
+            print("test2")
             if request.method == "POST":
                 email = session.get("email")
                 food = request.form.get("food")
@@ -402,6 +406,7 @@ def user_profile():
     else:
         return redirect(url_for("login"))
     return render_template("user_profile.html", status=True, form=form)
+
 
 @app.route("/history", methods=["GET"])
 def history():
