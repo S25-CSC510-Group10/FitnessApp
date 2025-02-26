@@ -219,5 +219,24 @@
             specialCharIcon.classList.add('text-danger');
         }
     });
+
+    // Check proper submission of a valid password
+    function validateForm() {
+        const password = document.querySelector('input[name="password"]').value;
+        const confirmPassword = document.querySelector('input[name="confirm_password"]').value;
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            alert("Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        return true;
+    }
 </script>
 {% endblock content %}
