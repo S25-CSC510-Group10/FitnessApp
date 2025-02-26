@@ -89,8 +89,6 @@ This document serves as a comprehensive reference point for users, giving them i
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
-- [Team Members](#team-members)
-- [Contribution](#contribution)
 - [License](#license)
 
 # Why use BurnOut?
@@ -216,16 +214,6 @@ https://github.com/S25-CSC510-Group10/FitnessApp/
 4. Improve progress visualization
 5. Add a prescribed meal plan based on weight loss goals using the food database.
 6. Website customization options.
-
-# Team Members
-
-<table>
-  <tr>
-    <td align="center"><sub><b>Hank Lenham</b></sub></td>
-    <td align="center"><sub><b>Ryan McPhee</b></sub></td>
-    <td align="center"><sub><b>Lawrence Stephenson</b></sub></td>
-  </tr>
-</table>
 
 # License
 
