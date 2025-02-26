@@ -138,13 +138,13 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## Excercise Section
 
-![image](https://github.com/user-attachments/assets/2a7d7cec-7530-464c-ad74-20d73e663951)
+![image](https://github.com/user-attachments/assets/3e7d46d4-fe09-4493-a56b-434ac61679bf)
 
-## Enter Calories
+## Enter Calories Consumed and Burned
 
-![image](https://github.com/user-attachments/assets/ae45d06c-fe29-4982-8078-1fc2f03cbc0f)
+![image](https://github.com/user-attachments/assets/abf8be09-c94c-49d3-a9a0-ab886e325d51)
 
-## Enter water intakes
+## Enter Water Intake
 
 ![image](https://github.com/user-attachments/assets/850b2db0-3b45-4c40-826a-f8de44fd09c4)
 
@@ -152,7 +152,7 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/15a36eb1-42f3-40ca-99e1-7c8027d44e85)
 
-## Shop workout gears
+## Shop for Workout Gear
 
 ![image](https://github.com/user-attachments/assets/77351168-219f-4927-9718-a89d7cc0a7c8)
 
