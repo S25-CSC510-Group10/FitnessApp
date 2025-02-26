@@ -46,4 +46,4 @@ jobs:
 
       - name: Run tests
         run: |
-           pytest --cov=. --maxfail=3 --disable-warnings tests/
+           pytest -v --cov=. --maxfail=3 --disable-warnings tests/
