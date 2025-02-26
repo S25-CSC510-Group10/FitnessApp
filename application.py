@@ -1097,11 +1097,9 @@ def bot_response(user_message):
         if user_message:
             calories = get_calories(user_message)
             if calories:
-                return f"The calorie count for {
-                    user_message} is {calories} kcal."
+                return f"The calorie count for {user_message} is {calories} kcal."
             else:
-                return f"Sorry, I couldn't find the calorie count for {
-                    user_message}. Please check the spelling or try a different food item. Otherwise, enter 0 to go back to the menu."
+                return f"Sorry, I couldn't find the calorie count for {user_message}. Please check the spelling or try a different food item. Otherwise, enter 0 to go back to the menu."
 
     bot_state = 0
     return (
