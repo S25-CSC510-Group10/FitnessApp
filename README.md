@@ -26,10 +26,10 @@
 <a href="https://github.com/anshganatra/FitnessApp/stargazers" target="blank">
 <img src="https://img.shields.io/github/stars/anshganatra/FitnessApp?style=flat-square" alt="FitnessApp stars"/>
 </a>
-<a href="https://github.com/anshganatra/FitnessApp/issues" target="blank">
+<a href="https://github.com/S25-CSC510-Group10/FitnessApp/issues" target="blank">
 <img src="https://img.shields.io/github/issues/anshganatra/FitnessApp?style=flat-square" alt="FitnessApp issues"/>
 </a>
-<a href="https://github.com/anshganatra/FitnessApp/issues" target="blank">
+<a href="https://github.com/S25-CSC510-Group10/FitnessApp/issues" target="blank">
 <img src="https://img.shields.io/github/issues-closed/anshganatra/FitnessApp" alt="FitnessApp issues closed"/>
 </a>
 <a href="https://github.com/anshganatra/FitnessApp/pulls" target="blank">
