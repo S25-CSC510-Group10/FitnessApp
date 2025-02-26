@@ -305,7 +305,7 @@ def test_add_favorite_empty_request(client, mock_user):
 
 
 # --------------------------------------->
-# --------- TESTING ADD_FAVORITE -------->
+# --------- TESTING CHATBOT ------------->
 # --------------------------------------->
 # Test unauthorized access
 def test_chatbot_unauthenticated(client):
