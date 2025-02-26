@@ -39,6 +39,11 @@ import time
 from datetime import date
 import os
 from jinja2 import TemplateNotFound
+from werkzeug.serving import make_server
+import threading
+import atexit
+import signal
+import sys
 
 # Set project root directory for standardization.
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -61,6 +66,30 @@ mail = Mail(app)
 
 insertfooddata()
 insertexercisedata()
+
+
+def close_db_connection():
+    mongo.cx.close()
+    print("Database connection closed")
+
+
+def schedule_process():
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(10)
+    except KeyboardInterrupt:
+        print("Scheduler thread interrupted")
+        sys.exit(0)
+
+
+def signal_handler(sig, frame):
+    print("You pressed Ctrl+C!")
+    close_db_connection()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
 
 
 def reminder_email():
@@ -88,16 +117,6 @@ def reminder_email():
 
 
 schedule.every().day.at("08:00").do(reminder_email)
-
-
-# Run the scheduler
-def schedule_process():
-    while True:
-        schedule.run_pending()
-        time.sleep(10)
-
-
-Thread(target=schedule_process).start()
 
 
 @app.route("/", methods=["GET", "POST"])
