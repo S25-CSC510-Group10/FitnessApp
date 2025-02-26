@@ -86,7 +86,7 @@ This document serves as a comprehensive reference point for users, giving them i
   - [Register](#register)
   - [Login](#login)
   - [Homepage](#homepage)
-  - [Exercise Section](#Exercise Section)
+  - [Exercise Section](#exercise)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
