@@ -122,7 +122,7 @@ This document serves as a comprehensive reference point for users, giving them i
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="html" width="20" height="20"> CSS3 </br>
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="css" width="20" height="20"> HTML 5 </br>
 
-# Core Functionalities of the Application
+# Core Functionalities
 
 ## Register
 
