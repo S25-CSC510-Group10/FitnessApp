@@ -34,7 +34,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest pytest-cov coverage
+          pip install pytest pytest-cov coverage coveralls
 
       - name: Wait for MongoDB to be ready
         run: |
@@ -50,7 +50,10 @@ jobs:
           pytest --cov=. --maxfail=3 --disable-warnings tests/
           coverage xml
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@v2  
+      - name: Upload coverage to Coveralls  
+        run: |
+          coveralls --format=cobertura
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+          
