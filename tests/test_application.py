@@ -38,6 +38,11 @@ def mock_insert(data):
 def mock_update_many(query, update):
     return None  # Simulate successful update
 
+
+# ----------------------------------------------
+# ----------------- USER LOGIN -----------------
+# ----------------------------------------------
+
 # Test a successful login.
 def test_login_success(client, mock_user, monkeypatch):
     
@@ -65,6 +70,11 @@ def test_login_redirect_if_logged_in(client, monkeypatch):
     response = client.get("/login", follow_redirects=True)
     assert response.status_code == 200
 
+
+# ----------------------------------------------
+# ------------ USER REGISTRATION ---------------
+# ----------------------------------------------
+
 # Test a user's registration.
 def test_registration(client, monkeypatch):
     
@@ -83,8 +93,189 @@ def test_registration(client, monkeypatch):
         data = {
             "username": "newuser",
             "email": "newuser@example.com",
-            "password": "securepassword",
-            "confirm_password": "securepassword",
+            "password": "Securepassword!",
+            "confirm_password": "Securepassword!",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+# Test a user's registration with the uppercase in the middle of the password.
+def test_registration_uppercase_in_middle(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "ecurepaSssword!",
+            "confirm_password": "ecurepaSssword!",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+# Test a user's registration with the uppercase at the end of the password
+def test_registration_uppercase_at_end(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "ecurepassword!S",
+            "confirm_password": "ecurepassword!S",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+
+# Test a user's registration with special character at the beginning of the password
+def test_registration_special_at_beginning(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "!Securepassword",
+            "confirm_password": "!Securepassword",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+# Test a user's registration.
+def test_registration_special_in_middle(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "Secure!password",
+            "confirm_password": "Secure!password",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+# Test a user's registration with multiple uppercase letters.
+def test_registration_multiple_uppercase(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "SecuSrepaSssword!",
+            "confirm_password": "SecuSrepaSssword!",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" in response.data
+
+# Test a user's registration with multiple uppercase letters.
+def test_registration_multiple_special(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "Secure!pass!word!",
+            "confirm_password": "Secure!pass!word!",
             "weight": "70",
             "height": "175",
             "goal": "Weight Loss",
@@ -112,8 +303,8 @@ def test_registration_no_username(client, monkeypatch):
         data = {
             "username": "",
             "email": "newuser@example.com",
-            "password": "securepassword",
-            "confirm_password": "securepassword",
+            "password": "Securepassword!",
+            "confirm_password": "Securepassword!",
             "weight": "70",
             "height": "175",
             "goal": "Weight Loss",
@@ -152,6 +343,99 @@ def test_registration_no_password(client, monkeypatch):
     )
 
     assert b"Account created for newuser!" not in response.data
+
+# Test a user's registration that should fail with short password
+def test_registration_invalid_password_too_short(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "Passwd!", # Password Length: 7, Uppercase: Yes, Special Character, Yes
+            "confirm_password": "Passwd!",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" not in response.data
+
+# Test a user's registration that should fail with no special character in password
+def test_registration_invalid_password_no_uppercase(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "password!", # Password Length: 9, Uppercase: No, Special Character, Yes
+            "confirm_password": "password!",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" not in response.data
+
+
+# Test a user's registration that should fail with no special character in password
+def test_registration_invalid_password_no_special_character(client, monkeypatch):
+    
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Ensure no existing user has the same email
+    mongo.db.user.delete_many({"email": "newuser@example.com"})
+    mongo.db.profile.delete_many({"email": "newuser@example.com"})
+
+    monkeypatch.setattr(mongo.db.user, "insert_one", mock_insert_one)
+    monkeypatch.setattr(mongo.db.profile, "insert_profile", mock_insert_one)
+
+    response = client.post(
+        "/register",
+        data = {
+            "username": "newuser",
+            "email": "newuser@example.com",
+            "password": "Password", # Password Length: 8, Uppercase: Yes, Special Character, No
+            "confirm_password": "Password",
+            "weight": "70",
+            "height": "175",
+            "goal": "Weight Loss",
+            "target_weight": "65",
+        },
+        follow_redirects=True
+    )
+
+    assert b"Account created for newuser!" not in response.data
+
+
+# ----------------------------------------------
+# -------------- CALORIE INTAKE ----------------
+# ----------------------------------------------
 
 # Test adding a valid calorie intake.
 def test_calories_valid(client, monkeypatch):
@@ -227,6 +511,10 @@ def test_calories_invalid_item(client, monkeypatch):
     )
 
     assert b"Successfully updated the data" not in response.data
+
+# ----------------------------------------------
+# ----------------- PROFILE --------------------
+# ----------------------------------------------
 
 # Tests displaying a profile with a user logged in
 def test_display_profile(client):
