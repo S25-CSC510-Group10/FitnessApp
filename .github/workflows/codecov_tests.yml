@@ -48,5 +48,8 @@ jobs:
         run: |
            pytest --cov=. --maxfail=3 --disable-warnings tests/
 
-      - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v2
+      - name: Upload coverage results as an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.xml
