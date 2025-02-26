@@ -1,12 +1,12 @@
-# CSC510 Project 3 - Group 71
+# CSC510 Project 2 - Group 10
 
 ### Team Members
-- Ansh Ganatra
-- Sai Tarun Yellamraju
-- Yash Mor
+- Hank Lenham
+- Ryan McPhee
+- Lawrence Stephenson
 
-# Link to new features video:
-[Demo Video](https://drive.google.com/file/d/1UQmxP05gOOQCj-7cpbBgVPsfmwztNKNk/view?usp=sharing)
+# The new stuff we added! And fixed, and refactored, and... well, you get it.
+[Demo Video](https://drive.google.com/file/d/1-92R7eB7o5IQaQgNukk9kp4yPzkffn4j/view)
 <br>
 <br>
 
