@@ -82,12 +82,24 @@ This document serves as a comprehensive reference point for users, giving them i
 
 - [Why use BurnOut?](#why-use-burnout)
 - [TechStack Used for the Development of Project:](#techstack-used-for-the-development-of-project)
-- [Core Functionalities of the Application:](#core-functionalities)
+- [Core Functionalities of the Application](#core-functionalities)
   - [Register](#register)
   - [Login](#login)
   - [Homepage](#homepage)
   - [Exercise Section](#exercise-section)
-- [Steps for Execution:](#steps-for-execution)
+  - [Achievements](#achievements)
+  - [Favorites](#favorites)
+  - [Calorie Intake](#enter-calories-consumed-and-burned)
+  - [Water Intake](#water-intake)
+  - [Blog](#blog)
+  - [Workout Gear](#shop-for-workout-gear)
+  - [Friends](#friends)
+  - [BMI Calculator](#bmi-calculator)
+  - [Reviews](#reviews)
+  - [User Profile](#user-profile)
+  - [Workouts](#workouts)
+  - [Mindfulness](#mindfulness)
+- [Installation Steps](#installation-steps)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
 - [License](#license)
@@ -140,7 +152,7 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/abf8be09-c94c-49d3-a9a0-ab886e325d51)
 
-## Enter Water Intake
+## Water Intake
 
 ![image](https://github.com/user-attachments/assets/850b2db0-3b45-4c40-826a-f8de44fd09c4)
 
@@ -152,30 +164,30 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/77351168-219f-4927-9718-a89d7cc0a7c8)
 
-## Add Friends
+## Friends
 
 ![image](https://github.com/user-attachments/assets/208d3ac5-602c-4ec8-9140-22e64a761c49)
 
-## Calculate BMI
+## BMI Calculator
 
 ![image](https://github.com/user-attachments/assets/c7c2bbd6-1553-4fb7-95d2-0a670d389397)
 
-## Submit a Review
+## Reviews
 
 ![image](https://github.com/user-attachments/assets/c142e439-dcfd-40a8-a589-b971a1aa1266)
 
-## View User Profile
+## User Profile
 
 ![image](https://github.com/user-attachments/assets/0a2361ff-cfc1-4f06-aaa7-28455fe6d0ce)
 
-## Time your Workouts
+## Workouts
 ![image](https://github.com/user-attachments/assets/178ab8df-a160-4a04-9cfc-46d6a1f3db35)
 
 ## Mindfulness
 
 ![image](https://github.com/user-attachments/assets/7143e7e6-56c1-4d98-9b6b-1f36a28ff769)
 
-# Steps for execution
+# Installation Steps
 
 Step 1:
 Install MongoDB using the following link:
