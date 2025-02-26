@@ -1,6 +1,6 @@
 
 """
-Copyright (c) 2024 Devesh Ajay Vaidya, Ashwin Ramesh, Aditi Reddy, Bhuvan Chandra Kurra
+Copyright (c) 2025 Hank Lenham, Ryan McPhee, Lawrence Stephenson
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: Burnout
@@ -9,7 +9,7 @@ This code is licensed under MIT license (see LICENSE for details)
 This python file is used in and is part of the Burnout project.
 
 For more information about the Burnout project, visit:
-https://github.com/CS510-001-HW/FitnessApp
+https://github.com/S25-CSC510-Group10/FitnessApp
 """
 
 # from datetime import date

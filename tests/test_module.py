@@ -1,6 +1,6 @@
 
 """
-Copyright (c) 2023 Rajat Chandak, Shubham Saboo, Vibhav Deo, Chinmay Nayak
+Copyright (c) 2025 Hank Lenham, Ryan McPhee, Lawrence Stephenson
 This code is licensed under MIT license (see LICENSE for details)
 
 @author: Burnout
@@ -9,13 +9,11 @@ This code is licensed under MIT license (see LICENSE for details)
 This python file is used in and is part of the Burnout project.
 
 For more information about the Burnout project, visit:
-https://github.com/VibhavDeo/FitnessApp
+https://github.com/S25-CSC510-Group10/FitnessApp
 
 """
 import unittest
-import os,sys,inspect
 from application import app
-from flask import session
 
 class TestApplication(unittest.TestCase):
 

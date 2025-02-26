@@ -8,8 +8,7 @@ This code is licensed under MIT license (see LICENSE for details)
 This python file is used in and is part of the Burnout project.
 
 For more information about the Burnout project, visit:
-https://github.com/VibhavDeo/FitnessApp
-
+https://github.com/S25-CSC510-Group10/FitnessApp
 """
 
 from datetime import datetime
@@ -612,7 +611,7 @@ def get_bmi_category(bmi):
 
 @app.route("/guided_meditation", methods=["GET"])
 def render_guided_meditation():
-    return render_template("guided_medication.html")
+    return render_template("guided_meditation.html")
 
 
 @app.route("/send_email", methods=["GET", "POST"])

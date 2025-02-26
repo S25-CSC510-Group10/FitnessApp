@@ -4,7 +4,6 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from application import app
-from flask import session
 
 class TestApplicationExtra(unittest.TestCase):
 
