@@ -157,7 +157,7 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## View User Profile
 
-![image](https://github.com/user-attachments/assets/10d08d3c-89ea-407a-bdf2-e08a8288e2b9)
+![image](https://github.com/user-attachments/assets/0a2361ff-cfc1-4f06-aaa7-28455fe6d0ce)
 
 ## Time your Workouts
 ![image](https://github.com/user-attachments/assets/178ab8df-a160-4a04-9cfc-46d6a1f3db35)
