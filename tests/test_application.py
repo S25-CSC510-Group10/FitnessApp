@@ -7,6 +7,7 @@ from flask import session
 from application import reminder_email
 from unittest.mock import MagicMock
 from forms import CalorieForm
+from insert_db_data import insertexercisedata, insertfooddata
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -18,6 +19,9 @@ def client():
     app.config["WTF_CSRF_ENABLED"] = False
     with app.test_client() as client:
         yield client
+
+    insertfooddata()
+    insertexercisedata()
 
 
 # Database user
@@ -35,14 +39,18 @@ def mock_find_one(query):
         return mock_user
     return None
 
+
 def mock_insert_one(data):
     return None
+
 
 def mock_delete_many(query, data):
     return None
 
+
 def mock_insert(data):
-        return None  # Simulate successful insertion
+    return None  # Simulate successful insertion
+
 
 def mock_update_many(query, update):
     return None  # Simulate successful update
@@ -439,8 +447,17 @@ def test_reminder_email(mock_mongo, mock_smtp):
 
     # Verify emails were sent
     assert len(mock_smtp) == 2  # Now this should correctly detect sent emails
-    assert ("burnoutapp2023@gmail.com", "test1@example.com", "Subject: Daily Reminder to Exercise") in mock_smtp
-    assert ("burnoutapp2023@gmail.com", "test2@example.com", "Subject: Daily Reminder to Exercise") in mock_smtp
+    assert (
+        "burnoutapp2023@gmail.com",
+        "test1@example.com",
+        "Subject: Daily Reminder to Exercise",
+    ) in mock_smtp
+    assert (
+        "burnoutapp2023@gmail.com",
+        "test2@example.com",
+        "Subject: Daily Reminder to Exercise",
+    ) in mock_smtp
+
 
 # Tests enrolling in an activity.
 def test_enroll(client, monkeypatch):
@@ -448,7 +465,15 @@ def test_enroll(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
 
@@ -456,15 +481,20 @@ def test_enroll(client, monkeypatch):
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to enroll in abs
-    response = client.post("/abs", data = {
-        "action": "enroll",
-        "Email": "newuser@example.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "enroll",
+            "Email": "newuser@example.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully enrolled in abs!" in response.data
+
 
 # Tests enrolling from an activity after already enrolling (should fail).
 def test_enroll_duplicate(client, monkeypatch):
@@ -472,35 +502,52 @@ def test_enroll_duplicate(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
-    
+
     # Get rid of everything related to this user
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to enroll in abs
-    response = client.post("/abs", data = {
-        "action": "enroll",
-        "Email": "hplenham@example.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "enroll",
+            "Email": "hplenham@example.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully enrolled in abs!" in response.data
 
     # Try to enroll in abs again (this time it shouldn't let you)
-    response = client.post("/abs", data = {
-        "action": "enroll",
-        "Email": "hplenham@gmail.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "enroll",
+            "Email": "hplenham@gmail.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     # Make sure it's not in the response data.
     assert b"You have successfully enrolled in abs!" not in response.data
+
 
 # Tests completing an activity
 def test_complete_activity(client, monkeypatch):
@@ -508,7 +555,15 @@ def test_complete_activity(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
 
@@ -516,24 +571,32 @@ def test_complete_activity(client, monkeypatch):
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to enroll in abs
-    response = client.post("/abs", data = {
-        "action": "enroll",
-        "Email": "hplenham@gmail.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "enroll",
+            "Email": "hplenham@gmail.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully enrolled in abs!" in response.data
 
     # Try to complete abs
-    response = client.post("/abs", data = {
-        "action": "complete",
-        "Email": "hplenham@example.com",
-        "Activity": "abs",
-        "Status": "Complete",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "complete",
+            "Email": "hplenham@example.com",
+            "Activity": "abs",
+            "Status": "Complete",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully completed abs!" in response.data
 
@@ -544,7 +607,15 @@ def test_complete_activity_invalid(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
 
@@ -552,15 +623,20 @@ def test_complete_activity_invalid(client, monkeypatch):
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to complete abs
-    response = client.post("/abs", data = {
-        "action": "complete",
-        "Email": "hplenham@example.com",
-        "Activity": "abs",
-        "Status": "Complete",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "complete",
+            "Email": "hplenham@example.com",
+            "Activity": "abs",
+            "Status": "Complete",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully completed abs!" not in response.data
+
 
 # Tests unenrolling from an activity in a valid manner.
 def test_unenroll_valid(client, monkeypatch):
@@ -568,7 +644,15 @@ def test_unenroll_valid(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
 
@@ -576,26 +660,35 @@ def test_unenroll_valid(client, monkeypatch):
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to enroll in abs
-    response = client.post("/abs", data = {
-        "action": "enroll",
-        "Email": "hplenham@gmail.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "enroll",
+            "Email": "hplenham@gmail.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully enrolled in abs!" in response.data
 
     # Try to unenroll from abs without being enrolled first.
-    response = client.post("/abs", data = {
-        "action": "unenroll",
-        "Email": "newuser@example.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "unenroll",
+            "Email": "newuser@example.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully unenrolled from abs!" in response.data
+
 
 # Tests unenrolling from an activity without being enrolled first.
 def test_unenroll_invalid(client, monkeypatch):
@@ -603,7 +696,15 @@ def test_unenroll_invalid(client, monkeypatch):
     monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
 
     # Log in to our account
-    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    response = client.post(
+        "/login",
+        data={
+            "name": "hplenham",
+            "email": "hplenham@gmail.com",
+            "password": "3g:$*fe9R=@9zx",
+        },
+        follow_redirects=True,
+    )
     assert b"You have been logged in!" in response.data
     assert session.get("email") == "hplenham@gmail.com"
 
@@ -611,12 +712,16 @@ def test_unenroll_invalid(client, monkeypatch):
     mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
 
     # Try to unenroll from abs without being enrolled first.
-    response = client.post("/abs", data = {
-        "action": "unenroll",
-        "Email": "newuser@example.com",
-        "Activity": "abs",
-        "Status": "Enrolled",
-        "Date": date.today().strftime("%Y-%m-%d")
-    }, follow_redirects=True)
+    response = client.post(
+        "/abs",
+        data={
+            "action": "unenroll",
+            "Email": "newuser@example.com",
+            "Activity": "abs",
+            "Status": "Enrolled",
+            "Date": date.today().strftime("%Y-%m-%d"),
+        },
+        follow_redirects=True,
+    )
 
     assert b"You have successfully unenrolled from abs!" not in response.data

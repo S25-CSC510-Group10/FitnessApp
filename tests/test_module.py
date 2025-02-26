@@ -16,6 +16,7 @@ import unittest
 from application import app
 from flask import session
 
+
 class TestApplication(unittest.TestCase):
 
     def setUp(self):

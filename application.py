@@ -11,6 +11,7 @@ For more information about the Burnout project, visit:
 https://github.com/S25-CSC510-Group10/FitnessApp
 """
 
+from flask import redirect, url_for, flash
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
@@ -38,6 +39,11 @@ import time
 from datetime import date
 import os
 from jinja2 import TemplateNotFound
+from werkzeug.serving import make_server
+import threading
+import atexit
+import signal
+import sys
 
 # Set project root directory for standardization.
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -60,6 +66,30 @@ mail = Mail(app)
 
 insertfooddata()
 insertexercisedata()
+
+
+def close_db_connection():
+    mongo.cx.close()
+    print("Database connection closed")
+
+
+def schedule_process():
+    try:
+        while True:
+            schedule.run_pending()
+            time.sleep(10)
+    except KeyboardInterrupt:
+        print("Scheduler thread interrupted")
+        sys.exit(0)
+
+
+def signal_handler(sig, frame):
+    print("You pressed Ctrl+C!")
+    close_db_connection()
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
 
 
 def reminder_email():
@@ -87,16 +117,6 @@ def reminder_email():
 
 
 schedule.every().day.at("08:00").do(reminder_email)
-
-
-# Run the scheduler
-def schedule_process():
-    while True:
-        schedule.run_pending()
-        time.sleep(10)
-
-
-Thread(target=schedule_process).start()
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -226,6 +246,7 @@ def calories():
 
     if get_session is not None:
         form = CalorieForm()
+        print("TEST5")
         if form.validate_on_submit():
 
             print("test2")
@@ -261,7 +282,9 @@ def calories():
                 flash(f"Successfully updated the data", "success")
                 return redirect(url_for("calories"))
     else:
+        print("TEST2")
         return redirect(url_for("home"))
+    print("TEST1")
     return render_template("calories.html", form=form, time=now)
 
 
@@ -442,7 +465,8 @@ def water():
         # Retrieving records for the logged-in user
         records = mongo.db.intake_collection.find({"email": email}).sort("time", -1)
 
-        # IMPORTANT: We need to convert the cursor to a list to iterate over it multiple times
+        # IMPORTANT: We need to convert the cursor to a list to iterate over it
+        # multiple times
         records_list = list(records)
         if records_list:
             average_intake = sum(
@@ -792,9 +816,6 @@ def dashboard():
         return redirect(url_for("login"))
 
 
-from flask import redirect, url_for, flash
-
-
 @app.route("/add_favorite", methods=["POST"])
 def add_favorite():
     email = session.get("email")
@@ -904,7 +925,8 @@ def activity_page(activity):
     email = session.get("email")
 
     if email is None:
-        return redirect(url_for("dashboard"))  # Redirect if user is not logged in
+        # Redirect if user is not logged in
+        return redirect(url_for("dashboard"))
 
     # Check if the user is enrolled in the activity
     userEnrolledStatus = mongo.db.user_activity.find_one(
@@ -956,10 +978,7 @@ def activity_page(activity):
             )
             flash(f"You have successfully completed {activity}!", "success")
             if achievement:
-                flash(
-                    f'Congratulations! You earned the "{achievement["name"]}" achievement!',
-                    "success",
-                )
+                flash(f'Congratulations! You earned the "{achievement["name"]}" achievement!',"success")
 
         # Refresh the dashboard with updated activity status
         activity_cursor = findActivities(email)
@@ -995,7 +1014,8 @@ def submit_reviews():
     if session.get("email"):
         print("Imhere2")
         if request.method == "POST":  # Check if it's a POST request
-            form = ReviewForm(request.form)  # Initialize the form with form data
+            # Initialize the form with form data
+            form = ReviewForm(request.form)
             if form.validate_on_submit():
                 print("imehere1")
                 email = session.get("email")
