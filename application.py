@@ -981,7 +981,7 @@ def activity_page(activity):
                 flash(
                     f'Congratulations! You earned the "{
                         achievement["name"]}" achievement!',
-                    "success",
+                    "success"
                 )
 
         # Refresh the dashboard with updated activity status
