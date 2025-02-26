@@ -46,7 +46,8 @@ jobs:
 
       - name: Run tests
         run: |
-           pytest --cov=. --cov-report=xml --maxfail=3 --disable-warnings tests/
+          cd tests
+          pytest --cov=. --cov-report=xml --maxfail=3 --disable-warnings tests/
 
       - name: Coveralls
         uses: coverallsapp/github-action@v2  
