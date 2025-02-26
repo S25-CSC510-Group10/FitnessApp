@@ -86,7 +86,7 @@ This document serves as a comprehensive reference point for users, giving them i
   - [Register](#register)
   - [Login](#login)
   - [Homepage](#homepage)
-  - [Exercise Section] (#exercise-section)
+  - [Exercise Section](#exercise-section)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Future Scope](#future-scope)
@@ -124,7 +124,7 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ![image](https://github.com/user-attachments/assets/fcd993dd-0d33-4e74-8f3d-130b70ee5a26)
 
-## Excercise Section
+## Exercise Section
 
 ![image](https://github.com/user-attachments/assets/3e7d46d4-fe09-4493-a56b-434ac61679bf)
 
