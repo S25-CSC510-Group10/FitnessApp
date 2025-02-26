@@ -126,15 +126,15 @@ This document serves as a comprehensive reference point for users, giving them i
 
 ## Register
 
-![image](https://github.com/user-attachments/assets/cdc4700a-6da8-41cd-ac35-e3a3137f43bd)
+![image](https://github.com/user-attachments/assets/7c388575-9f5c-4d6b-b01c-bd3b41ad888b)
 
 ## Login
 
-![image](https://github.com/user-attachments/assets/37f3b1cb-a737-44c7-b4b1-2fa0d1ebc4ea)
+![image](https://github.com/user-attachments/assets/0dab79e5-d434-45a0-ae67-fba852596139)
 
 ## Dashboard
 
-![image](https://github.com/user-attachments/assets/22a574f3-8a33-4852-86d9-ace6d5e06820)
+![image](https://github.com/user-attachments/assets/fcd993dd-0d33-4e74-8f3d-130b70ee5a26)
 
 ## Excercise Section
 
