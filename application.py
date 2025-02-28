@@ -705,24 +705,41 @@ def send_email():
 def ajaxsendrequest():
     # ############################
     # ajaxsendrequest() is a function that updates friend request information into database
-    # route "/ajaxsendrequest" will redirect to ajaxsendrequest() function.
     # Details corresponding to given email address are fetched from the database entries and send request details updated
     # Input: Email, receiver
     # Output: DB entry of receiver info into database and return TRUE if success and FALSE otherwise
-    # ##########################
-    email = get_session = session.get("email")
-    if get_session is not None:
+    # ############################
+    
+    # Get the session email
+    email = session.get("email")
+    
+    # Ensure the user is logged in
+    if email is not None:
+        # Get the receiver's email from the form data
         receiver = request.form.get("receiver")
+        
+        # Check if the sender and receiver are the same
+        if email == receiver:
+            return json.dumps({"status": False, "message": "You cannot send a friend request to yourself"}), 500, {"ContentType": "application/json"}
+        
+        # Check if the receiver exists in the database
+        receiver_exists = mongo.db.user.find_one({"email": receiver})  # Check if receiver exists
+        
+        if receiver_exists is None:  # If receiver doesn't exist, return an error
+            return json.dumps({"status": False, "message": "Receiver email does not exist"}), 500, {"ContentType": "application/json"}
+        
+        # If the receiver exists, proceed with inserting the friend request into the database
         res = mongo.db.friends.insert_one(
             {"sender": email, "receiver": receiver, "accept": False}
         )
+        
+        # If the request insertion is successful
         if res:
-            return (
-                json.dumps({"status": True}),
-                200,
-                {"ContentType": "application/json"},
-            )
-    return json.dumps({"status": False}), 500, {"ContentType:": "application/json"}
+            return json.dumps({"status": True}), 200, {"ContentType": "application/json"}
+    
+    # If no session email exists or request fails
+    return json.dumps({"status": False, "message": "Session not found or request failed"}), 500, {"ContentType": "application/json"}
+
 
 
 @app.route("/ajaxcancelrequest", methods=["POST"])
