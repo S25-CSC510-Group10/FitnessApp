@@ -25,6 +25,9 @@
 ![Contributors](https://img.shields.io/github/contributors/S25-CSC510-Group10/FitnessApp?style=flat-square)
 ![Commit](https://img.shields.io/github/commit-activity/w/S25-CSC510-Group10/FitnessApp?style=flat-square)
 ![Repo Size](https://img.shields.io/github/repo-size/S25-CSC510-Group10/FitnessApp?style=flat-square)
+[![Run tests and upload coverage](https://github.com/S25-CSC510-Group10/FitnessApp/actions/workflows/codecov_tests.yml/badge.svg?branch=development)](https://github.com/S25-CSC510-Group10/FitnessApp/actions/workflows/codecov_tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/S25-CSC510-Group10/FitnessApp/badge.svg?branch=development)](https://coveralls.io/github/S25-CSC510-Group10/FitnessApp?branch=development)
+
 
 
 # BurnOut
@@ -180,11 +183,11 @@ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows
 Step 2:
 Git Clone the Repository
 
-    git clone https://github.com/anshganatra/FitnessApp.git
+    git clone https://github.com/S25-CSC510-Group10/FitnessApp.git
 
 (OR) Download the .zip file on your local machine
 
-    https://github.com/anshganatra/FitnessApp.git
+    https://github.com/S25-CSC510-Group10/FitnessApp.git
 
 Step 3:
 Install the required packages by running the following command in the terminal

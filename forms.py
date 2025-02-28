@@ -1,4 +1,3 @@
-
 """
 Copyright (c) 2025 Hank Lenham, Ryan McPhee, Lawrence Stephenson
 This code is licensed under MIT license (see LICENSE for details)
@@ -25,120 +24,121 @@ from apps import App
 app = App()
 mongo = app.mongo
 
+
 class RegistrationForm(FlaskForm):
     """Form to collect the registration data of the user"""
-    username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+
+    username = StringField(
+        "Username", validators=[DataRequired(), Length(min=2, max=20)]
+    )
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired()])
     confirm_password = PasswordField(
-        'Confirm Password', validators=[
-            DataRequired(), EqualTo('password')])
+        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+    )
     weight = StringField(
-        'Weight (in kilograms)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
+        "Weight (in kilograms)", validators=[DataRequired(), Length(min=2, max=20)]
+    )
     height = StringField(
-        'Height (in centimeters)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
-    goal = SelectField('Select Goal', choices=['---', 'Weight Loss', 'Muscle Gain'])
+        "Height (in centimeters)", validators=[DataRequired(), Length(min=2, max=20)]
+    )
+    goal = SelectField("Select Goal", choices=["---", "Weight Loss", "Muscle Gain"])
     target_weight = StringField(
-        'Target Weight (in kilograms)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
-    submit = SubmitField('Sign Up')
+        "Target Weight (in kilograms)",
+        validators=[DataRequired(), Length(min=2, max=20)],
+    )
+    submit = SubmitField("Sign Up")
 
     def validate_email(self, email):
         """Function to validate the entered email"""
         app_object = App()
         mongo = app_object.mongo
 
-        temp = mongo.db.user.find_one({'email': email.data}, {'email', 'pwd'})
+        temp = mongo.db.user.find_one({"email": email.data}, {"email", "pwd"})
         if temp:
-            raise ValidationError('Email already exists!')
+            raise ValidationError("Email already exists!")
 
 
 class LoginForm(FlaskForm):
     """Login form to log in to the application"""
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
-    submit = SubmitField('Login')
+
+    email = StringField("Email", validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    remember = BooleanField("Remember Me")
+    submit = SubmitField("Login")
 
 
 class CalorieForm(FlaskForm):
-    """Form to record the calorie intake details of the user"""
-    cursor = mongo.db.food.find()
-    get_docs = []
-    for record in cursor:
-        get_docs.append(record)
+    food = SelectField("Select Food", choices=[])
+    burnout = StringField("Burn Out", validators=[DataRequired()])
+    submit = SubmitField("Save")
 
+    def __init__(self, *args, **kwargs):
+        super(CalorieForm, self).__init__(*args, **kwargs)
 
-    result = []
-    temp = ""
-    for i in get_docs:
-        temp = i['food'] + ' (' + i['calories'] + ')'
-        result.append((temp, temp))
+        # Fetch food data dynamically
+        cursor = mongo.db.food.find()
+        get_docs = [record for record in cursor]
 
-    food = SelectField(
-        'Select Food', choices=result)
+        result = []
+        for i in get_docs:
+            temp = f"{i['food']} ({i['calories']})"
+            result.append((temp, temp))
 
-    burnout = StringField('Burn Out', validators=[DataRequired()])
-    submit = SubmitField('Save')
+        # Assign the updated choices
+        self.food.choices = result
 
 
 class UserProfileForm(FlaskForm):
     """Form to input user details to store their height, weight, goal and target weight"""
+
     weight = StringField(
-        'Weight (in kilograms)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
+        "Weight (in kilograms)", validators=[DataRequired(), Length(min=2, max=20)]
+    )
     height = StringField(
-        'Height (in centimeters)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
-    goal = SelectField('Select Goal', choices=['Weight Loss', 'Muscle Gain'])
+        "Height (in centimeters)", validators=[DataRequired(), Length(min=2, max=20)]
+    )
+    goal = SelectField("Select Goal", choices=["Weight Loss", "Muscle Gain"])
     target_weight = StringField(
-        'Target Weight (in kilograms)', validators=[
-            DataRequired(), Length(
-                min=2, max=20)])
-    submit = SubmitField('Update')
+        "Target Weight (in kilograms)",
+        validators=[DataRequired(), Length(min=2, max=20)],
+    )
+    submit = SubmitField("Update")
 
 
 class HistoryForm(FlaskForm):
     """Form to input the date for which the history needs to be displayed"""
+
     date = DateField()
-    submit = SubmitField('Fetch')
+    submit = SubmitField("Fetch")
 
 
 class EnrollForm(FlaskForm):
     """Form to enroll into a particular exercise/event"""
-    submit = SubmitField('Enroll')
+
+    submit = SubmitField("Enroll")
+
 
 class UnenrollForm(FlaskForm):
     """Form to unenroll from a particular exercise/event"""
-    completed = SubmitField(label='Completed')
-    submit = SubmitField(label='Unenroll')
+
+    completed = SubmitField(label="Completed")
+    submit = SubmitField(label="Unenroll")
+
 
 class ResetPasswordForm(FlaskForm):
     """Form to reset the account password"""
-    password = PasswordField('Password', validators=[DataRequired()])
+
+    password = PasswordField("Password", validators=[DataRequired()])
     confirm_password = PasswordField(
-        'Confirm Password', validators=[
-            DataRequired(), EqualTo('password')])
-    submit = SubmitField('Reset')
+        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+    )
+    submit = SubmitField("Reset")
+
 
 class ReviewForm(FlaskForm):
     """Form to input the different reviews about the application"""
-    review = StringField(
-        'Review', validators=[
-            DataRequired(), Length(
-                min=2, max=200)])
-    name = StringField(
-        'Name', validators=[
-            DataRequired(), Length(
-                min=2, max=200)])
-    submit = SubmitField('Submit')
+
+    review = StringField("Review", validators=[DataRequired(), Length(min=2, max=200)])
+    name = StringField("Name", validators=[DataRequired(), Length(min=2, max=200)])
+    submit = SubmitField("Submit")
