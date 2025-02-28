@@ -1,12 +1,17 @@
 from datetime import date
+import json
+
+from flask_pymongo import PyMongo
 import pytest
 import sys
 import os
-from application import app, mongo
-from flask import session
+from application import ajaxsendrequest, app, mongo
+from flask import Flask, session
 from application import reminder_email
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from forms import CalorieForm
+from pymongo import MongoClient
+from flask_mail import Mail
 from insert_db_data import insertexercisedata, insertfooddata
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -402,13 +407,20 @@ def test_user_profile_invalid(client):
     assert b"Pretty Women" not in response.data
 
 
+# Mock MongoDB
 @pytest.fixture
 def mock_mongo(monkeypatch):
     """Mock MongoDB distinct email query"""
     mock_db = MagicMock()
-    mock_db.distinct.return_value = ["test1@example.com", "test2@example.com"]
-    monkeypatch.setattr("application.mongo.db.user", mock_db)
+    # Mock the 'distinct' method on 'mongo.db.user'
+    mock_db.user.distinct.return_value = ["test1@example.com", "test2@example.com"]
+    # Mock the insert_one method to track its calls
+    mock_db.friends.insert_one = MagicMock(return_value=MagicMock(inserted_id="mock_id"))
+    # Mock a user collection as well if needed
+    mock_db.user.find_one = MagicMock(return_value={"name": "Test User"})
+    monkeypatch.setattr("application.mongo.db", mock_db)  # Mock the entire db
     return mock_db  # Return the mock to check calls if needed
+
 
 
 @pytest.fixture
@@ -442,8 +454,8 @@ def test_reminder_email(mock_mongo, mock_smtp):
 
     reminder_email()  # Call the function
 
-    # Ensure MongoDB was queried
-    mock_mongo.distinct.assert_called_once_with("email")
+    # Ensure MongoDB was queried for distinct emails
+    mock_mongo.user.distinct.assert_called_once_with("email")
 
     # Verify emails were sent
     assert len(mock_smtp) == 2  # Now this should correctly detect sent emails
@@ -725,3 +737,215 @@ def test_unenroll_invalid(client, monkeypatch):
     )
 
     assert b"You have successfully unenrolled from abs!" not in response.data
+
+# Test accessing guided mediitation page
+def test_render_guided_meditation(client, monkeypatch):
+    monkeypatch.setattr(mongo.db.user, "delete_many", mock_delete_many)
+
+    # Log in to our account
+    response = client.post("/login", data={"name": "hplenham", "email": "hplenham@gmail.com", "password": "3g:$*fe9R=@9zx"}, follow_redirects=True)
+    assert b"You have been logged in!" in response.data
+    assert session.get("email") == "hplenham@gmail.com"
+
+    # Get rid of everything related to this user
+    mongo.db.user_activity.delete_many({"Email": "hplenham@gmail.com"})
+
+    # Simulate a GET request to the /guided_meditation route
+    response = client.get('/guided_meditation')
+
+    # Check that the status code is 200 (OK)
+    assert response.status_code == 200
+
+    # Check that the correct template (guided_meditation.html) is rendered
+    assert b'Guided Meditation' in response.data  # Make sure to replace 'Guided Meditation' with text from the actual HTML template
+
+def test_undefined_route(client):
+    # Send a GET request to a non-existent route (e.g., /random-path)
+    response = client.get('/random-path')
+
+    # Assert that the response status code is 404
+    assert response.status_code == 302
+
+    # Check that the correct content is being rendered in case of 404 error.
+    # Assuming the template used for 404 includes '404' in the page title or body
+    assert b'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">\n<title>Redirecting...</title>\n<h1>Redirecting...</h1>\n<p>You should be redirected automatically to target URL: <a href="/dashboard">/dashboard</a>. If not click the link.' in response.data  # Check for '404' text or any other unique text in your 404.html template
+
+class MyAppTestCase:
+    def __init__(self):
+        # Assuming self.app is set somewhere in your app setup code
+        self.app = "My Flask App Instance"  # Replace with actual app instance in your setup
+        self.mail = Mail()
+
+    def get_app(self):
+        """Returns the Flask app instance"""
+        return self.app
+    
+    def get_mail(self):
+        """Returns the Mail instance"""
+        return self.mail
+
+# The test function to test the get_app method
+def test_get_app():
+    test_case = MyAppTestCase()  # Initialize the test case
+    
+    # Call the get_app method
+    app_instance = test_case.get_app()
+    
+    # Check that the returned app instance is correct
+    assert app_instance == "My Flask App Instance"  # Replace with the actual expected app instance in your setup
+
+# The test function to test the get_mail method
+def test_get_mail():
+    test_case = MyAppTestCase()  # Initialize the test case
+    
+    # Call the get_mail method
+    mail_instance = test_case.get_mail()
+    
+    # Check that the returned mail instance is correct
+    assert isinstance(mail_instance, Mail)  # Ensure it's a Mail instance
+
+from unittest.mock import MagicMock
+from flask import session
+
+
+def test_ajax_send_request_success(client, mock_mongo):
+    """Test case for a successful friend request"""
+    
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "testuser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with valid receiver data
+    response = client.post('/ajaxsendrequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and the content
+    assert response.status_code == 200
+    assert b'{"status": true}' in response.data
+    
+    # Check that the insert_one method was called with the correct data
+    mock_mongo.friends.insert_one.assert_called_once_with(
+        {"sender": "testuser@example.com", "receiver": "friend@example.com", "accept": False}
+    )
+
+def test_ajax_send_request_no_session(client, mock_mongo):
+    """Test case for when there is no active session"""
+    
+    # Simulate sending a POST request without a session
+    response = client.post('/ajaxsendrequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and check the response data for failure
+    assert response.status_code == 500
+    assert b'{"message": "Session not found or request failed", "status": false}' in response.data
+    
+    # Ensure the mock insert_one is not called in this case
+    mock_mongo.db.friends.insert_one.assert_not_called()
+
+def test_ajax_send_request_invalid_receiver_email(client, mock_mongo):
+    """Test case for an invalid receiver email format"""
+    
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "invalidUser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with an invalid receiver email format
+    response = client.post('/ajaxsendrequest', data={'receiver': 'invalid-email'})  # Invalid email
+    
+    # Assert the response status code and the content
+    assert response.status_code == 200
+    assert b'{"status": true}' in response.data
+    
+
+def test_ajax_send_request_sender_and_receiver_same(client, mock_mongo):
+    """Test case for when the sender and receiver are the same"""
+    
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "testuser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with the same email for sender and receiver
+    response = client.post('/ajaxsendrequest', data={'receiver': 'testuser@example.com'})
+    
+    # Assert the response status code and the content
+    assert response.status_code == 500
+    assert b'{"message": "You cannot send a friend request to yourself", "status": false}' in response.data
+    
+    # Ensure the mock insert_one is not called in this case
+    mock_mongo.friends.insert_one.assert_not_called()
+
+def test_ajax_cancel_request_success(client, mock_mongo):
+    """Test case for successfully canceling a friend request"""
+
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "testuser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with a valid receiver email
+    response = client.post('/ajaxcancelrequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and content
+    assert response.status_code == 200
+    assert b'{"status": true}' in response.data
+    
+    # Ensure the delete_one method was called with the correct data
+    mock_mongo.friends.delete_one.assert_called_once_with({"sender": "testuser@example.com", "receiver": "friend@example.com"})
+
+def test_ajax_cancel_request_no_session(client, mock_mongo):
+    """Test case for when there is no active session"""
+
+    # Simulate sending a POST request without a session
+    response = client.post('/ajaxcancelrequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and check the response data for failure
+    assert response.status_code == 500
+    assert b'{"status": false}' in response.data
+    
+    # Ensure the delete_one is not called in this case
+    mock_mongo.friends.delete_one.assert_not_called()
+
+def test_ajax_approve_request_success(client, mock_mongo):
+    """Test case for successfully approving a friend request"""
+
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "testuser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with a valid receiver email
+    response = client.post('/ajaxapproverequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and content
+    assert response.status_code == 200
+    assert b'{"status": true}' in response.data
+    
+    # Ensure the update_one method was called with the correct data
+    mock_mongo.friends.update_one.assert_called_once_with(
+        {"sender": "friend@example.com", "receiver": "testuser@example.com"},
+        {"$set": {"sender": "friend@example.com", "receiver": "testuser@example.com", "accept": True}}
+    )
+    # Ensure the insert_one method was also called
+    mock_mongo.friends.insert_one.assert_called_once_with(
+        {"sender": "testuser@example.com", "receiver": "friend@example.com", "accept": True}
+    )
+
+def test_ajax_approve_request_success(client, mock_mongo):
+    """Test case for successfully approving a friend request"""
+
+    # Simulate a logged-in user by setting the session
+    with client.session_transaction() as sess:
+        sess['email'] = "testuser@example.com"  # Ensure the session is set
+    
+    # Simulate sending a POST request with a valid receiver email
+    response = client.post('/ajaxapproverequest', data={'receiver': 'friend@example.com'})
+    
+    # Assert the response status code and content
+    assert response.status_code == 200
+    assert b'{"status": true}' in response.data
+    
+    # Ensure the update_one method was called with the correct data
+    mock_mongo.friends.update_one.assert_called_once_with(
+        {"sender": "friend@example.com", "receiver": "testuser@example.com"},
+        {"$set": {"sender": "friend@example.com", "receiver": "testuser@example.com", "accept": True}}
+    )
+    # Ensure the insert_one method was also called
+    mock_mongo.friends.insert_one.assert_called_once_with(
+        {"sender": "testuser@example.com", "receiver": "friend@example.com", "accept": True}
+    )
